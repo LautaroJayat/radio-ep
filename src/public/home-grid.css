@@ -237,10 +237,10 @@ body {
 @media (min-width:1201px) {
     .emitions {
         width: 85%;
-        grid-template-columns: 4fr 5fr 5fr;
-        grid-template-rows: 5rem 1fr 1fr;
-        grid-gap: 5vh 10vh;
-        grid-template-areas: "title title title" "item-1 item-2 item-3" "item-1 item-4 item-5";
+        grid-template-columns: 4fr 8fr;
+        grid-template-rows: 5rem repeat(5 auto);
+        grid-gap: 1vh 5vh;
+        grid-template-areas: "title title" "item-1 item-2" "item-1 item-3" "item-1 item-4" "item-1 item-5";
     }
     .emitions .title {
         grid-area: title;
@@ -248,6 +248,7 @@ body {
     .emitions .article-big {
         grid-area: item-1;
     }
+
 }
 
 .footer {
