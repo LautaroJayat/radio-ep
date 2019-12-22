@@ -1,0 +1,526 @@
+/**************
+General Sttyles
+**************/
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: roboto, sans-serif;
+    text-decoration: none;
+    box-sizing: content-box;
+}
+
+.header {
+    background-color: rgb(0, 0, 0);
+    position: relative;
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+}
+
+/******** Nav *********/
+
+nav {
+    position: fixed;
+    top: 0;
+}
+
+.nav-flex {
+    position: fixed;
+    top: 0;
+    display: flex;
+    width: 100vw;
+    height: 10vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    align-items: center;
+    z-index: 20;
+}
+
+.navigation-logo {
+    margin-left: 3vw;
+    width: auto;
+    height: 7vh;
+    display: inline-block;
+    z-index: 20;
+}
+
+/* THE ROUND PSEUDO-ELEMENT HOVER STYLES */
+
+.listen-button {
+    margin-left: 16%;
+}
+
+.listen-href-button {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    width: 13vw;
+    height: auto;
+    padding: 0.7vh;
+    overflow: hidden;
+    color: crimson;
+    border: 2px solid crimson;
+    font-weight: 600;
+    text-align: left;
+    line-height: 4.5vh;
+    transition: color .2s ease-in-out;
+}
+
+.listen-icon {
+    line-height: 4.3vh;
+}
+
+.listen-href-button:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: crimson;
+    height: 100px;
+    width: 600px;
+    border-radius: 45%;
+}
+
+.listen-button .listen-href-button:hover {
+    color: #fff;
+}
+
+.listen-button .listen-href-button:before {
+    top: 100%;
+    left: 100%;
+    transition: all .7s ease-in-out;
+}
+
+.listen-button .listen-href-button:hover:before {
+    top: -30px;
+    left: -30px;
+}
+
+.nav-links {
+    margin-left: auto;
+    display: flex;
+    max-width: 45vw;
+    width: 100%;
+    margin-right: 5vw;
+    justify-content: space-between;
+    text-decoration: none;
+    list-style: none;
+}
+
+.nav-link>li {
+    text-decoration: none;
+}
+
+.nav-link {
+    display: inline;
+    text-decoration: none;
+    font-weight: 600;
+    color: white;
+    font-size: 1.1rem;
+    transition: all 0.2s ease-out;
+}
+
+.nav-link:hover {
+    display: inline;
+    text-decoration: none;
+    color: crimson;
+    cursor: pointer;
+}
+
+.nav-link:active {
+    display: inline;
+    text-decoration: none;
+    color: crimson;
+    cursor: pointer;
+    transform: translateY(2px);
+}
+
+/**************
+    Showcase
+**************/
+
+.showcase::after {
+    content: '';
+    background-image: url('img/mortir1000px.JPG');
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 80vh;
+    width: 100%;
+    display: block;
+}
+
+/*************************
+    Showcase Container
+**************************/
+
+.showcase-container {
+    position: absolute;
+    height: 50%;
+    width: 50vh;
+    margin-right: 60%;
+    margin-top: 18vh;
+    left: 15vh;
+    background: rgba(255, 255, 255, 0.04);
+    text-align: center;
+    z-index: 1;
+}
+
+.showcase-container .logo {
+    width: 40vh;
+}
+
+.showcase-container .title {
+    padding-left: 0.8rem;
+    padding-top: 1.2rem;
+    font-size: 4rem;
+    color: #fc9393;
+    line-height: 1;
+    font-family: 'Alfa Slab One', cursive;
+    letter-spacing: 0.5rem;
+}
+
+.showcase-container .text {
+    line-height: 1.7;
+    padding-top: 1rem;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.listen-now {
+    margin-top: 1vh;
+}
+
+/*******************************
+    First Episode on Podcast Stream
+********************************/
+
+.soundcloud {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+
+.section-margin-trending {
+    margin: 5vh 2.5vw 5vh 2.5vw;
+}
+
+.section-margin-episodes {
+    margin: 9vh 2.5vw 5vh 2.5vw;
+    width: 90vw;
+}
+
+.section-margin {
+    margin: 9vh 2.5vw 5vh 2.5vw;
+}
+
+/***************************
+    Episodes Partial
+*****************************/
+
+.title-container {
+    background-color: rgba(240, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 1rem 0rem;
+}
+
+.title-container:hover .blue-v-line {
+    width: 0.4rem;
+    height: 3.3rem;
+    background-color: rgb(255, 0, 133);
+}
+
+.blue-v-line {
+    width: 0.4rem;
+    height: 3rem;
+    background-color: rgb(0, 0, 255);
+    transition: all 0.3s ease-out;
+}
+
+.recortes-title {
+    font-size: 250%;
+    color: white;
+    font-weight: 400;
+    margin: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+  
+}
+
+
+.title-container:hover .recortes-title {
+    color: white;
+    font-size: 400;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.recortes-line-separator {
+    display: block;
+    height: 1px;
+    border-bottom: 1px solid rgba(245, 245, 245, 0.356);
+    margin: auto;
+    width: 100%;
+    margin: 0rem 0rem 2rem 0rem;
+}
+
+.line-separator {
+    height: 1px;
+    border-bottom: 1px solid rgba(245, 245, 245, 0.356);
+    margin: auto;
+    width: 100%;
+    margin: 3rem 0rem;
+}
+
+.trending-container {
+    width: 90vw;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.img-container {
+    width: 20vw;
+    height: 20vw;
+    overflow: hidden;
+    margin: 0.5rem 0rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.trending-img {
+    max-width: 36vw;
+    height: auto;
+    object-fit: cover;
+}
+
+.img-container>a {
+    font-size: 120%;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.397);
+    position: absolute;
+    z-index: 11;
+    bottom: 0;
+    padding: 0.5rem;
+    transition: all 0.25s ease-out;
+}
+
+.img-container:hover>a {
+    font-size: 120%;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.767);
+    position: absolute;
+    z-index: 11;
+    bottom: 0;
+    padding: 0.5rem;
+}
+
+.ep-container {
+    margin-top: 2.5rem;
+}
+
+.ep-card {
+    position: relative;
+    display: flex;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: black;
+    border-left-style: solid;
+    border-left-width: 0.2rem;
+    border-color: black;
+    transition: border 0.5s ease-out;
+    -webkit-transition: border 0.5s ease-out;
+}
+
+.ep-card:hover {
+    border-left-style: solid;
+    border-color: crimson;
+    transition: border 0.5s ease-out;
+    -webkit-transition: border 0.5s ease-out;
+}
+
+.ep-info {
+    max-width: 60%;
+}
+
+.ep-title {
+    font-weight: 300;
+    font-size: 1.3rem;
+    color: white;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+    display: block;
+    font-weight: 400;
+    font-size: 180%;
+}
+
+.ep-description {
+    color: rgba(255, 255, 255, 0.911);
+    margin: 1rem 0.5rem;
+    display: block;
+    font-size: 115%;
+}
+
+.nombre-del-programa {
+    color: #cf5387;
+    font-size: 100%;
+    margin-left: 0.5rem;
+}
+
+.ep-video {
+    margin-right: 3%;
+}
+
+.news-container {
+    width: 93vw;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 5vh;
+    justify-content: space-between;
+}
+
+.new-card {
+    position: relative;
+    width: 28vw;
+    height: 20vw;
+    overflow: hidden;
+}
+
+.new-card>img {
+    width: 28vw;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.new-card>span {
+    font-size: 80%;
+    position: absolute;
+    z-index: 11;
+    background-color: #ffffff4b;
+    top: 0rem;
+    right: 0rem;
+    padding: 0.25rem;
+    transition: all 0.45s ease-out;
+}
+
+.new-card:hover>span {
+    font-size: 80%;
+    position: absolute;
+    z-index: 11;
+    background-color: #ffffff94;
+    top: 0rem;
+    right: 0rem;
+    padding: 0.25rem;
+}
+
+.new-card>a {
+    width: 100%;
+    min-height: 17%;
+    font-size: 160%;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.397);
+    position: absolute;
+    z-index: 11;
+    bottom: 0rem;
+    left: 0;
+    padding: 0.5rem;
+    transition: all 0.45s ease-out;
+}
+
+.new-card:hover a {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.764);
+    position: absolute;
+    z-index: 11;
+    bottom: 1.35rem;
+    padding: 0.5rem;
+}
+
+.container-login {
+    margin: 20vh auto;
+}
+
+.form>input {
+    display: block;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2vh 10%;
+    margin: 2vh;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 1.5rem;
+    background-color: white;
+    border: 2px solid rgb(255, 160, 234);
+    outline: none;
+    transition: all 0.2s ease-out;
+}
+
+.button-submit {
+    position: relative;
+    width: 95%;
+    padding: 2vh 0px;
+    margin: 2vh;
+    text-decoration: none;
+    background-color: rgb(255, 0, 200);
+    color: white;
+    font-size: 1.5rem;
+    border: 2px solid rgba(255, 0, 200, 0.5);
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.form>.button-sumbit:focus, .form>.button-submit:hover {
+    background-color: rgb(255, 38, 208);
+    border: 2px solid rgb(255, 38, 208);
+}
+
+input:active, input:focus {
+    display: block;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2vh 10%;
+    margin: 2vh;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 1.5rem;
+    background-color: white;
+    border: 2px solid rgb(252, 117, 223);
+    box-shadow: 3px 3px 5px rgba(255, 0, 200, 0.5);
+}
+
+.input-pass {
+    background-image: url('/img/pass.svg');
+    background-repeat: no-repeat;
+    background-position: 3% 50%;
+}
+
+.input-user {
+    background-image: url('/img/user.svg');
+    background-repeat: no-repeat;
+    background-position: 3% 50%;
+}
+
+.form-card {
+    position: relative;
+    width: 40%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 1.5%;
+}
+
+/*****************************************************
+              media Queries                        
+******************************************************/

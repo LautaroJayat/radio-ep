@@ -1,0 +1,38 @@
+<div class="dashboard-control">
+
+    <div class="iframes-dash">
+
+        <div class="iframe-form">
+            {{#if bigSound}}
+            <div class="min-iframe">
+                {{{bigSound.iframe}}}
+            </div>
+            {{else}}
+            <h2>Todavía no hay registrado un bigIframe</h2>
+            {{/if}}
+            <form class="actual-iframe-form" action="/admin/bigsound/register?_method=PUT" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <input type="text" name="iframe" class="input-i">
+                <button type="submit" class="button-i">Actualizar</button>
+            </form>
+        </div>
+
+
+        <div class="iframe-form">
+            {{#if smallSound}}
+            <div class="min-iframe">
+                {{{smallSound.iframe}}}
+            </div>
+            {{else}}
+            <h2>Todavía no hay registrado un smallIframe</h2>
+            {{/if}}
+            <form class="actual-iframe-form" action="/admin/smallsound/register?_method=PUT" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <input type="text" name="iframe" class="input-i">
+                <button type="submit" class="button-i">Actualizar</button>
+            </form>
+        </div>
+
+
+    </div>
+</div>

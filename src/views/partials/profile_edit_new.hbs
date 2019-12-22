@@ -1,0 +1,263 @@
+<div class="dashboard-control">
+    <div class="ck-editor-dash">
+        <h2 class="Udatos-title">Editar Noticia</h2>
+        <div class="n-form">
+            <input type="hidden" name="id" id="_id" value="{{news._id}}">
+            <label for="url">Escriba la URL de la noticia</label>
+            <input id="url" class="n-input" type="text" name="url" value="{{news.url}}"
+                placeholder="Escriba la URL de la noticia">
+            <label for="title">Escriba el título de su noticia</label>
+            <input id="title" class="n-input" type="text" name="title" placeholder="Escriba un título"
+                value="{{news.title}}">
+            <label for="headline">Escriba el encabezado de su noticia</label>
+            <input id="headline" class="n-input" type="text" name="h
+            eadline" placeholder="Escriba un título" value="{{news.headline}}">
+            <label for="description">Escriba la descripción de la noticia</label>
+            <textarea id="description" class="n-input-textarea" type="text" name="description"
+                placeholder="Escriba una descripción">{{news.description}}</textarea>
+            <div class="input-group">
+                <label for="alt_sources_checkbox" id="alt_sources_checkbox_label">¿Necesita editar una fuente
+                    alternativa?</label>
+                <input type="checkbox" name="alt_sources_checkbox" id="alt_sources_checkbox"
+                    {{#if news.alt_author}}checked{{/if}}>
+            </div>
+
+            {{#if news.alt_author}}
+            <div class="input-group">
+                <label for="alt_sources_checkbox">¿Necesita eliminar los campos de las fuentes originales o
+                    alternativas?</label>
+                <input type="checkbox" name="delete_sources" id="delete_sources">
+
+            </div>
+            {{/if}}
+
+
+            <div id="alt_sources_container" class="{{#unless news.alt_author}}hidden{{/unless}}">
+                <label for="alt_author">Escriba al autor o autora original</label>
+                <input id="alt_author" class="n-input" type="text" name="alt_author"
+                    placeholder="Escriba al autor original" {{#if news.alt_author}}value="{{news.alt_author}}" {{/if}}>
+                <label for="al_social">Escriba un link hacia alguna de sus redes</label>
+                <input id="alt_social" class="n-input" type="text" name="alt_social"
+                    placeholder="Escriba un link de redes sociales" {{#if news.alt_author}}value="{{news.alt_social}}"
+                    {{/if}}>
+                <label for="alt_source">Mencione la fuente original</label>
+                <input id="alt_source" class="n-input" type="text" name="alt_source"
+                    placeholder="Escriba el nombre de fuente original"
+                    {{#if news.alt_author}}value="{{news.alt_source}}" {{/if}}>
+                <label for="alt_source_link">Escriba un link hacia la fuente original</label>
+                <input id="alt_source_link" class="n-input" type="text" name="alt_source_link"
+                    placeholder="Escriba un link hacia la fuente original"
+                    {{#if news.alt_author}}value="{{news.alt_source_link}}" {{/if}}>
+
+            </div>
+
+            <textarea class="photo-input" name="content" id="editor">{{news.body}}</textarea>
+            <input type="hidden" id="photo" name="photo" value="{{news.photo}}">
+            <input type="hidden" id="thumbnail" name="thumbnail" value="{{news.thumbnail}}">
+            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-Submit-block">BUSCAR
+                IMAGEN</button>
+
+            <div class="result-container">
+                <div id="img-preview-container" class="img-preview-container">
+                </div>
+            </div>
+            <button id='sendEditorData' class=" B-B-Submit-block">EDITAR nOTICIA</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    // Declaring basic elements to interact with
+    const CROPPER_RATIO = 1.4;
+    const front_url = document.getElementById('url');
+    const alt_sources_container = document.getElementById('alt_sources_container');
+    const alt_author = document.getElementById('alt_author');
+    const alt_source = document.getElementById('alt_source');
+    const alt_social = document.getElementById('alt_social');
+    const alt_source_link = document.getElementById('alt_source_link');
+    const title = document.getElementById('title');
+    const headline = document.getElementById('headline');
+    const senderButton = document.getElementById('sendEditorData');
+    const newId = document.getElementById('_id');
+    var thumbnailBinaryData;
+
+    //  Creating a CKEDITOR instance only when everithing is loaded
+    window.onload = () => {
+
+        const BlogEditor = CKEDITOR.replace('editor', {
+            width: '100%',
+            height: '75vh',
+            embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}',
+            extraPlugins: 'embed,autoembed,image2',
+            removeButtons: 'Source,Save,Templates,NewPage,Preview,Print,PasteText,Find,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,HiddenField,Subscript,Superscript,CopyFormatting,RemoveFormat,NumberedList,BulletedList,Outdent,Indent,CreateDiv,BidiLtr,BidiRtl,Language,Anchor,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Font,FontSize,TextColor,BGColor,ShowBlocks,About,Styles'
+
+        });
+
+        const DescriptionEditor = CKEDITOR.replace('description', {
+            width: '100%',
+            height: '25vh',
+            removePlugins: "dialogui,dialog,a11yhelp,about,bidi,blockquote,clipboard," +
+                "button,panelbutton,panel,colorbutton,colordialog,menu," +
+                "contextmenu,dialogadvtab,div,elementspath,enterkey,entities,popup," +
+                "filebrowser,find,fakeobjects,flash,listblock,richcombo," +
+                "font,format,forms,horizontalrule,htmlwriter,iframe,image,indent," +
+                "indentblock,indentlist,justify,link,list,liststyle" +
+                "maximize,newpage,pagebreak,pastefromword,pastetext,preview,print," +
+                "removeformat,resize,save,scayt,selectall,showblocks," +
+                "showborders,smiley,sourcearea,specialchar,stylescombo,tab,table," +
+                "tabletools,templates,undo,spellchecker",
+            removeDialogTabs: 'link:advanced, spellchecker',
+            removeButtons: 'others,spellchecker,clipboard,Source,Save,Templates,NewPage,Preview,Print,Cut,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Subscript,Superscript,CopyFormatting,RemoveFormat,NumberedList,BulletedList,Outdent,Indent,Blockquote,CreateDiv,JustifyCenter,JustifyLeft,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Anchor,Unlink,Link,Image,Flash,Table,HorizontalRule,Smiley,SpecialChar,Iframe,PageBreak,Styles,Format,Font,FontSize,TextColor,BGColor,ShowBlocks,Maximize,About,Scayt',
+        });
+
+    }
+
+    //Seting the logic for displaying the alt_sources fields with the checkbox
+    document.getElementById('alt_sources_checkbox').addEventListener("click", () => {
+        if (document.getElementById('alt_sources_checkbox').checked) {
+            alt_sources_container.classList.remove("hidden");
+            alt_author.disabled = false;
+            alt_social.disabled = false;
+            alt_source_link.disabled = false;
+            alt_source.disabled = false;
+
+        } else {
+            alt_sources_container.classList.add("hidden");
+            alt_author.disabled = true;
+            alt_social.disabled = true;
+            alt_source_link.disabled = true;
+            alt_source.disabled = true;
+
+        }
+    });
+    if (document.getElementById('delete_sources')) {
+        document.getElementById('delete_sources').addEventListener("click", () => {
+            if (document.getElementById('delete_sources').checked) {
+                document.getElementById("alt_sources_checkbox_label").classList.add("hidden");
+                document.getElementById("alt_sources_checkbox").classList.add("hidden");
+                alt_sources_container.classList.add("hidden");
+                alt_author.disabled = true;
+                alt_social.disabled = true;
+                alt_source_link.disabled = true;
+                alt_source.disabled = true;
+
+            } else {
+                alt_sources_container.classList.add("hidden");
+                document.getElementById("alt_sources_checkbox").classList.remove("hidden");
+                document.getElementById("alt_sources_checkbox_label").classList.remove("hidden");
+                alt_sources_container.classList.remove("hidden");
+                alt_author.disabled = false;
+                alt_social.disabled = false;
+                alt_source_link.disabled = false;
+                alt_source.disabled = false;
+
+            }
+        });
+    }
+
+    senderButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        let dataLength = CKEDITOR.instances.editor.getData();
+        dataLength = dataLength.length;
+        if (title.value.length < 7) {
+            alert("El título debe tener al menos 7 carácteres de largo");
+        }
+        else if (dataLength < 60) {
+            alert("El cuerpo de la noticia es demasiado corto");
+        } else {
+            sendToServer();
+        }
+
+    });
+
+
+    // Opening the cropper pushing it to the front    
+    function openCropper() {
+        document.getElementById('cropper-div').style.left = '0';
+    }
+
+    // Setting the SENDER BUTTON
+    async function sendToServer() {
+        if (binaryData) {
+            let imgPreview = document.getElementById('preview-image');
+            let littleCanvas = await document.createElement('canvas');
+            littleCanvas.height = 360;
+            littleCanvas.width = 504;
+            littleCanvasCTX = littleCanvas.getContext('2d');
+            littleCanvasCTX.drawImage(imgPreview, 0, 0, 504, 360);
+            littleCanvas.toBlob((blob) => {
+                thumbnailBinaryData = blob;
+                appendingDataIntoFormAndFetchingToServer();
+            }, 'image/jpeg');
+        } else {
+            appendingDataIntoFormAndFetchingToServer();
+        }
+    }
+
+    async function appendingDataIntoFormAndFetchingToServer() {
+        let body = await CKEDITOR.instances.editor.getData();
+        let description = await CKEDITOR.instances.description.getData();
+        var form = new FormData();
+        form.append('url', front_url.value);
+        form.append('title', title.value);
+        form.append('description', description);
+        form.append('headline', headline.value);
+        form.append('body', body);
+        if (document.getElementById('delete_sources') && document.getElementById('delete_sources').checked) {
+            document.getElementById('alt_sources_checkbox').checked = false;
+            form.append('alt_author', "");
+            form.append('alt_social', "");
+            form.append('alt_source', "");
+            form.append('alt_source_link', "");
+
+        }
+        if (document.getElementById('alt_sources_checkbox') && document.getElementById('alt_sources_checkbox').checked) {
+            form.append('alt_author', alt_author.value);
+            form.append('alt_social', alt_social.value);
+            form.append('alt_source', alt_source.value);
+            form.append('alt_source_link', alt_source_link.value);
+        }
+
+        if (binaryData) {
+            var name = new Date();
+            name = name.getTime();
+            name = name.toString();
+            form.append('image', binaryData, name + "big.jpeg");
+            form.append('image', thumbnailBinaryData, name + "small.jpeg");
+            fetch(`/news/fulledit/${newId.value}`, { method: "POST", body: form })
+                .then(function (response) {
+                    console.log(response.status);
+                    if (response.status === 201) {
+                        console.log("done");
+                        window.location.assign("/admin/profile");
+                    } else {
+                        window.location.assign("/");
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        }
+        if (!binaryData) {
+            form.append('photo', photo.value);
+            form.append('thumbnail', thumbnail.value);
+            fetch(`/news/partialedit/${newId.value}`, { method: "POST", body: form })
+               .then(function (response) {
+                    console.log(response.status);
+                    if (response.status === 201) {
+                        console.log("done");
+                        window.location.assign("/admin/profile");
+                    } else {
+                        window.location.assign("/");
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        }
+
+    }
+
+</script>

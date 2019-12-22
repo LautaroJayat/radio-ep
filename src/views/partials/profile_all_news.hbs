@@ -1,0 +1,45 @@
+<div class="dashboard-control">
+
+    <div class="allUsers">
+        <div class="allUsers-dash">
+            <h2 class="aU-title">Todas las Publicaciones</h2>
+            <div class="news-list">
+
+                {{#each news}}
+                <div class="list-card">
+                    <div class="n-img-container">
+                        <img src="{{thumbnail}}" alt="">
+                    </div>
+                    <div class="n-info">
+                        <h3 class="n-title">{{title}}</h3>
+
+                        <div class="author-block">
+                            <div class="thumb">
+                                <img src="{{author_thumbnail}}" alt=""></div>
+                            <span class="aN-author">Por {{author}}</span>
+                        </div>
+                        <span class="aN-date">{{date}}</span>
+                    </div>
+                    <div class="n-actions">
+                        <a href="/news/edit/{{_id}}">
+                            <div class="edit"><i class="fas fa-edit"></i></div>
+                        </a>
+                        <form action="/news/delete/{{_id}}?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button>
+                                <div class="trash"><i class="fas fa-trash-alt"></i></div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

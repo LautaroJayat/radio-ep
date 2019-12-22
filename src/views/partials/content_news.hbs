@@ -1,0 +1,18 @@
+<div class="section-margin">
+    <div class="title-container">
+        <div class="blue-v-line"></div>
+        <h2 class="recortes-title">Últimas Noticias</h2>
+    </div>
+    <div class="news-container inline-block-when-small">
+
+        {{#each news}}
+        <div class="new-card">
+            <img src="{{thumbnail}}" alt="">
+            <span>Por {{author}}</span>
+            <a href="">{{title}}</a>
+        </div>
+        {{/each}}
+
+    </div>
+
+</div>

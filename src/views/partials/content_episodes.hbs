@@ -1,0 +1,25 @@
+<div class="section-margin-episodes">
+    <div class="title-container">
+        <div class="blue-v-line"></div>
+        <h2 class="recortes-title">Últimas Emisiones</h2>
+    </div>
+    <div class="recortes-line-separator"></div>
+    <div class="ep-container inline-block-when-small">
+
+        {{#each emitions}}
+        <div class="line-separator"></div>
+        <div class="ep-card black-continer">
+            <div class="ep-info">
+                <h2 class="ep-title">{{title}}</h2>
+                <span class="nombre-del-programa">{{program}}</span>
+                <span class="ep-description">{{description}} </span>
+            </div>
+
+            <div class="ep-video">
+                {{{iframe}}}
+            </div>
+        </div>
+        {{/each}}
+
+    </div>
+</div>

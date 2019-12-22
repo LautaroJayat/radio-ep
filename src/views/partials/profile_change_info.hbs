@@ -1,0 +1,29 @@
+<div class="dashboard-control">
+
+    <div class="U-info-dash">
+        <h2 class="Udatos-title">Modificar Datos</h2>
+        <form id="form" class="form-flex" action="/users/info/modify?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <input class="p-input" id="user_name" type="text" name="user_name" placeholder="Inserte su nombre"
+                {{#if user.name}}value="{{user.name}}" {{/if}}>
+            <input class="p-input" id="email" type="email" name="email" placeholder="Inserte su email"
+                {{#if user.email}}value="{{user.email}}" {{/if}}>
+            <input class="p-input" id="pass" type="password" name="pass" placeholder="Inserte su contraseña">
+            <button id="sender" class="B-B-Submit" type="submit">MODIFICAR DATOS</button>
+        </form>
+    </div>
+
+</div>
+<script>
+    document.getElementById('sender').addEventListener('click', (e) => {
+        e.preventDefault();
+        let user_name = document.getElementById('user_name').value;
+        let pass = document.getElementById('pass').value;
+        if (pass.length < 2 || user_name < 2) {
+            console.log(pass);
+            console.log(user_name);
+            alert("usuario o contraseña demasiado cortos");
+        };
+        document.getElementById('form').submit();
+    });
+</script>

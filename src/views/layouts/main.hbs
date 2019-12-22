@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- UTF Charset Encoding -->
+    <meta charset="UTF-8">
+
+    <!--MetaData For the Spiders and Snippets -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="{{headers.ogTitle}}" />
+    <meta property="og:description" content="{{headers.ogDescription}}" />
+    <meta property="og:image" content="{{headers.ogImage}}" />
+
+    <title>{{{headers.pageTitle}}}</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="/home-grid.css">
+    <link rel="stylesheet" href="/home-styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {{#unless headers.profile}}
+    {{/unless}}
+    {{>alt_Css}}
+</head>
+
+
+
+<body>
+    {{#each error_msg}}<div class="error_div">{{this}}</div>{{/each}}
+
+    {{#if error_msg}}
+    <script>
+        const x = document.querySelectorAll(".error_div");
+        for (let i = 0; i < x.length; i++) {
+            for (i = 0; i < x.length; i++) {
+                x[i].addEventListener("click", (target) => {
+                    target.path[1].removeChild(target.path[0]);
+                });
+            }
+        }
+    </script>
+    <style>
+        .error_div {
+            z-index: 99999;
+            position: fixed;
+            height: auto;
+            background-color: white;
+            color: red;
+            width: auto;
+        }
+    </style>
+    {{/if}}
+
+
+    {{{body}}}
+
+</body>
+{{>alt_Scripts}}

@@ -1,0 +1,31 @@
+<div class="dashboard-control">
+
+    <div class="U-info-dash">
+        <h2 class="Udatos-title">¿ESTÁS SEGURO QUE DESEAS BORRAR ÉSTE USUARIO?</h2>
+        <form id="form" class="form-flex" action="/admin/users/delete?_method=DELETE" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="user" value="{{_id}}">
+            <input class="p-input" id="pass" type="password" name="pass" placeholder="Inserte su contraseña actual">
+            <input class="p-input" id="rePass" type="password" name="rePass" placeholder="Inserte su contraseña actual">
+            <button id="sender" class="B-B-Submit" type="submit">BORRAR USUARIO</button>
+        </form>
+        <a class="B-B-Submit" href="/admin/profile">CANCELAR</a>
+
+    </div>
+
+</div>
+<script>
+    document.getElementById('sender').addEventListener('click', (e) => {
+        e.preventDefault();
+        let pass = document.getElementById('pass').value;
+        let rePass = document.getElementById('rePass').value;
+
+        if (pass.length < 3 || rePass < 3) {
+            alert("Alguno de los Campos es demasiado corto");
+        };
+        else if (pass !== rePass) {
+            alert("Tus nuevas contraseñas no coinciden");
+        } else
+            document.getElementById('form').submit();
+    });
+</script>

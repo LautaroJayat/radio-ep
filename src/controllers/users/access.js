@@ -1,0 +1,44 @@
+const User = require('../../models/users');
+const passport = require('passport');
+const access_ctrl = {};
+
+access_ctrl.login = (req, res) => {
+    const headers = {
+        pageTitle: "Noches de Piernas - LogIn",
+        ogDescription: "Escucha la radio del club más caliente",
+        ogTitle: "Radio Entre-Piernas",
+        ogImage: "https://res.cloudinary.com/djyu25sfm/image/upload/v1560887972/snipetREP.png",
+        /*altFormat: {
+            altCSS: [],
+            altScripts: []
+        }*/
+    };
+
+    res.render('users/sign_n_login/nochesdelogin', { headers });
+}
+
+access_ctrl.signin = (req, res) => {
+    const headers = {
+        pageTitle: "Crear Usuario",
+        ogDescription: "Escucha la radio del club más caliente",
+        ogTitle: "Radio Entre-Piernas",
+        ogImage: "https://res.cloudinary.com/djyu25sfm/image/upload/v1560887972/snipetREP.png",
+    }
+    res.render('users/sign_n_login/nochesdesignin', { headers });
+}
+
+access_ctrl.create_user = async (req, res) => {
+    const { name, password } = req.body;
+    console.log(req.body);
+    const newUser = new User({ name, password });
+    newUser.password = await newUser.encryptPassword(password);
+    await newUser.save();
+    res.redirect('/nochesdelogin');
+}
+
+access_ctrl.logout = (req, res) => {
+    req.logOut();
+    res.redirect('/');
+}
+    
+module.exports = access_ctrl;

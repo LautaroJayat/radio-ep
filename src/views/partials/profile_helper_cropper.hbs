@@ -1,0 +1,26 @@
+<div id="cropper-div" class="black-bg">
+    <div class="image-cropper">
+        <div class="buttons">
+            <button id="getFileInput">Seleccionar Archivo</button>
+            <button id="addImageFromUrl">Añadir imagen desde URL</button>
+            <button id="croppNow">Recortar foto</button>
+            <button id="close">Cerrar</button>
+        </div>
+        <div class="cropper-right">
+            <div class="img">
+                <img id="image" style="max-width: 100%;" src="" alt="">
+            </div>
+        </div>
+        <div class="cropper-left">
+            <div class="img-preview" style="overflow: hidden; width: 200px; height: 200px;">
+            </div>
+        </div>
+
+        <div id="urlPrompt" class="prompt">
+            <input id="urlInput" type="text" placeholder="Pegue la dirección de la imagen aquí">
+            <button id="selectUrl">Seleccionar Imagen</button>
+            <button id="cancelUrl">Cancelar</button>
+            <input id="fileInput" type="file">
+        </div>
+    </div>
+</div>

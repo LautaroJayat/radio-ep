@@ -1,0 +1,548 @@
+body {
+    overflow-x: hidden;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #040A0E;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: rgba(24, 104, 158, 0.788);
+    transition: all 0.5s ease-in-out;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(0, 153, 255);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scrollbar-color: rgb(0, 153, 255) rgb(0, 0, 0);
+    scrollbar-width: thin;
+}
+
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+    z-index: 99;
+}
+
+.menu-button, .main-nav-menu {
+    display: none;
+}
+
+.hero {
+    position: relative;
+    margin-top: 10vh;
+    width: 100%;
+    height: 70vh;
+}
+
+.opacity-layer {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.890);
+}
+
+.first-section-background {
+    box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.822);
+    position: relative;
+    height: auto;
+    background-image: url(/Dana2.JPG);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position-y: 5vh;
+    overflow: hidden;
+}
+
+.columns-news-section-background {
+    box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.76);
+    position: relative;
+    height: auto;
+    background-image: url(/yuni.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.emitions-background {
+    box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.562);
+    position: relative;
+    height: auto;
+    overflow: hidden;
+    background-image: url(/chape.JPG);
+    background-position-x: 25vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.news {
+    position: relative;
+    width: 85%;
+    margin: 0 auto;
+    display: grid;
+    margin-bottom: 7vh;
+}
+
+.article-bg {
+    background-color: rgba(51, 51, 51, 0.28);
+}
+
+@media only screen and (min-width: 1201px) {
+    .news {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: repeat(3 30vh);
+        grid-gap: 5% 2%;
+        grid-template-areas: "item-1 item-2 item-2" "item-1 item-3 item-4" "item-1 item-5 item-6";
+    }
+    .news .article-1 {
+        grid-area: item-1;
+        min-height: 100%
+    }
+    .news .article-2 {
+        grid-area: item-2;
+        min-height: 100%
+    }
+    .news .article-3 {
+        grid-area: item-3;
+        min-height: 100%
+    }
+    .news .article-4 {
+        grid-area: item-4;
+        min-height: 100%
+    }
+    .news .article-5 {
+        grid-area: item-5;
+        min-height: 100%
+    }
+    .news .article-6 {
+        grid-area: item-6;
+        min-height: 100%
+    }
+}
+
+.news .info {
+    padding: 4%;
+}
+
+.columns-and-news-container {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    width: 85%;
+    margin: 3% auto;
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    grid-template-rows: 5rem auto;
+    grid-template-areas: "columns-title more-news-title" "columns more-news";
+    grid-gap: 2vh 10vh;
+}
+
+.columns {
+    grid-area: columns;
+    width: 100%;
+    display: grid;
+}
+
+@media only screen and (min-width: 1201px) {
+    .columns {
+        min-height: 120vh;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 2vh 5vh;
+        grid-template-areas: "item-1 item-2 item-3" "item-4 item-5 item-6";
+    }
+    .columns .title {
+        grid-area: columns-title;
+    }
+    .columns .article-1 {
+        grid-area: item-1;
+    }
+    .columns .article-2 {
+        grid-area: item-2;
+    }
+    .columns .article-3 {
+        grid-area: item-3;
+    }
+    .columns .article-4 {
+        grid-area: item-4;
+    }
+    .columns .article-5 {
+        grid-area: item-5;
+    }
+    .columns .article-6 {
+        grid-area: item-6;
+    }
+}
+
+.more-news {
+    grid-area: "more-news";
+    width: 100%;
+    height: auto;
+}
+
+.more-news .title {
+    grid-area: more-news-title;
+    margin-bottom: 2%;
+}
+
+.bg-when-small {
+    background-color: rgba(255, 251, 251, 0.08);
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.more-news .article {
+    width: 92%;
+    margin: 0 auto 5vh auto;
+}
+
+.emitions {
+    position: relative;
+    overflow: hidden;
+    height: auto;
+    margin: 0vh auto 15vh auto;
+    display: grid;
+}
+
+@media (min-width:1201px) {
+    .emitions {
+        width: 85%;
+        grid-template-columns: 4fr 5fr 5fr;
+        grid-template-rows: 5rem 1fr 1fr;
+        grid-gap: 5vh 10vh;
+        grid-template-areas: "title title title" "item-1 item-2 item-3" "item-1 item-4 item-5";
+    }
+    .emitions .title {
+        grid-area: title;
+    }
+    .emitions .article-big {
+        grid-area: item-1;
+    }
+}
+
+.footer {
+    position: relative;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.footer .item {
+    width: 25%;
+}
+
+.footer-socials {
+    width: 100%;
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10vh;
+        z-index: 99;
+    }
+    .menu-button, .main-nav-menu {
+        display: none;
+    }
+    .first-section-background {
+        background-image: url(/DanaFlip.JPG);
+        background-position-y: 5vh;
+        background-repeat: round;
+    }
+    .columns-news-section-background {
+        background-image: url(/yuni.jpg);
+        background-position-x: -23vw;
+        background-position-y: 15vh;
+    }
+    .emitions-background {
+        background-image: url(/chape.JPG);
+        background-position-x: 0;
+        background-position-y: 5vh;
+    }
+    .news {
+        width: 90%;
+        display: grid;
+        grid-template-columns: 5fr 3fr;
+        grid-auto-rows: 30vh;
+        grid-gap: 3vh 3vh;
+        grid-template-areas: "item-1 item-2" "item-1 item-2" "item-3 item-3" "item-4 item-4" "item-5 item-5" "item-6 item-6";
+        margin-bottom: 7vh;
+    }
+    .news .info {
+        padding: 4% 2% 2% 4%;
+    }
+    .news .article-1 {
+        grid-area: item-1;
+    }
+    .news .article-2 {
+        grid-area: item-2;
+    }
+    .news .article-3 {
+        grid-area: item-3;
+    }
+    .news .article-4 {
+        grid-area: item-4;
+    }
+    .news .article-5 {
+        grid-area: item-5;
+    }
+    .news .article-6 {
+        grid-area: item-6;
+    }
+    .columns-and-news-container {
+        position: relative;
+        z-index: 10;
+        height: 100%;
+        width: 85%;
+        margin: 3% auto;
+        display: grid;
+        grid-template-columns: 7fr 3fr;
+        grid-template-rows: 5rem auto;
+        grid-template-areas: "columns-title more-news-title" "columns more-news";
+        grid-gap: 2vh 3vw;
+    }
+    .columns {
+        grid-area: columns;
+        width: 100%;
+        min-height: 120vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap: 2vh 2vh;
+        grid-template-areas: "item-1 item-2" "item-3 item-4" "item-5 item-6";
+    }
+    .emitions {
+        width: 90%;
+        margin: 0vh auto 15vh auto;
+        grid-template-columns: 1fr;
+        grid-auto-rows: 30vh;
+        grid-gap: 5vh;
+    }
+    .footer {
+        position: relative;
+        height: auto;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    .footer .item {
+        width: 25%;
+    }
+    .footer-socials {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:999px) {
+    .main-nav {
+        display: none
+    }
+    .menu-button {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(90deg);
+        height: 10vh;
+        width: 10vh;
+        bottom: 2vh;
+        right: 2vh;
+        z-index: 99;
+        background-color: crimson
+    }
+    .menu-button span {
+        font-weight: bolder;
+    }
+    .main-nav-menu {
+        position: fixed;
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.945);
+        z-index: 100;
+        padding-left: 5%;
+        transition: all 0.2s ease-in-out;
+    }
+    .menu-in {
+        transform: translateX(0);
+    }
+    .menu-out {
+        transform: translateX(-100%);
+    }
+    .main-nav-menu .close-button {
+        position: absolute;
+        top: 2vh;
+        right: 2vh;
+        width: 7vh;
+        height: 7vh;
+        background-color: crimson;
+        transform: rotate(45deg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 210%;
+        border-radius: 50%;
+    }
+    .main-nav-menu h2 {
+        margin-top: 5vh;
+        margin-bottom: 3vh;
+        font-size: 400%;
+        font-weight: bold;
+    }
+    .main-nav-menu .nav-list {
+        height: 50%;
+        margin-left: 1%;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+    }
+    .main-nav-menu .nav-link {
+        font-size: 180%;
+    }
+    .hero {
+        position: relative;
+        margin-top: 0;
+        min-width: 90%;
+        width: 90%;
+        min-height: auto;
+    }
+    .opacity-layer {
+        display: inline-block;
+        position: absolute;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 100%;
+        background-color: rgba(0, 0, 0, 0.897);
+    }
+    .first-section-background {
+        box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.822);
+        position: relative;
+        height: auto;
+        background-image: url(/Dana2.JPG);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position-y: 5vh;
+        overflow: hidden;
+    }
+    .columns-news-section-background {
+        box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.76);
+        position: relative;
+        height: auto;
+        background-image: url(/yuni.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        overflow: hidden;
+    }
+    .emitions-background {
+        box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.562);
+        position: relative;
+        height: auto;
+        overflow: hidden;
+        background-image: url(/chape.JPG);
+        background-position-x: 25vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        overflow: hidden;
+    }
+    .news, .columns, .emitions {
+        position: relative;
+        width: 85%;
+        height: auto;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        grid-gap: 5vh;
+    }
+    .news .info {
+        padding: 4%;
+    }
+    .columns-and-news-container {
+        position: relative;
+        z-index: 10;
+        height: auto;
+        width: 85%;
+        margin: 3% auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas: "columns-title" "columns" "more-news-title" "more-news";
+        grid-gap: 2vh 10vh;
+    }
+    .more-news {
+        grid-area: "more-news";
+    }
+    .more-news .title {
+        grid-area: more-news-title;
+        margin-top: 4vh;
+    }
+    .footer {
+        position: relative;
+        height: auto;
+        width: 100%;
+        margin: 7vh auto 0 auto;
+        display: flex;
+        flex-flow: column;
+        flex-wrap: unset;
+    }
+    .footer .item {
+        width: 90%;
+        margin: 2vh auto 4vh auto;
+    }
+    .footer .socials-footer {
+        width: 100%;
+    }
+    .main-nav-menu .socials-footer {
+        margin-top: 7vh;
+        justify-content: space-between;
+    }
+}

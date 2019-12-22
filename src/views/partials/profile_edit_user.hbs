@@ -1,0 +1,138 @@
+<div class="dashboard-control">
+    <div class="ck-editor-dash">
+        <h2 class="Udatos-title">Editar Usuario</h2>
+        <div class="n-form">
+            <input type="hidden" name="id" id="_id" value="{{user._id}}">
+            <label for="name">Nombre del Usuario</label>
+            <input id="name" class="n-input" type="text" name="name" placeholder="Nombre de usuario"
+                value="{{user.name}}">
+            <label for="email">Email del Usuario</label>
+            <input id="email" class="n-input" type="email" name="email" value="{{user.email}}"
+                placeholder="Email del usuario">
+            <label for="insta">Instagram del Usuario</label>
+            <input id="insta" class="n-input" type="text" name="insta" value="{{user.instagram}}"
+                placeholder="Instagram del usuario">
+            <label for="face">Facebook del Usuario</label>
+            <input id="face" class="n-input" type="text" name="email" value="{{user.facebook}}"
+                placeholder="Facebook del usuario">
+            <label for="twit">Twitter del Usuario</label>
+            <input id="twit" class="n-input" type="text" name="email" value="{{user.twitter}}"
+                placeholder="Twitter del usuario">
+            <label for="pass">Cambiar la contraseña del Usuario</label>
+            <input id="pass" class="n-input" type="password" name="email" value=""
+                placeholder="Cambiar contraseña del usuario">
+            <input type="hidden" id="photo" name="photo" value="{{user.photo}}">
+            <input type="hidden" id="thumbnail" name="thumbnail" value="{{user.thumbnail}}">
+            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-Submit-block">BUSCAR
+                IMAGEN</button>
+
+            <div class="result-container">
+                <div id="img-preview-container" class="img-preview-container">
+                </div>
+            </div>
+            <button id='sendEditorData' class=" B-B-Submit-block">EDITAR DATOS DEL USUARIO</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    // Declaring basic elements to interact with
+    const CROPPER_RATIO = 1.3;
+    const userName = document.getElementById('name');
+    const face = document.getElementById('face');
+    const twit = document.getElementById('twit');
+    const email = document.getElementById('email');
+    const insta = document.getElementById('insta');
+    const pass = document.getElementById('pass');
+    const senderButton = document.getElementById('sendEditorData');
+    let userId = document.getElementById('_id');
+    var thumbnailBinaryData;
+
+    senderButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (userName.value.length < 7) {
+            alert("El nombre debe tener al menos 7 carácteres de largo");
+        }
+        else if (pass < 4) {
+            alert("La contraseña es demasiado corta");
+        } else {
+            sendToServer();
+        }
+
+    });
+
+
+    // Opening the cropper pushing it to the front    
+    function openCropper() {
+        document.getElementById('cropper-div').style.left = '0';
+    }
+
+    // Setting the SENDER BUTTON
+    async function sendToServer() {
+        if (binaryData) {
+            let imgPreview = document.getElementById('preview-image');
+            let littleCanvas = await document.createElement('canvas');
+            littleCanvas.height = 100;
+            littleCanvas.width = 130;
+            littleCanvasCTX = littleCanvas.getContext('2d');
+            littleCanvasCTX.drawImage(imgPreview, 0, 0, 130, 100);
+            littleCanvas.toBlob((blob) => {
+                thumbnailBinaryData = blob;
+                appendingDataIntoFormAndFetchingToServer();
+            }, 'image/jpeg');
+        } else {
+            appendingDataIntoFormAndFetchingToServer();
+        }
+    }
+
+    async function appendingDataIntoFormAndFetchingToServer() {
+        var form = new FormData();
+        form.append('name', userName.value);
+        form.append('email', email.value);
+        form.append('insta', insta.value);
+        form.append('face', face.value);
+        form.append('twit', twit.value);
+        form.append('pass', pass.value);
+        if (binaryData) {
+            var name = new Date();
+            name = name.getTime();
+            name = name.toString();
+            form.append('image', binaryData, name + "big.jpeg");
+            form.append('image', thumbnailBinaryData, name + "small.jpeg");
+            fetch(`/admin/users/fulledit/${userId.value}`, { method: "POST", body: form })
+                .then(function (response) {
+                    console.log(response.status);
+                    if (response.status === 201) {
+                        console.log("done");
+                        window.location.assign("/admin/profile");
+                    } else {
+                        window.location.assign("/");
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        }
+        if (!binaryData) {
+            form.append('photo', photo.value);
+            form.append('thumbnail', thumbnail.value);
+            fetch(`/admin/users/edit/${userId.value}`, { method: "POST", body: form })
+                .then(function (response) {
+                    console.log(response.status);
+                    if (response.status === 201) {
+                        console.log("done");
+                        window.location.assign("/admin/profile");
+                    } else {
+                        window.location.assign("/");
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        }
+    }
+
+</script>

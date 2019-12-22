@@ -1,0 +1,114 @@
+{{>main_nav}}
+{{#if user.admin}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{{user.admin}}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+
+{{#each errors}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{{text}}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/each}}
+
+<div class="container">
+    <h1 class="display-2 text-center mb-5">Panel Admin</h1>
+    <div class="row mt-5">
+        <div class="col-10 mx-auto">
+            <div class="card bg-secondary">
+                <h2 class="card-title display-4 text-center pt-3">Nuevo Post</h2>
+                <div class="card-body">
+                    <form action="/post" method="POST">
+
+                        <div class="form-group input-group-lg">
+                            <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="description" class="form-control" placeholder="Description" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="body" placeholder="Body" id="body" class="form-control" rows="25"> <h1>Escriba aquí el cuerpo de la noticia</h1>
+                                <h2>Utilice la barra de herramientas de arriba para darle formato.</h2>
+
+                                <h3>Referencias:</h3>
+                                    <ul>
+                                <li> <h3>B --> Negrita</h3></li>
+
+                                <li><h3>I --> Italica / Cursiva</h3></li>
+
+                                <li><h3>Utilice el menú desplegable de la izquierda para crear Títulos y subtitulos eligiendo las opciones de "Encabezado1" "Encabezado2" "Encabezado3"</h3></li>
+
+                                <li><h3>Inserte las imagenes desde una url (un link de google, printerest, o algun servicio de hosting), las mismas serán formateadas automáticamente al enviar el formulario</h3></li>
+                                </ul>
+
+
+                            </textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Link" name="link">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="photo" placeholder="Photo">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Likes" name="likes">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="views" placeholder="Views">
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">Post This Fucking Shit!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8 mx-auto">
+
+            <!--  {{#if sound}}
+
+
+            <div class="card bg-secondary mt-5 mb-5">
+                <h2 class="card-title display-4 text-center pt-3">Editar Podcast Iframe</h2>
+                <div class="card-body">
+                    {{{sound.iframe}}}
+                    <form action="/sound/{{sound._id}}?_method=PUT" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="form-group">
+                            <input type="text" name="iframe" class="form-control" placeholder="Inserte Iframe">
+                        </div>
+
+                        <button class="btn btn-primary btn-block" type="submit">Post This Fucking Shit!</button>
+                    </form>
+                </div>
+            </div>
+
+            {{else}}
+
+            <div class="card bg-secondary mt-5">
+                <h2 class="card-title display-4 text-center pt-3">Nuevo Podcast Iframe</h2>
+                <div class="card-body">
+                    <form action="/sound" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="iframe" class="form-control"
+                                placeholder="Iframe String de Soundcloud">
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">Post This Fucking Shit!</button>
+                    </form>
+                </div>
+            </div>
+
+
+            {{/if}}
+-->
+        </div>
+    </div>
+</div>
+

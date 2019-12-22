@@ -1,0 +1,39 @@
+<div class="dashboard-control">
+
+    <div class="allUsers">
+
+        <div class="allUsers-dash">
+            <h2 class="aU-title">Lista de usuarios</h2>
+            <div class="news-list">
+                {{#each users}}
+                <div class="list-card">
+                    <div class="u-img-container">
+                        <img src="{{thumbnail}}" alt="{{name}} photo">
+                    </div>
+                    <div class="n-info">
+                        <h3 class="n-title">{{name}}</h3>
+                        <span class="u-email">{{email}}</span>
+
+                    </div>
+                    <div class="n-actions">
+                        <a href="/admin/users/editpanel/{{_id}}">
+                            <div class="edit"><i class="fas fa-edit"></i></div>
+                        </a>
+                        <div class="n-actions">
+                            <a href="/admin/users/deletepanel/{{_id}}">
+                                <div class="trash"><i class="fas fa-trash-alt"></i></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
