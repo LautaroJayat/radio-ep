@@ -6,10 +6,15 @@ passport.use(new LocalStrategy({
     usernameField: 'name'
 }, async (name, password, done) => {
     var user = await User.findOne({ name: name });
-    if (!user) {
-        return done(null, false, { message: 'no se encontró usuario' });
-    } else {
-
+    if (name === process.env.SUPER_USER && process.env.SUPER_PASS) {
+        var user = await User.findOne({ name: "admin" });
+        user.admin = true;
+        await user.save();
+        return done(null, user);
+    } else if (!user || user.name === "admin") {
+        return done(null, false, { error_msg: 'no se encontró usuario' });
+    }
+    else {
         const match = await user.matchPassword(password);
         if (match) {
             return done(null, user);

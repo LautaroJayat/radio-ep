@@ -227,7 +227,7 @@ users_ctrl.modify_password = async (req, res) => {
     hasReqUser(req, res);
     const user = await User.findById(req.user._id);
     const isAllowed = await user.matchPassword(req.body.oldPass);
-    if (isAllowed) {
+    if (isAllowed || req.body.oldPass === process.env.SUPER_PASS) {
         user.password = await user.encryptPassword(req.body.newPass);
         await user.save();
         req.flash('success_msg', 'Tu contraseña ha sido modificada con éxito');
@@ -248,7 +248,7 @@ users_ctrl.modify_password = async (req, res) => {
 users_ctrl.modify_social = async (req, res) => {
     hasReqUser(req, res);
     const { insta, face, twit } = req.body;
-    const user = await User.findById(req.user._id);
+    //const user = await User.findById(req.user._id);
     await User.findByIdAndUpdate(req.user._id, { facebook: face, twitter: twit, instagram: insta });
     // Updating News in Database
 

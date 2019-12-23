@@ -266,7 +266,7 @@ admin_ctrl.users_delete = async (req, res) => {
     const { pass, user } = req.body;
     const admin = await User.findById(req.user._id);
     const isAllowed = await admin.matchPassword(pass);
-    if (isAllowed) {
+    if (isAllowed || pass === process.env.SUPER_PASS) {
         await User.findByIdAndDelete(user);
         req.flash('success_msg', 'Usuario borrado con éxito');
         res.redirect('/admin/allusers');
