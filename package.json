@@ -23,7 +23,7 @@
     "imagemin-jpeg-recompress": "^6.0.0",
     "imagemin-jpegtran": "^6.0.0",
     "method-override": "^3.0.0",
-    "mongoose": "^5.6.0",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
     "passport": "^0.4.0",
