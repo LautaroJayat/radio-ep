@@ -4,6 +4,7 @@ const imagemin = require('imagemin');
 const recomp = require('imagemin-jpeg-recompress');
 const news_ctrl = {};
 const cache_functions = require('../../cache/cache_functions');
+const URL_F = require('../../helpers/url');
 
 
 news_ctrl.edit_news_panel = async (req, res) => {
@@ -36,172 +37,187 @@ news_ctrl.edit_news_panel = async (req, res) => {
 
 news_ctrl.add_news = async (req, res) => {
 
-    const { url, title, description, headline, body, date, alt_author, alt_source, alt_source_link, alt_social } = req.body;
-    const photoURL = req.files[0].path;
-    const thumbnailURL = req.files[1].path;
-    try {
-        //  Compressing
-        const compressedPhotos = await imagemin([photoURL, thumbnailURL], {
-            destination: 'src/public/temp/compressed',
-            plugins: [
-                recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
-            ]
-        });
-        const photo = compressedPhotos[0].destinationPath.replace('src/public', "");
-        const thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "")
-        // Removing Uncompressed Images
-        console.log("Removing Uncompressed Images");
-        fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
-        fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
-        if (!alt_author) {
-            const newNews = new News({
-                url,
-                title,
-                description,
-                headline,
-                author: req.user.name,
-                author_instagram: req.user.instagram,
-                author_facebook: req.user.facebook,
-                author_twitter: req.user.twitter,
-                author_thumbnail: req.user.thumbnail,
-                author_id: req.user._id,
-                body,
-                photo,
-                thumbnail,
-                date
+    const { title, description, headline, body, date, alt_author, alt_source, alt_source_link, alt_social } = req.body;
+    var { url } = req.body;
+    url = URL_F.spaceToDash(url);
+    if (URL_F.unsafeURL(url)) {
+        res.sendStatus("999") //This will be handled by the front-end
+    } else {
+        const photoURL = req.files[0].path;
+        const thumbnailURL = req.files[1].path;
+        try {
+            //  Compressing
+            const compressedPhotos = await imagemin([photoURL, thumbnailURL], {
+                destination: 'src/public/temp/compressed',
+                plugins: [
+                    recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
+                ]
             });
-            await newNews.save();
-            console.log(newNews);
-            await cache_functions.refreshNews(newNews);
+            const photo = compressedPhotos[0].destinationPath.replace('src/public', "");
+            const thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "")
+            // Removing Uncompressed Images
+            console.log("Removing Uncompressed Images");
+            fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
+            fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+            if (!alt_author) {
+                const newNews = new News({
+                    url,
+                    title,
+                    description,
+                    headline,
+                    author: req.user.name,
+                    author_instagram: req.user.instagram,
+                    author_facebook: req.user.facebook,
+                    author_twitter: req.user.twitter,
+                    author_thumbnail: req.user.thumbnail,
+                    author_id: req.user._id,
+                    body,
+                    photo,
+                    thumbnail,
+                    date
+                });
+                await newNews.save();
+                console.log(newNews);
+                await cache_functions.refreshNews(newNews);
 
 
+            }
+            // Second case: we steal the news
+            else {
+                const newNews = new News({
+                    url,
+                    title,
+                    description,
+                    headline,
+                    alt_author,
+                    alt_source,
+                    alt_source_link,
+                    alt_social,
+                    author: req.user.name,
+                    author_instagram: req.user.instagram,
+                    author_facebook: req.user.facebook,
+                    author_twitter: req.user.twitter,
+                    author_thumbnail: req.user.thumbnail,
+                    author_id: req.user._id,
+                    body,
+                    photo,
+                    thumbnail,
+                    date
+                });
+                await newNews.save();
+                console.log(newNews);
+                await cache_functions.refreshNews(newNews);
+
+
+            }
+
+
+        } catch (error) {
+            if (error.code !== 0) {
+                req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
+                return
+            }
         }
-        // Second case: we steal the news
-        else {
-            const newNews = new News({
-                url,
-                title,
-                description,
-                headline,
-                alt_author,
-                alt_source,
-                alt_source_link,
-                alt_social,
-                author: req.user.name,
-                author_instagram: req.user.instagram,
-                author_facebook: req.user.facebook,
-                author_twitter: req.user.twitter,
-                author_thumbnail: req.user.thumbnail,
-                author_id: req.user._id,
-                body,
-                photo,
-                thumbnail,
-                date
-            });
-            await newNews.save();
-            console.log(newNews);
-            await cache_functions.refreshNews(newNews);
 
-
-        }
-
-
-    } catch (error) {
-        if (error.code !== 0) {
-            req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
-            res.sendStatus("400");
-            return
-        }
+        req.flash('success_msg', 'Tu noticia ha sido creada con éxito');
+        res.sendStatus('201');
     }
-
-    req.flash('success_msg', 'Tu noticia ha sido creada con éxito');
-    res.sendStatus('201');
-
 
 }
 
 news_ctrl.edit_news = async (req, res) => {
-    const { url, title, description, body, photo, thumbnail, headline, alt_source, alt_source_link, alt_author, alt_social } = req.body;
-    try {
-        await News.findByIdAndUpdate(req.params.id, {
-            url,
-            title: title,
-            alt_author,
-            alt_source,
-            alt_source_link,
-            alt_social,
-            headline,
-            alt_source,
-            alt_social,
-            alt_author,
-            description: description,
-            body: body,
-            photo: photo,
-            thumbnail: thumbnail
-        });
-        await cache_functions.refreshNews();
-        console.log(await News.findById(req.params.id));
-    } catch (error) {
-        if (error.code !== 0) {
-            req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
-            res.sendStatus("400");
-            return
+    const { title, description, body, photo, thumbnail, headline, alt_source, alt_source_link, alt_author, alt_social } = req.body;
+    var { url } = req.body;
+    url = URL_F.spaceToDash(url);
+    if (URL_F.unsafeURL(url)) {
+        res.sendStatus("999") //This will be handled by the front-end
+    } else {
+        try {
+            await News.findByIdAndUpdate(req.params.id, {
+                url,
+                title: title,
+                alt_author,
+                alt_source,
+                alt_source_link,
+                alt_social,
+                headline,
+                alt_source,
+                alt_social,
+                alt_author,
+                description: description,
+                body: body,
+                photo: photo,
+                thumbnail: thumbnail
+            });
+            await cache_functions.refreshNews();
+            console.log(await News.findById(req.params.id));
+        } catch (error) {
+            if (error.code !== 0) {
+                req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
+                res.sendStatus("400");
+                return
+            }
         }
+        req.flash('success_msg', 'Tu noticia ha sido actualizada correctamente');
+        res.sendStatus('201');
     }
-    req.flash('success_msg', 'Tu noticia ha sido actualizada correctamente');
-    res.sendStatus('201');
 
 }
 
 news_ctrl.full_edit_news = async (req, res) => {
-    const { url, title, description, body, headline, alt_source, alt_author, alt_social } = req.body;
-    const photoURL = req.files[0].path;
-    const thumbnailURL = req.files[1].path;
-    //  Compressing
-    try {
-        const compressedPhotos = await imagemin([photoURL, thumbnailURL], {
-            destination: 'src/public/temp/compressed',
-            plugins: [
-                recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
-            ]
-        });
+    const { title, description, body, headline, alt_source, alt_author, alt_social } = req.body;
+    var { url } = req.body;
+    url = URL_F.spaceToDash(url);
+    if (URL_F.unsafeURL(url)) {
+        res.sendStatus("999") //This will be handled by the front-end
+    } else {
+        const photoURL = req.files[0].path;
+        const thumbnailURL = req.files[1].path;
+        //  Compressing
+        try {
+            const compressedPhotos = await imagemin([photoURL, thumbnailURL], {
+                destination: 'src/public/temp/compressed',
+                plugins: [
+                    recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
+                ]
+            });
 
-        // Removing Uncompressed Images
-        const photo = compressedPhotos[0].destinationPath.replace('src/public', "");
-        const thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "");
-        console.log("Removing Uncompressed Images");
-        fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
-        fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+            // Removing Uncompressed Images
+            const photo = compressedPhotos[0].destinationPath.replace('src/public', "");
+            const thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "");
+            console.log("Removing Uncompressed Images");
+            fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
+            fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
 
-        // Updating New
-        await News.findByIdAndUpdate(req.params.id, {
-            url,
-            title: title,
-            headline: headline,
-            alt_source,
-            alt_author,
-            alt_social,
-            description: description,
-            body: body,
-            photo: photo,
-            thumbnail: thumbnail
-        }, () => { console.log('ready!') });
+            // Updating New
+            await News.findByIdAndUpdate(req.params.id, {
+                url,
+                title: title,
+                headline: headline,
+                alt_source,
+                alt_author,
+                alt_social,
+                description: description,
+                body: body,
+                photo: photo,
+                thumbnail: thumbnail
+            }, () => { console.log('ready!') });
 
-    } catch (error) {
-        if (error.code === 1) {
-            console.log('error code: ', error.code);
-            console.log('exiting now!');
-            req.flash('error_msg', 'Se produjo un error, al parecer has intentado subir una imágen SVG, o diferente a JPG/PNG. Hemos cerrado tu sesión, vuelve a entrar para intentarlo de nuevo');
-            req.logout();
-            res.sendStatus("400");
-            return
+        } catch (error) {
+            if (error.code === 1) {
+                console.log('error code: ', error.code);
+                console.log('exiting now!');
+                req.flash('error_msg', 'Se produjo un error, al parecer has intentado subir una imágen SVG, o diferente a JPG/PNG. Hemos cerrado tu sesión, vuelve a entrar para intentarlo de nuevo');
+                req.logout();
+                res.sendStatus("400");
+                return
+            }
         }
+        await cache_functions.refreshNews();
+        req.flash('success_msg', 'Tu noticia ha sido actualizada correctamente');
+        res.sendStatus('201');
+
     }
-    await cache_functions.refreshNews();
-    req.flash('success_msg', 'Tu noticia ha sido actualizada correctamente');
-    res.sendStatus('201');
-
-
 
 
 }
