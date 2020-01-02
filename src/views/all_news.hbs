@@ -1,0 +1,31 @@
+<style>
+    * {
+        color: white;
+    }
+</style>
+
+{{#each news}}
+<p>{{title}}</p>
+{{/each}}
+
+<div id="app"></div>
+
+<button id="gimmi">gimmi</button>
+<script>
+    var i = 2;
+    document.getElementById("gimmi").addEventListener("click", () => {
+        fetch(`/all/news?page=${i}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then(res => {
+                let p = document.createElement("p");
+                let t = document.createTextNode(res.news[0].title);
+                p.appendChild(t);
+                document.getElementById('app').appendChild(p);
+            }
+            );
+        i++
+        console.log(i)
+    });
+</script>
