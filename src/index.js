@@ -63,6 +63,8 @@ app.use(require('./routes/emitions'));
 app.use(require('./routes/news'));
 app.use(require('./routes/soundSmall'));
 app.use(require('./routes/soundBig'));
+app.use(require('./routes/contents'));
+
 
 
 
