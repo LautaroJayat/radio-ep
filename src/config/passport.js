@@ -11,7 +11,7 @@ passport.use(new LocalStrategy({
         user.admin = true;
         await user.save();
         return done(null, user);
-    } else if (!user || user.name === "admin") {
+    } else if (!user) {
         return done(null, false, { error_msg: 'no se encontró usuario' });
     }
     else {
