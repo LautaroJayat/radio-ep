@@ -65,6 +65,7 @@
         </div>
     </div>
 </div>
+{{>error_div_style}}
 
 
 <script>
@@ -232,6 +233,21 @@
                     if (response.status === 201) {
                         console.log("done");
                         window.location.assign("/admin/profile");
+                    } else if (response.status === 999) {
+                        console.log(response);
+                        var error_m = document.createElement('div');
+                        error_m.classList.add('error_div');
+                        var error_p = document.createTextNode('Recuerda que la URL debe contener sólo letras, números y usar guiones en vez de espacios');
+                        error_m.appendChild(error_p);
+                        document.body.appendChild(error_m);
+                        const x = document.querySelectorAll(".error_div");
+                        for (let i = 0; i < x.length; i++) {
+                            for (i = 0; i < x.length; i++) {
+                                x[i].addEventListener("click", (target) => {
+                                    target.path[1].removeChild(target.path[0]);
+                                });
+                            }
+                        }
                     } else {
                         window.location.assign("/");
                     }
@@ -244,12 +260,28 @@
             form.append('photo', photo.value);
             form.append('thumbnail', thumbnail.value);
             fetch(`/news/partialedit/${newId.value}`, { method: "POST", body: form })
-               .then(function (response) {
+                .then(function (response) {
                     console.log(response.status);
                     if (response.status === 201) {
                         console.log("done");
                         window.location.assign("/admin/profile");
-                    } else {
+                    } else if (response.status === 999) {
+                        console.log(response);
+                        var error_m = document.createElement('div');
+                        error_m.classList.add('error_div');
+                        var error_p = document.createTextNode('Recuerda que la URL debe contener sólo letras, números y usar guiones en vez de espacios');
+                        error_m.appendChild(error_p);
+                        document.body.appendChild(error_m);
+                        const x = document.querySelectorAll(".error_div");
+                        for (let i = 0; i < x.length; i++) {
+                            for (i = 0; i < x.length; i++) {
+                                x[i].addEventListener("click", (target) => {
+                                    target.path[1].removeChild(target.path[0]);
+                                });
+                            }
+                        }
+                    }
+                    else {
                         window.location.assign("/");
                     }
                 })

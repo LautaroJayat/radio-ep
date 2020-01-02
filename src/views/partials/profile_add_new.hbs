@@ -1,6 +1,17 @@
+    <style>
+        .error_div {
+            z-index: 99999;
+            position: fixed;
+            height: auto;
+            background-color: white;
+            color: red;
+            width: auto;
+        }
+    </style>
 <div class="dashboard-control">
     <div class="ck-editor-dash">
         <h2 class="Udatos-title">Nueva Noticia</h2>
+
         <div class="n-form">
             <label for="url">Escriba la URL de la noticia</label>
             <input id="url" class="n-input" type="text" name="url" placeholder="Escriba la URL de la noticia">
@@ -157,18 +168,34 @@
         }
         console.log('small', thumbnailBinaryData);
         fetch("/news/add", { method: "POST", body: form })
-           .then(function (response) {
-                    console.log(response.status);
-                    if (response.status === 201) {
-                        console.log("done");
-                        window.location.assign("/admin/profile");
-                    } else {
-                        window.location.assign("/");
-                    }
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
+            .then(function (response) {
+                console.log(response.status);
+                if (response.status === 201) {
+                    console.log("done");
+                    window.location.assign("/admin/profile");
+                } else if (response.status === 999) {
+                    console.log(response);
+                    var error_m = document.createElement('div');
+                    error_m.classList.add('error_div');
+                    var error_p = document.createTextNode('Recuerda que la URL debe contener sólo letras, números y usar guiones en vez de espacios');
+                    error_m.appendChild(error_p);
+                    document.body.appendChild(error_m);
+                    const x = document.querySelectorAll(".error_div");
+                    for (let i = 0; i < x.length; i++) {
+                        for (i = 0; i < x.length; i++) {
+                            x[i].addEventListener("click", (target) => {
+                                target.path[1].removeChild(target.path[0]);
+                            });
+                        }
+                    } 
+                }
+                else {
+                    window.location.assign("/");
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
     }
 
     //  Creating a CKEDITOR instance only when everithing is loaded
