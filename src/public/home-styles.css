@@ -265,7 +265,6 @@ body {
     margin-bottom: 6%;
 }
 
-
 .news .display-medium p {
     overflow: hidden;
     white-space: nowrap;
@@ -396,10 +395,12 @@ body {
 
 .article-big .emition-image-container {
     width: 100%;
-    height: 60%;
-    max-height: 60%;
+    max-width: 40vw;
+    height: 60vh;
+    max-height: 60vh;
     background-color: rgba(220, 20, 60, 0);
 }
+
 
 .emition-image-container .emition-img {
     width: 100%;
@@ -412,7 +413,13 @@ body {
     display: flex;
     flex-flow: row;
     max-height: 20vh;
+    max-width: 50vw;
     background-color: rgba(65, 65, 65, 0.432);
+}
+
+.article-small .custom-headline {
+    max-width: 32vw;
+    max-height: 30%;
 }
 
 .article-small .emition-image-container {
@@ -432,11 +439,11 @@ body {
 }
 
 .article-small .custom-small-title {
-    margin-top: 0;
+    margin: 0.5rem 0;
 }
 
 .article-small .custom-author {
-    margin-bottom: 5%;
+    margin-top: 0.5rem;
 }
 
 .footer {
