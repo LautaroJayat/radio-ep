@@ -43,31 +43,35 @@
         <div class="article">
             <div class="img-container"><a href="/news/{{url}}"><img src="{{thumbnail}}"></a></div>
             <div class="info">
-                <span class="date">{{date}}</span>
+                <div class="container">
+                    <span class="date">{{date}}</span>
 
-                <a href="/news/{{url}}">
+                    <a href="/news/{{url}}">
 
-                    <h2 class="article-title">{{title}}</h2>
-                </a>
+                        <h2 class="article-title">{{title}}</h2>
+                    </a>
+                </div>
+
                 <div class="author">
                     <div class="author_container"><img src="{{author_thumbnail}}" alt=""></div>
                     <span>Por <strong>{{author}}</strong></span>
                 </div>
 
                 <style>
-                    .button-container{
+                    .button-container {
                         height: auto;
                         width: 100%;
                         display: flex;
                         justify-content: center;
                     }
+
                     button {
-                        cursor:pointer;
+                        cursor: pointer;
                         border: none;
                         background: crimson;
                         color: white;
                         width: 40vw;
-                        min-width: 75px;
+                        min-width: 300px;
                         min-height: 50px;
                         height: 10vh;
                         font-weight: bold;
@@ -76,9 +80,17 @@
                         position: relative;
                         transition: all 0.3s ease-in-out;
                     }
-                    button:hover{
+
+                    button:hover {
                         background-color: rgb(220, 20, 80);
+                        border: 1px solid rgba(46, 184, 218, 0.63);
                     }
+
+                    button:focus {
+                        outline: none;
+
+                    }
+
 
                     strong {
                         font-weight: bold;
@@ -90,7 +102,7 @@
                         flex-flow: column;
                         justify-content: space-between;
                         position: relative;
-                        min-height: 38%;
+                        min-height: 37%;
                     }
 
                     .author {
@@ -98,7 +110,7 @@
                         color: white;
                         display: flex;
                         flex-flow: row;
-                        justify-content: start;
+                        justify-content: ;
                         align-items: center;
                     }
 
@@ -199,8 +211,25 @@
                     date.classList.add('date');
                     date.appendChild(document.createTextNode(e.date));
                     link2.appendChild(title);
-                    info.appendChild(date);
-                    info.appendChild(link2);
+                    let container = document.createElement('div');
+                    container.appendChild(date);
+                    container.appendChild(link2);
+                    info.appendChild(container);
+                    let author = document.createElement('div');
+                    author.classList.add('author');
+                    let author_container = document.createElement('div');
+                    author_container.classList.add('author_container');
+                    let author_img = document.createElement('img');
+                    author_img.src = e.author_thumbnail;
+                    author_container.appendChild(author_img);
+                    author.appendChild(author_container);
+                    let author_name = document.createElement('span');
+                    author_name.appendChild(document.createTextNode('Por '));
+                    let StrongestNameInTheHistory = document.createElement('strong');
+                    StrongestNameInTheHistory.appendChild(document.createTextNode(e.author));
+                    author_name.appendChild(StrongestNameInTheHistory);
+                    author.appendChild(author_name);
+                    info.appendChild(author);
                     link.appendChild(image);
                     img_container.appendChild(link);
                     article.appendChild(img_container);
@@ -480,12 +509,13 @@
         color: white;
         font-size: 120%;
         margin-bottom: 2%;
+        margin-top: 0.2rem;
 
     }
 
     .info .date {
         color: crimson;
-        font-size: 85%;
+        font-size: 70%;
     }
 
     .footer {
