@@ -15,7 +15,7 @@
         <div id="close-button" class="close-button"><span>+</span></div>
         <h2 class="font-crimson">MENU</h2>
         <ul class="nav-list">
-           <li><a href="/all/news" class="nav-link font-crimson">NOTICIAS</a></li>
+            <li><a href="/all/news" class="nav-link font-crimson">NOTICIAS</a></li>
             <li><a href="/all/columns" class="nav-link font-crimson">RECORTES</a></li>
             <li><a href="/all/emitions" class="nav-link font-crimson">EMISIONES</a></li>
             <li><a href="/all/contact" class="nav-link font-crimson">CONTACTO</a></li>
@@ -273,68 +273,76 @@
             {{#if emitions}}
             <div class="article-big">
                 <div class="emition-image-container">
-                    <a href="/emitions/{{emitions.[0].url}}"><img src="{{emitions.[0].thumbnail}}" class="emition-img" alt=""></a>
+                    <a href="/emitions/{{emitions.[0].url}}"><img src="{{emitions.[0].thumbnail}}" class="emition-img"
+                            alt=""></a>
                 </div>
                 <div class="info">
+                    <span class="custom-headline font-white">{{emitions.[0].date}}</span>
 
                     <a href="/emitions/{{emitions.[0].url}}">
                         <h3 class="custom-medium-title font-crimson">{{emitions.[0].program}}</h3>
                     </a>
-                    <span class="custom-headline font-white">{{emitions.[0].date}}</span>
-                    <span class="custom-small-title font-white">{{emitions.[0].description}}</span>
+                    <span class="custom-small-title font-white clamp">{{{emitions.[0].description}}}</span>
                 </div>
             </div>
 
             <div class="article-small">
                 <div class="emition-image-container">
-                    <a href="/emitions/{{emitions.[1].url}}"><img src="{{emitions.[1].thumbnail}}" class="emition-img" alt=""></a>
+                    <a href="/emitions/{{emitions.[1].url}}"><img src="{{emitions.[1].thumbnail}}" class="emition-img"
+                            alt=""></a>
                 </div>
                 <div class="info">
+                    <span class="custom-author font-white">{{emitions.[1].date}}</span>
+
                     <a href="/emitions/{{emitions.[1].url}}">
                         <h3 class="custom-small-title font-crimson">{{emitions.[1].program}}</h3>
                     </a>
-                    <span class="custom-author font-white">{{emitions.[1].date}}</span>
-                    <span class="custom-headline font-white">{{emitions.[1].description}}</span>
+                    <span class="custom-headline font-white clamp">{{{emitions.[1].description}}}</span>
                 </div>
 
             </div>
             <div class="article-small">
                 <div class="emition-image-container">
-                    <a href="/emitions/{{emitions.[2].url}}"><img src="{{emitions.[2].thumbnail}}" class="emition-img" alt=""></a>
+                    <a href="/emitions/{{emitions.[2].url}}"><img src="{{emitions.[2].thumbnail}}" class="emition-img"
+                            alt=""></a>
                 </div>
                 <div class="info">
+                    <span class="custom-author font-white">{{emitions.[2].date}}</span>
+
                     <a href="/emitions/{{emitions.[2].url}}">
                         <h3 class="custom-small-title font-crimson">{{emitions.[2].program}}</h3>
                     </a>
-                    <span class="custom-author font-white">{{emitions.[2].date}}</span>
-                    <span class="custom-headline font-white">{{emitions.[2].description}}</span>
+                    <span class="custom-headline font-white clamp">{{{emitions.[2].description}}}</span>
                 </div>
 
             </div>
             <div class="article-small">
                 <div class="emition-image-container">
-                    <a href="/emitions/{{emitions.[3].url}}"><img src="{{emitions.[3].thumbnail}}" class="emition-img" alt=""></a>
+                    <a href="/emitions/{{emitions.[3].url}}"><img src="{{emitions.[3].thumbnail}}" class="emition-img"
+                            alt=""></a>
                 </div>
                 <div class="info">
+                    <span class="custom-author font-white">{{emitions.[3].date}}</span>
                     <a href="/emitions/{{emitions.[3].url}}">
                         <h3 class="custom-small-title font-crimson">{{emitions.[3].program}}</h3>
                     </a>
-                    <span class="custom-author font-white">{{emitions.[3].date}}</span>
-                    <span class="custom-headline font-white">{{emitions.[3].description}}</span>
+                    <span class="custom-headline font-white clamp">{{{emitions.[3].description}}}</span>
                 </div>
 
 
             </div>
             <div class="article-small">
                 <div class="emition-image-container">
-                    <a href="/emitions/{{emitions.[4].url}}"><img src="{{emitions.[4].thumbnail}}" class="emition-img" alt=""></a>
+                    <a href="/emitions/{{emitions.[4].url}}"><img src="{{emitions.[4].thumbnail}}" class="emition-img"
+                            alt=""></a>
                 </div>
                 <div class="info">
-                    <a href="/emitions/{{emitions.[4].url}}">
-                        <h3 class="custom-small-title font-crimson">{{emitions.[4].program}}</h3>
-                    </a>
                     <span class="custom-author font-white">{{emitions.[4].date}}</span>
-                    <span class="custom-headline font-white">{{emitions.[4].description}}</span>
+
+                    <a href="/emitions/{{emitions.[4].url}}">
+                        <h3 class="custom-small-title font-crimson">{{{emitions.[4].program}}}</h3>
+                    </a>
+                    <span class="custom-headline font-white clamp">{{{emitions.[4].description}}}</span>
                 </div>
             </div>
 
@@ -411,4 +419,18 @@
         }
     });
 
+
+    var toClamp = document.getElementsByClassName("clamp");
+    for (let i = 0; i < toClamp.length; i++) {
+        let ps = toClamp[i].getElementsByTagName("p");
+        let text = ""
+        for (let j = 0; j < ps.length; j++) {
+            let a = ps[0].innerText;
+            text = text + a;
+        }
+        toClamp[i].innerHTML = "";
+        if (i === 0 && text.length > 200) { text = text.slice(0, 200); text = text + "..." }
+        if (i !== 0 && text.length > 100) { text = text.slice(0, 100); text = text + "..." }
+        toClamp[i].appendChild(document.createTextNode(text));
+    }
 </script>
