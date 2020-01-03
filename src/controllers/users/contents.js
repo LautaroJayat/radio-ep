@@ -42,11 +42,13 @@ contents_ctrl.get_author = async (req, res) => {
 
 contents_ctrl.get_all_news = async (req, res) => {
     if (req.query.page) {
-        const news = await News.find({}, { _id: 0 }).sort({_id:-1}).limit(1).skip(parseInt(req.query.page));
-        res.json({ news });
+        const news = await News.find({}, { _id: 0 }).sort({ _id: -1 }).limit(3).skip(parseInt(req.query.page));
+        if (news.length < 1) { res.sendStatus(500) } else {
+            res.json({ news });
+        }
     } else {
-        const {news} = HOME_CACHE;
-        res.render("all_news", {news});
+        const { news } = HOME_CACHE;
+        res.render("all_news", { news });
     }
 }
 contents_ctrl.get_all_emitions = async (req, res) => {
