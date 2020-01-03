@@ -36,24 +36,96 @@
 </nav>
 
 <div id="menu-button" class="menu-button"><span>|||</span></div>
+<section class="contents">
+    <h1 class="section-title font-crimson">Todas las Noticias</h1>
+    <div id="grid-container" class="grid-container">
+        {{#each news}}
+        <div class="article">
+            <div class="img-container"><a href="/news/{{url}}"><img src="{{thumbnail}}"></a></div>
+            <div class="info">
+                <span class="date">{{date}}</span>
 
-<div id="grid-container" class="grid-container">
-    {{#each news}}
-    <div class="article">
-        <div class="img-container"><a href="/news/{{url}}"><img src="{{thumbnail}}"></a></div>
-        <div class="info">
-            <span class="date">{{date}}</span>
+                <a href="/news/{{url}}">
 
-            <a href="/news/{{url}}">
+                    <h2 class="article-title">{{title}}</h2>
+                </a>
+                <div class="author">
+                    <div class="author_container"><img src="{{author_thumbnail}}" alt=""></div>
+                    <span>Por <strong>{{author}}</strong></span>
+                </div>
 
-                <h2 class="article-title">{{title}}</h2>
-            </a>
+                <style>
+                    .button-container{
+                        height: auto;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                    }
+                    button {
+                        cursor:pointer;
+                        border: none;
+                        background: crimson;
+                        color: white;
+                        width: 40vw;
+                        min-width: 75px;
+                        min-height: 50px;
+                        height: 10vh;
+                        font-weight: bold;
+                        font-size: 150%;
+                        margin: 5% auto;
+                        position: relative;
+                        transition: all 0.3s ease-in-out;
+                    }
+                    button:hover{
+                        background-color: rgb(220, 20, 80);
+                    }
+
+                    strong {
+                        font-weight: bold;
+                    }
+
+                    .info {
+                        object-fit: cover;
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: space-between;
+                        position: relative;
+                        min-height: 38%;
+                    }
+
+                    .author {
+                        font-size: 80%;
+                        color: white;
+                        display: flex;
+                        flex-flow: row;
+                        justify-content: start;
+                        align-items: center;
+                    }
+
+                    .author_container {
+                        height: 2rem;
+                        width: 2rem;
+                        margin-right: 0.5rem;
+
+                    }
+
+                    .author img {
+                        border-radius: 100%;
+                        height: 2rem;
+                        width: 2rem;
+                        max-height: 100%;
+                        max-width: 100%;
+                        object-fit: cover;
+                    }
+                </style>
+            </div>
         </div>
+        {{/each}}
     </div>
-    {{/each}}
+</section>
+<div class="button-container">
+    <button id="gimmi">MÁS NOTICIAS!</button>
 </div>
-
-<button id="gimmi">gimmi</button>
 
 <footer class="footer">
     <div class="item">
@@ -100,49 +172,52 @@
     </div>
 </footer>
 <script>
-    var i = 2;
+    var i = 6;
     document.getElementById("gimmi").addEventListener("click", () => {
         fetch(`/all/news?page=${i}`)
             .then((response) => {
                 return response.json();
             })
             .then(res => {
-                let article = document.createElement('div');
-                article.classList.add('article');
-                let img_container = document.createElement('div');
-                img_container.classList.add('img-container');
-                let link = document.createElement('a');
-                link.href = `/news/${res.news[0].url}`;
-                let image = document.createElement('img');
-                image.src = res.news[0].thumbnail;
-                let info = document.createElement('div');
-                info.classList.add('info');
-                let link2 = document.createElement('a');
-                link2.href = `/news/${res.news[0].url}`;
-                let title = document.createElement('h2');
-                title.classList.add('article-title');
-                title.appendChild(document.createTextNode(res.news[0].title));
-                let date = document.createElement('span');
-                date.classList.add('date');
-                date.appendChild(document.createTextNode(res.news[0].date));
-                link2.appendChild(title);
-                info.appendChild(date);
-                info.appendChild(link2);
-                link.appendChild(image);
-                img_container.appendChild(link);
-                article.appendChild(img_container);
-                article.appendChild(info);
-                let grid = document.getElementById("grid-container");
-                grid.appendChild(article);
+                res.news.forEach(e => {
+                    let article = document.createElement('div');
+                    article.classList.add('article');
+                    let img_container = document.createElement('div');
+                    img_container.classList.add('img-container');
+                    let link = document.createElement('a');
+                    link.href = `/news/${e.url}`;
+                    let image = document.createElement('img');
+                    image.src = e.thumbnail;
+                    let info = document.createElement('div');
+                    info.classList.add('info');
+                    let link2 = document.createElement('a');
+                    link2.href = `/news/${e.url}`;
+                    let title = document.createElement('h2');
+                    title.classList.add('article-title');
+                    title.appendChild(document.createTextNode(e.title));
+                    let date = document.createElement('span');
+                    date.classList.add('date');
+                    date.appendChild(document.createTextNode(e.date));
+                    link2.appendChild(title);
+                    info.appendChild(date);
+                    info.appendChild(link2);
+                    link.appendChild(image);
+                    img_container.appendChild(link);
+                    article.appendChild(img_container);
+                    article.appendChild(info);
+                    let grid = document.getElementById("grid-container");
+                    grid.appendChild(article);
+                })
+
             }
             ).catch((err) => {
-                let par = document.createElement('p');
-                par.appendChild(document.createTextNode(err));
+                let par = document.createElement('h3');
+                par.appendChild(document.createTextNode("Me parece que no tenemos más tenemos más noticias. Te recomendamos recorrer el resto de la página, visitar nuestras redes o sumarte en alguna de nuestras épicas fiestas."));
                 let grid = document.getElementById("grid-container");
                 par.classList.add('font-crimson');
                 grid.appendChild(par);
             });
-        i++
+        i = i + 3;
         console.log(i)
     });
 </script>
@@ -410,6 +485,7 @@
 
     .info .date {
         color: crimson;
+        font-size: 85%;
     }
 
     .footer {
