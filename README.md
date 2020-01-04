@@ -2,11 +2,12 @@
 
 Un gestor de contenidos creado "from scratch" para el proyecto Radio EntrePiernas.
 Para ver una maqueta del sitio dirigirse a los siguientes links:
-[Vista de una maqueta de Landing-Page](https://radioentrepiernas3.imfast.io/)
 
-[Vista de una maqueta página de contenidos de contenidos](https://contents.imfast.io/)
+*[Vista de una maqueta de Landing-Page](https://radioentrepiernas3.imfast.io/)
 
-[Maquetas realizadas en Figma](https://www.figma.com/file/1vnqesP5XAjm795tbxnR1c/Radio-Ep-dark-Theme)
+*[Vista de una maqueta página de contenidos de contenidos](https://contents.imfast.io/)
+
+*[Maquetas realizadas en Figma](https://www.figma.com/file/1vnqesP5XAjm795tbxnR1c/Radio-Ep-dark-Theme)
 
 ## Objetivo
 
