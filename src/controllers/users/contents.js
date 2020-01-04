@@ -27,14 +27,16 @@ contents_ctrl.get_column = async (req, res) => {
 }
 contents_ctrl.get_emition = async (req, res) => {
     const url = req.params.url;
-    if (HOME_CACHE.emition.filter(element => element.url === url)) {
+    if (HOME_CACHE.emitions.filter(element => element.url === url)) {
         //console.log("works")
-        res.send(HOME_CACHE.emition.filter(element => element.url === url))
+        res.send(HOME_CACHE.emitions.filter(element => element.url === url))
     } else {
         const emition = await News.find({ url: url }, { _id: 0 });
         res.send(emition);
     };
 }
+
+
 contents_ctrl.get_author = async (req, res) => {
 
     res.send("working");
