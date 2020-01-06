@@ -25,7 +25,6 @@ admin_ctrl.all_users = async (req, res) => {
         _id: 1
 
     });
-    console.log(users);
     res.render('users/update_content/profile_all_users', { headers, users });
 }
 
