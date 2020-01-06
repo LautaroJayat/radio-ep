@@ -103,7 +103,7 @@ cache_functions.addSmallSound = async function (doc) {
 // Try to run this operation first in order to populate the CACHE FUNCTION BOOLEANS IN LINE 10 TO 14
 cache_functions.checkIfEmptyAndPopulate = async function () {
     console.log('\nCHECKINKG CACHE\n')
-    if (HOME_CACHE.news.length === 0) {
+    if (HOME_CACHE.news.length < 1) {
         cache_functions.newsIsEmpty = true;
         await cache_functions.refreshNews();
 
@@ -140,9 +140,8 @@ cache_functions.checkIfEmptyAndPopulate = async function () {
 // This function refreshes the News array in HOME_CACHE object
 cache_functions.refreshNews = async function () {
     //  Triyng to find News and sorting in Desc order.
-    let news = await News.find({},{_id:0}).sort({ _id: -1 });
+    HOME_CACHE.news = await News.find({},{_id:0}).sort({ _id: -1 }).limit(6);
     //  Then populate the CACHE with the Newest 6 elements 
-    HOME_CACHE.news = news.slice(0, 6);
     (() => {
         if (HOME_CACHE.news.length > 0) {
             cache_functions.newsIsEmpty = false;
@@ -156,9 +155,8 @@ cache_functions.refreshNews = async function () {
 // This function refreshes the Columns array in HOME_CACHE object
 cache_functions.refreshColumns = async function () {
     //  Triyng to find Columns and sorting in Desc order.
-    let columns = await Columns.find({},{_id:0}).sort({ _id: -1 });
+    HOME_CACHE.columns = await Columns.find({},{_id:0}).sort({ _id: -1 }).limit(6);
     //  Then populate the CACHE with the Newest 4 elements 
-    HOME_CACHE.columns = columns.slice(0, 6);
     (() => {
         if (HOME_CACHE.columns.length > 0) {
             cache_functions.columnsIsEmpty = false;
@@ -172,9 +170,8 @@ cache_functions.refreshColumns = async function () {
 // This function refreshes the Columns array in HOME_CACHE object
 cache_functions.refreshEmitions = async function () {
     //  Triyng to find Columns and sorting in Desc order.
-    let emitions = await Emitions.find({},{_id:0}).sort({ _id: -1 });
+    HOME_CACHE.emitions = await Emitions.find({},{_id:0}).sort({ _id: -1 }).limit(5);
     //  Then populate the CACHE with the Newest 4 elements 
-    HOME_CACHE.emitions = emitions.slice(0, 5);
     (() => {
         if (HOME_CACHE.emitions.length > 0) {
             cache_functions.emitionsIsEmpty = false;
