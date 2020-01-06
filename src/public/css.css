@@ -141,7 +141,7 @@ nav {
 
 .showcase::after {
     content: '';
-    background-image: url('img/mortir1000px.JPG');
+    background-image: url('/img/mortir1000px.JPG');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
