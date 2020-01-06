@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
 
     <!--MetaData For the Spiders and Snippets -->
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="og:title" content="{{headers.ogTitle}}" />
     <meta property="og:description" content="{{headers.ogDescription}}" />
@@ -14,30 +15,32 @@
     <title>{{{headers.pageTitle}}}</title>
 
     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link rel="stylesheet" href="/home-grid.css">
-    <link rel="stylesheet" href="/home-styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 
+    <!--There will be CSS in this section-->
+    {{#if headers.altFormat}}
+    {{#each headers.altFormat.altCSS}}
+    {{{this}}}
+    {{/each}}
+    {{else}}
+    <link rel="stylesheet" href="/home-grid.css">
+    <link rel="stylesheet" href="/home-styles.css">
+    {{/if}}
 
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    {{#unless headers.profile}}
-    {{/unless}}
-    {{>alt_Css}}
 </head>
 
 
 
 <body>
     {{#each error_msg}}<div class="error_div">{{this}}</div>{{/each}}
-
     {{#if error_msg}}
     <script>
         const x = document.querySelectorAll(".error_div");
