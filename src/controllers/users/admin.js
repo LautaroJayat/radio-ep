@@ -13,9 +13,6 @@ const admin_ctrl = {};
 admin_ctrl.all_users = async (req, res) => {
     const headers = {
         pageTitle: "Todos Los Usuarios",
-        //ogDescription: "Escucha la radio del club más caliente",
-        //ogTitle: "Radio Entre-Piernas",
-        //ogImage: "",
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
@@ -28,6 +25,7 @@ admin_ctrl.all_users = async (req, res) => {
         _id: 1
 
     });
+    console.log(users);
     res.render('users/update_content/profile_all_users', { headers, users });
 }
 
