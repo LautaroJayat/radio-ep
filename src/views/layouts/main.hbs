@@ -8,9 +8,16 @@
     <!--MetaData For the Spiders and Snippets -->
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:site_name" name="og:site_name" content="Radio Entre-Piernas" />
     <meta property="og:title" content="{{headers.ogTitle}}" />
-    <meta property="og:description" content="{{headers.ogDescription}}" />
+    <meta property="og:description" content="{{{headers.ogDescription}}}" />
     <meta property="og:image" content="{{headers.ogImage}}" />
+    {{#if headers.news}}
+    <meta property="og:type" name="og:type" content="article" />
+    <meta property="og:url" name="og:url" content="https://{{news.url}}" />
+    <meta property="og:article:author" name="og:article:author"
+        content="{{#if news.alt_author}}{{news.alt_author}}{{else}}{{news.author}}{{/if}}" />
+    {{/if}}
 
     <title>{{{headers.pageTitle}}}</title>
 
@@ -23,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 
     <!--There will be CSS in this section-->
-    {{#if headers.altFormat}}
+    {{#if headers.altFormat.altCSS}}
     {{#each headers.altFormat.altCSS}}
     {{{this}}}
     {{/each}}
