@@ -37,6 +37,8 @@ emitions_ctrl.edit_emitions_panel = async (req, res) => {
 
 emitions_ctrl.add_emitions = async (req, res) => {
     const { title, description, body, program, date, iframe, url } = req.body;
+    let safeIframe = iframe.replace("https://www.youtube.com/watch?v=","")
+    safeIframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${safeIframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
     const thumbnailURL = req.files[0].path;
     try {
         //  Compressing
@@ -56,7 +58,7 @@ emitions_ctrl.add_emitions = async (req, res) => {
             url,
             title,
             description,
-            iframe,
+            iframe:safeIframe,
             program,
             body,
             thumbnail,
