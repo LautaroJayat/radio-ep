@@ -39,6 +39,9 @@ El gestor de contenidos implementa el paquete ImageMinRecompress para comprir la
 * Terminar el saneamiento de los formularios para prevenir XSS (del lado del usuario y del lado del servidor).
 * Crear Servicio de Mailing
 * Crear un load-balancer con NginX y pensar la implementacipon de PM2
-* Crear Contenedores Docker
+* Crear Contenedores Docker para instancias de Node, MongoDB y un volumen virtual donde hacer backups de la base de datos
+* Crear Scripts para automatizar backups
+* Integrar la API de Google Drive para automatizar backups remotos
+* Usar PM2 para automatizar tanto backups como restores en casos de escenarios catastróficos
 * Crear una rama específica para usar el esqueleto del gestor para otros proyectos.
 * Terminar la documentación
