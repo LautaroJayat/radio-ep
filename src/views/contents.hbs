@@ -65,13 +65,14 @@
                     <div class="author-img-container rounded-borders">
                         <img src="{{news.author_thumbnail}}" alt="author-img" class="author-img">
                     </div>
-                    <span class="name font-white">Por <strong>{{news.author}}</strong></span>
+                    <span class="name font-white">Por <strong class="font-crimson">{{news.author}}</strong></span>
                     {{/if}}
                     {{#if columns}}
-                    <span class="name font-white">Programa <strong>{{columns.program}}</strong></span>
+                    <span class="name font-white">Programa: <strong
+                            class="font-crimson">{{columns.program}}</strong></span>
                     {{/if}}
                     {{#if emitions}}
-                    <span class="name font-white">Programa <strong>{{emitions.program}}</strong></span>
+                    <span class="name font-white">Programa: <strong>{{emitions.program}}</strong></span>
                     {{/if}}
 
 
@@ -123,7 +124,7 @@
             {{/if}}
             {{#if columns}}
             <div class="main-media">
-                {{columns.iframe}}
+                {{{columns.iframe}}}
                 <span class="caption font-white">Fuente: {{#if columns.caption}}{{ columns.caption}}{{else}}Radio
                     Entre-Piernas S.A.{{/if}}</span>
 
@@ -131,7 +132,7 @@
             {{/if}}
             {{#if emitions}}
             <div class="main-media">
-                {{columns.iframe}}
+                {{{emitions.iframe}}}
                 <span class="caption font-white">Fuente: {{#if emitions.caption}}{{ emitions.caption}}{{else}}Radio
                     Entre-Piernas S.A.{{/if}}</span>
             </div>
@@ -141,52 +142,24 @@
                 {{{news.body}}}{{{columns.body}}}{{{emitions.body}}}
             </div>
         </article>
-        <h1 class="section-title font-crimson">RECORTES</h1>
+        <h1 class="section-title font-crimson">{{#if columns}}MÁS RECORTES{{else}}RECORTES{{/if}}</h1>
 
         <section id="columns" class="columns">
-            <div class="article-1">
+            {{#each _columns}}
+            <div class="column-article">
                 <div class="column-image-container">
-                    <a href="#">
-                        <img src="https://source.unsplash.com/random/501x502" class="column-img" alt="">
+                    <a href="/contents/columns/{{url}}">
+                        <img src="{{thumbnail}}" class="column-img" alt="">
                         <img src="/play-crimson-small.png" class="column-play" alt=""></a>
 
                 </div>
-                <span class="custom-headline font-crimson font-italic">Entre-Piernas Soft</span>
-                <a href="#">
-                    <h3 class="custom-small-title font-white title-hover">Dale un pancho a la Nati y te lo
-                        convierte
-                        en
-                        choripan</h3>
+                <span class="custom-headline font-crimson font-italic">{{program}}</span>
+                <a href="/contents/columns/{{url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{title}}</h3>
                 </a>
             </div>
-            <div class="article-2">
-                <div class="column-image-container">
-                    <a href="#">
-                        <img src="https://source.unsplash.com/random/502x502" class="column-img" alt="">
-                        <img src="/play-crimson-small.png" class="column-play" alt=""></a>
-
-                </div>
-                <span class="custom-headline font-crimson font-italic">Cojiendo Borracho</span>
-                <a href="#">
-                    <h3 class="custom-small-title font-white title-hover">"¿Nunca te arrastraron hasta la cama?"
-                    </h3>
-                </a>
-            </div>
-            <div class="article-3">
-                <div class="column-image-container">
-                    <a href="#">
-                        <img src="https://source.unsplash.com/random/500x503" class="column-img" alt="">
-                        <img src="/play-crimson-small.png" class="column-play" alt=""></a>
-
-                </div>
-                <span class="custom-headline font-crimson font-italic">El Ministerio de la venganza</span>
-                <a href="#">
-                    <h3 class="custom-small-title font-white title-hover">El peronismo integaláctico está
-                        preparando
-                        su
-                        revancha</h3>
-                </a>
-            </div>
+            {{/each}}
+        </section>
     </div>
 
     <div class="aside">
@@ -203,58 +176,14 @@
                 <h1 class="section-title font-crimson">MÁS NOTICIAS</h1>
 
                 <section id="more-news" class="more-news">
-
+                    {{#each _news}}
                     <div class="article">
-                        <a href="#">
-                            <h3 class="custom-small-title font-white">La DamaJuana Maestra nos trae mucha
-                                felicidad</h3>
+                        <a href="/contents/news/{{url}}">
+                            <h3 class="custom-small-title font-white">{{title}}</h3>
                         </a>
-                        <span class="custom-author font-crimson">Por Analía Ramírez</span>
+                        <span class="custom-author font-crimson">Por {{author}}</span>
                     </div>
-                    <div class="article">
-                        <a href="#">
-                            <h3 class="custom-small-title font-white">El patriarcado contraataca y estamos
-                                podridas,
-                                vamos a
-                                prender
-                                fuego todo.</h3>
-                        </a>
-                        <span class="custom-author font-crimson">Por PUSSY RIOT GONZALEZ</span>
-                    </div>
-                    <div class="article">
-                        <a href="#">
-                            <h3 class="custom-small-title font-white">Si vas a cocinar arroz, mejor hacelo en
-                                una
-                                cacerola.
-                                Reflexiones Postmodernas.</h3>
-                        </a>
-                        <span class="custom-author font-crimson">Por FRANCO VATTIMO GIMENEZ</span>
-                    </div>
-                    <div class="article">
-                        <a href="#">
-                            <h3 class="custom-small-title font-white">Perreo y revolución, la nueva tendencia
-                                para
-                                luchar
-                                contra
-                                la
-                                policía.</h3>
-                        </a>
-                        <span class="custom-author font-crimson">Por RESIDENTA CALLA TERESA</span>
-                    </div>
-                    <div class="article">
-                        <a href="#">
-                            <h3 class="custom-small-title font-white">"La economía está solucionada para
-                                siempre"</h3>
-                        </a>
-                        <span class="custom-author font-crimson">Por MAURICIO MACRI</span>
-                    </div>
-                    <div class="article">
-                        <a href="#">
-                            <h3 class="custom-small-title font-white">¿Y si todos fueramos Donald Trump?</h3>
-                        </a>
-                        <span class="custom-author font-crimson">Por DONALD TRUMP OK</span>
-                    </div>
-
+                    {{/each}}
                 </section>
             </div>
         </div>
