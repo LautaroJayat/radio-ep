@@ -1,7 +1,7 @@
 const News = require('../models/news');
 const Emitions = require('../models/emitions');
 const Columns = require('../models/column');
-const SmallSound = require('../models/soundSmall');
+const BigSound = require('../models/soundBig');
 //const bigSound = require('../models/soundBig');
 const HOME_CACHE = require('./HOME_CACHE');
 
@@ -85,14 +85,14 @@ cache_functions.addEmitions = async function (doc) {
 
 }
 
-cache_functions.addSmallSound = async function (doc) {
+cache_functions.addBigSound = async function (doc) {
     if (!this.checkIfEmptyAndPopulate_HAS_RUN) {
         console.log("\nCACHE IS NOT INITIALIZED\nINITIALIZING CACHÉ")
         await this.checkIfEmptyAndPopulate();
         console.log("CACHE WAS INITIALIZED AND POPULATED");
     } else {
         console.log("\nCACHE IS ALLREADY INITIALIZED, NO NEED TO CHECK IF IS EMPTY");
-        this.updateSmallSound(doc);
+        this.updateBigSound(doc);
         console.log("THE SMALL SOUND WAS ADDED");
 
     }
@@ -111,11 +111,11 @@ cache_functions.checkIfEmptyAndPopulate = async function () {
         cache_functions.newsIsEmpty = false;
     }
 
-    if (HOME_CACHE.smallSound.length === 0) {
-        cache_functions.smallSoundIsEmpty = true;
-        await cache_functions.refreshSmallSound();
+    if (HOME_CACHE.bigSound.length === 0) {
+        cache_functions.bigSoundIsEmpty = true;
+        await cache_functions.refreshBigSound();
     } else {
-        cache_functions.smallSoundIsEmpty = false;
+        cache_functions.bigSoundIsEmpty = false;
     }
 
     if (HOME_CACHE.columns.length === 0) {
@@ -140,7 +140,7 @@ cache_functions.checkIfEmptyAndPopulate = async function () {
 // This function refreshes the News array in HOME_CACHE object
 cache_functions.refreshNews = async function () {
     //  Triyng to find News and sorting in Desc order.
-    HOME_CACHE.news = await News.find({},{_id:0}).sort({ _id: -1 }).limit(6);
+    HOME_CACHE.news = await News.find({}, { _id: 0 }).sort({ _id: -1 }).limit(6);
     //  Then populate the CACHE with the Newest 6 elements 
     (() => {
         if (HOME_CACHE.news.length > 0) {
@@ -155,7 +155,7 @@ cache_functions.refreshNews = async function () {
 // This function refreshes the Columns array in HOME_CACHE object
 cache_functions.refreshColumns = async function () {
     //  Triyng to find Columns and sorting in Desc order.
-    HOME_CACHE.columns = await Columns.find({},{_id:0}).sort({ _id: -1 }).limit(6);
+    HOME_CACHE.columns = await Columns.find({}, { _id: 0 }).sort({ _id: -1 }).limit(6);
     //  Then populate the CACHE with the Newest 4 elements 
     (() => {
         if (HOME_CACHE.columns.length > 0) {
@@ -170,7 +170,7 @@ cache_functions.refreshColumns = async function () {
 // This function refreshes the Columns array in HOME_CACHE object
 cache_functions.refreshEmitions = async function () {
     //  Triyng to find Columns and sorting in Desc order.
-    HOME_CACHE.emitions = await Emitions.find({},{_id:0}).sort({ _id: -1 }).limit(5);
+    HOME_CACHE.emitions = await Emitions.find({}, { _id: 0 }).sort({ _id: -1 }).limit(5);
     //  Then populate the CACHE with the Newest 4 elements 
     (() => {
         if (HOME_CACHE.emitions.length > 0) {
@@ -185,14 +185,14 @@ cache_functions.refreshEmitions = async function () {
 //  This function is almost the same as the previous 4,
 //  but the smallSound always is an unique element, 
 //  so there is no need to slice the first elements
-cache_functions.refreshSmallSound = async function () {
-    HOME_CACHE.smallSound = await SmallSound.find({},{_id:0});
+cache_functions.refreshBigSound = async function () {
+    HOME_CACHE.bigSound = await BigSound.find({}, { _id: 0 }).sort({ _id: -1 }).limit(10);
     (() => {
-        if (HOME_CACHE.smallSound.length > 0) {
-            cache_functions.smallSoundIsEmpty = false;
-            console.log('SmallSound Cache Is Not Empty');
+        if (HOME_CACHE.bigSound.length > 0) {
+            cache_functions.bigSoundIsEmpty = false;
+            console.log('bigSound Cache Is Not Empty');
         } else {
-            console.log('There Are No SmallSounds Stored In Database');
+            console.log('There Are No bigSounds Stored In Database');
         }
     })();
 }
@@ -200,16 +200,14 @@ cache_functions.refreshSmallSound = async function () {
 // A simple shortCut to populate CACHE, if its needed...
 cache_functions.refreshAll = async function () {
 
-    let columns = await Columns.find({},{_id:0}).sort({ _id: -1 });
-    HOME_CACHE.columns = columns.slice(0, 3);
+    HOME_CACHE.columns = await Columns.find({}, { _id: 0 }).sort({ _id: -1 });
 
-    let emitions = await Emitions.find({},{_id:0}).sort({ _id: -1 });
-    HOME_CACHE.emitions = emitions.slice(0, 2);
+    HOME_CACHE.emitions = await Emitions.find({}, { _id: 0 }).sort({ _id: -1 }).limit(6);
 
-    let news = await News.find({},{_id:0}).sort({ _id: -1 });
-    HOME_CACHE.news = news.slice(0, 5);
+    HOME_CACHE.news = await News.find({}, { _id: 0 }).sort({ _id: -1 }).limit(6);
 
-    HOME_CACHE.smallSound = await SoundSmall.find({},{_id:0}).sort({ _id: -1 });
+    HOME_CACHE.bigSound = await BigSound.find({}, { _id: 0 }).sort({ _id: -1 }).limit(10);
+    console.log(HOME_CACHE.BigSound);
 }
 
 // An easy function to keep the CACHE updated when a NEWS is created by some user
@@ -241,8 +239,11 @@ cache_functions.updateColumns = function (doc) {
     }
 
 }
-cache_functions.updateSmallSound = function (doc) {
-    HOME_CACHE.smallSound[0] = doc;
+cache_functions.updateBigSound = function (doc) {
+    HOME_CACHE.bigSound.unshift(doc);
+    if (HOME_CACHE.bigSound.length > 10) {
+        HOME_CACHE.bigSound.pop();
+    }
 
 }
 
