@@ -308,7 +308,9 @@ a {
     font-style: oblique;
     font-size: 90%;
 }
-
+article{
+    max-width: 60vw;
+}
 .article .body p {
     position: relative;
     line-height: 2rem;
