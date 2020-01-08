@@ -2,36 +2,43 @@
 
     <div class="iframes-dash">
 
-        <div class="iframe-form">
+        <style>
+            .delete-panel {
+                width: 95%;
+                display: flex;
+                flex-flow: row;
+                flex-wrap: wrap;
+            }
+
+            .delete-panel form {
+                width: 150px;
+                height: auto;
+                margin: 2vh;
+            }
+        </style>
+        <div class="delete-panel">
             {{#if bigSound}}
-            <div class="min-iframe">
-                {{{bigSound.iframe}}}
-            </div>
-            {{else}}
-            <h2>Todavía no hay registrado un bigIframe</h2>
-            {{/if}}
-            <form class="actual-iframe-form" action="/admin/bigsound/register?_method=PUT" method="POST">
-                <input type="hidden" name="_method" value="PUT">
-                <input type="text" name="iframe" class="input-i">
-                <button type="submit" class="button-i">Actualizar</button>
+            {{#each bigSound}}
+            <form action="/iframes/delete/{{_id}}?_method=DELETE" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <iframe width="150px" height="150px" src="https://www.youtube.com/embed/{{video_id}}" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+                <button>Borrar</button>
             </form>
+            {{/each}}
+            {{/if}}
         </div>
-
-
         <div class="iframe-form">
-            {{#if smallSound}}
-            <div class="min-iframe">
-                {{{smallSound.iframe}}}
-            </div>
-            {{else}}
-            <h2>Todavía no hay registrado un smallIframe</h2>
-            {{/if}}
-            <form class="actual-iframe-form" action="/admin/smallsound/register?_method=PUT" method="POST">
-                <input type="hidden" name="_method" value="PUT">
+
+            <form class="actual-iframe-form" action="/admin/bigsound/register" method="POST">
                 <input type="text" name="iframe" class="input-i">
                 <button type="submit" class="button-i">Actualizar</button>
             </form>
         </div>
+
+
+
 
 
     </div>
