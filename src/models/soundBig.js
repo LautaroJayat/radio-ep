@@ -2,7 +2,7 @@ const mongoose = require ('mongoose');
 const { Schema } = mongoose;
 
 const soundBigSchema = new Schema({
-    iframe:  {type: String, required: true}
+    video_id:  {type: String, required: true}
     
 });
 
