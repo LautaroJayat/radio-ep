@@ -5,6 +5,7 @@ const recomp = require('imagemin-jpeg-recompress');
 const news_ctrl = {};
 const cache_functions = require('../../cache/cache_functions');
 const URL_F = require('../../helpers/url');
+const utf8 = require('utf8');
 
 
 news_ctrl.edit_news_panel = async (req, res) => {
@@ -37,11 +38,15 @@ news_ctrl.edit_news_panel = async (req, res) => {
 
 news_ctrl.add_news = async (req, res) => {
 
-    const { title, description, headline, body, date, alt_author, alt_source, alt_source_link, alt_social } = req.body;
-    var { url } = req.body;
+    const { title, headline, date, alt_author, alt_source, alt_source_link, alt_social } = req.body;
+    var { url, body, description } = req.body;
+    body = utf8.encode(body);
+    description = utf8.encode(description);
+    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
+    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
     url = URL_F.spaceToDash(url);
     if (URL_F.unsafeURL(url)) {
-        res.sendStatus("999") //This will be handled by the front-end
+        return res.sendStatus("999") //This will be handled by the front-end
     } else {
         const photoURL = req.files[0].path;
         const thumbnailURL = req.files[1].path;
@@ -126,11 +131,16 @@ news_ctrl.add_news = async (req, res) => {
 }
 
 news_ctrl.edit_news = async (req, res) => {
-    const { title, description, body, photo, thumbnail, headline, alt_source, alt_source_link, alt_author, alt_social } = req.body;
-    var { url } = req.body;
+    const { title, photo, thumbnail, headline, alt_source, alt_source_link, alt_author, alt_social } = req.body;
+    var { url, body, description } = req.body;
     url = URL_F.spaceToDash(url);
+    body = utf8.encode(body);
+    description = utf8.encode(description);
+    console.log(URL_F.checkScripts(description))
+    if (URL_F.checkScripts(description)) { return res.sendStatus(997) }
+    if (URL_F.checkScripts(body)) { return res.sendStatus(997) };
     if (URL_F.unsafeURL(url)) {
-        res.sendStatus("999") //This will be handled by the front-end
+       return res.sendStatus("999") //This will be handled by the front-end
     } else {
         try {
             await News.findByIdAndUpdate(req.params.id, {
@@ -165,8 +175,13 @@ news_ctrl.edit_news = async (req, res) => {
 }
 
 news_ctrl.full_edit_news = async (req, res) => {
-    const { title, description, body, headline, alt_source, alt_author, alt_social } = req.body;
-    var { url } = req.body;
+    const { title, headline, alt_source, alt_author, alt_social } = req.body;
+    var { url, body, description } = req.body;
+    url = URL_F.spaceToDash(url);
+    body = utf8.encode(body);
+    description = utf8.encode(description);
+    if (URL_F.checkScripts(description)) { return res.sendStatus(997) }
+    if (URL_F.checkScripts(body)) { return res.sendStatus(997) };
     url = URL_F.spaceToDash(url);
     if (URL_F.unsafeURL(url)) {
         res.sendStatus("999") //This will be handled by the front-end

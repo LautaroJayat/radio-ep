@@ -3,6 +3,8 @@ const fs = require('fs');
 const imagemin = require('imagemin');
 const recomp = require('imagemin-jpeg-recompress');
 const cache_functions = require('../../cache/cache_functions');
+const URL_F = require('../../helpers/url');
+const utf8 = require('utf8');
 
 
 const columns_ctrl = {};
@@ -52,9 +54,21 @@ columns_ctrl.edit_columns_panel = async (req, res) => {
 
 
 columns_ctrl.add_columns = async (req, res) => {
-    const { title, description, body, date, iframe, members, program, url } = req.body;
-    let safeIframe = iframe.replace("https://www.youtube.com/watch?v=", "")
-    safeIframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${safeIframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    const { title, date, members, program } = req.body;
+    var { iframe, body, url, description } = req.body;
+    body = utf8.encode(body);
+    description = utf8.encode(description);
+    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
+    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
+    url = URL_F.spaceToDash(url);
+    if (URL_F.unsafeURL(url)) {
+        res.sendStatus("999"); //This will be handled by the front-end
+        return
+    }
+    iframe = await URL_F.safeIframe(iframe);
+    if (iframe === undefined) { return res.sendStatus(998) }
+    //let safeIframe = iframe.replace("https://www.youtube.com/watch?v=", "")
+    //safeIframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${safeIframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
     const thumbnailURL = req.files[0].path;
     try {
         //  Compressing
@@ -74,7 +88,7 @@ columns_ctrl.add_columns = async (req, res) => {
             title,
             description,
             program,
-            iframe: safeIframe,
+            iframe: iframe,
             members,
             body,
             thumbnail,
@@ -98,26 +112,21 @@ columns_ctrl.add_columns = async (req, res) => {
 
 }
 
-async function safeIframe(iframe) {
-    if (iframe.search("embed") > 0) {
-        iframe = iframe.substring(iframe.indexOf('embed/'));
-        iframe = iframe.replace('embed/', "");
-        iframe = iframe.substr(0, iframe.indexOf('"'));
-        iframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${iframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-        return iframe
-    } else if (iframe.search("embed") < 0 && iframe.indexOf("https://www.youtube.com/watch?v=") === 0) {
-        iframe = iframe.replace("https://www.youtube.com/watch?v=", "")
-        iframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${iframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-        return iframe;
-    } else {
-        return undefined
-    };
-}
+
 
 columns_ctrl.edit_columns = async (req, res) => {
     var { title, description, body, iframe, program, members, url } = req.body;
-    iframe = await safeIframe(iframe);
-    if(iframe === undefined){return res.sendStatus(999)}
+    body = utf8.encode(body);
+    description = utf8.encode(description);
+    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
+    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
+    url = URL_F.spaceToDash(url);
+    if (URL_F.unsafeURL(url)) {
+        res.sendStatus("999"); //This will be handled by the front-end
+        return
+    }
+    iframe = await URL_F.safeIframe(iframe);
+    if (iframe === undefined) { return res.sendStatus(998) }
     try {
         await Column.findByIdAndUpdate(req.params.id, {
             program: program,
@@ -142,9 +151,19 @@ columns_ctrl.edit_columns = async (req, res) => {
 }
 
 columns_ctrl.full_edit_columns = async (req, res) => {
-    const { title, description, body, iframe, program, members, url } = req.body;
-    iframe = await safeIframe(iframe);
-    if(iframe === undefined){return res.sendStatus(999)}
+    const { title, program, members } = req.body;
+    var { iframe, description, body, url } = req.body;
+    body = utf8.encode(body);
+    description = utf8.encode(description);
+    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
+    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
+    url = URL_F.spaceToDash(url);
+    if (URL_F.unsafeURL(url)) {
+        res.sendStatus("999"); //This will be handled by the front-end
+        return
+    }
+    iframe = await URL_F.safeIframe(iframe);
+    if (iframe === undefined) { return res.sendStatus(998) }
     const thumbnailURL = req.files[0].path;
     try {
         //  Compressing

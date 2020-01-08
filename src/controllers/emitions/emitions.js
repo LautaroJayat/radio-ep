@@ -3,6 +3,8 @@ const fs = require('fs');
 const imagemin = require('imagemin');
 const recomp = require('imagemin-jpeg-recompress');
 const cache_functions = require('../../cache/cache_functions');
+const URL_F = require('../../helpers/url');
+const utf8 = require('utf8');
 
 const emitions_ctrl = {};
 
@@ -36,9 +38,19 @@ emitions_ctrl.edit_emitions_panel = async (req, res) => {
 
 
 emitions_ctrl.add_emitions = async (req, res) => {
-    const { title, description, body, program, date, iframe, url } = req.body;
-    let safeIframe = iframe.replace("https://www.youtube.com/watch?v=","")
-    safeIframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${safeIframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    const { title, program, date } = req.body;
+    var { iframe, description, body, url } = req.body;
+    body = utf8.encode(body);
+    description = utf8.encode(description);
+    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
+    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
+    url = URL_F.spaceToDash(url);
+    if (URL_F.unsafeURL(url)) {
+        res.sendStatus("999"); //This will be handled by the front-end
+        return
+    }
+    iframe = await URL_F.safeIframe(iframe);
+    if (iframe === undefined) { return res.sendStatus(998) }
     const thumbnailURL = req.files[0].path;
     try {
         //  Compressing
@@ -58,7 +70,7 @@ emitions_ctrl.add_emitions = async (req, res) => {
             url,
             title,
             description,
-            iframe:safeIframe,
+            iframe: iframe,
             program,
             body,
             thumbnail,
@@ -66,7 +78,7 @@ emitions_ctrl.add_emitions = async (req, res) => {
         });
         await newEmition.save();
         await cache_functions.addEmitions(newEmition);
-    }catch (error) {
+    } catch (error) {
         if (error.code !== 0) {
             req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
             res.sendStatus("400");
@@ -80,7 +92,19 @@ emitions_ctrl.add_emitions = async (req, res) => {
 }
 
 emitions_ctrl.edit_emitions = async (req, res) => {
-    const { title, description, program, body, iframe, url } = req.body;
+    const { title, program } = req.body;
+    var { iframe, description, body, url } = req.body;
+    body = utf8.encode(body);
+    description = utf8.encode(description);
+    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
+    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
+    url = URL_F.spaceToDash(url);
+    if (URL_F.unsafeURL(url)) {
+        res.sendStatus("999"); //This will be handled by the front-end
+        return
+    }
+    iframe = await URL_F.safeIframe(iframe);
+    if (iframe === undefined) { return res.sendStatus(998) }
     try {
         await Emition.findByIdAndUpdate(req.params.id, {
             url,
@@ -91,7 +115,7 @@ emitions_ctrl.edit_emitions = async (req, res) => {
             program: program
         });
         await cache_functions.refreshEmitions();
-    }catch (error) {
+    } catch (error) {
         if (error.code !== 0) {
             req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
             res.sendStatus("400");
@@ -103,7 +127,19 @@ emitions_ctrl.edit_emitions = async (req, res) => {
 }
 
 emitions_ctrl.full_edit_emitions = async (req, res) => {
-    const { title, description, program, body, url, iframe } = req.body;
+    const { title, program } = req.body;
+    var { iframe, description, body, url } = req.body;
+    body = utf8.encode(body);
+    description = utf8.encode(description);
+    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
+    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
+    url = URL_F.spaceToDash(url);
+    if (URL_F.unsafeURL(url)) {
+        res.sendStatus("999"); //This will be handled by the front-end
+        return
+    }
+    iframe = await URL_F.safeIframe(iframe);
+    if (iframe === undefined) { return res.sendStatus(998) }
     const thumbnailURL = req.files[0].path;
     try {
         //  Compressing
@@ -129,7 +165,7 @@ emitions_ctrl.full_edit_emitions = async (req, res) => {
             thumbnail: thumbnail
         });
         await cache_functions.refreshEmitions();
-    }catch (error) {
+    } catch (error) {
         if (error.code !== 0) {
             req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
             res.sendStatus("400");
