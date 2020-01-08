@@ -8,20 +8,35 @@ URLhelpers.checkScripts = function (targetString) {
 
 }
 
-URLhelpers.safeIframe = async function (iframe) {
-    if (iframe.search("embed") > 0) {
-        iframe = iframe.substring(iframe.indexOf('embed/'));
-        iframe = iframe.replace('embed/', "");
-        iframe = iframe.substr(0, iframe.indexOf('"'));
-        iframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${iframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-        return iframe
-    } else if (iframe.search("embed") < 0 && iframe.indexOf("https://www.youtube.com/watch?v=") === 0) {
-        iframe = iframe.replace("https://www.youtube.com/watch?v=", "")
-        iframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${iframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-        return iframe;
-    } else {
-        return undefined
-    };
+
+URLhelpers.safeIframe = async function (iframe, onlyID) {
+    if (!onlyID) {
+        if (iframe.search("embed") > 0) {
+            iframe = iframe.substring(iframe.indexOf('embed/'));
+            iframe = iframe.replace('embed/', "");
+            iframe = iframe.substr(0, iframe.indexOf('"'));
+            iframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${iframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+            return iframe
+        } else if (iframe.search("embed") < 0 && iframe.indexOf("https://www.youtube.com/watch?v=") === 0) {
+            iframe = iframe.replace("https://www.youtube.com/watch?v=", "")
+            iframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${iframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+            return iframe;
+        } else {
+            return undefined
+        };
+    } else if (onlyID) {
+        if (iframe.search("embed") > 0) {
+            iframe = iframe.substring(iframe.indexOf('embed/'));
+            iframe = iframe.replace('embed/', "");
+            iframe = iframe.substr(0, iframe.indexOf('"'));
+            return iframe
+        } else if (iframe.search("embed") < 0 && iframe.indexOf("https://www.youtube.com/watch?v=") === 0) {
+            iframe = iframe.replace("https://www.youtube.com/watch?v=", "")
+            return iframe;
+        } else {
+            return undefined
+        };
+    }
 }
 
 URLhelpers.unsafeURL = function (URLstring) {
