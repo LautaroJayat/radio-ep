@@ -248,8 +248,23 @@
                                 });
                             }
                         }
+                    } else if (response.status === 997) {
+                        console.log(response);
+                        var error_m = document.createElement('div');
+                        error_m.classList.add('error_div');
+                        var error_p = document.createTextNode('Sé que estás intentando inyectar scripts. Deja de hacerlo!');
+                        error_m.appendChild(error_p);
+                        document.body.appendChild(error_m);
+                        const x = document.querySelectorAll(".error_div");
+                        for (let i = 0; i < x.length; i++) {
+                            for (i = 0; i < x.length; i++) {
+                                x[i].addEventListener("click", (target) => {
+                                    target.path[1].removeChild(target.path[0]);
+                                });
+                            }
+                        }
                     } else {
-                        window.location.assign("/");
+                        //window.location.assign("/");
                     }
                 })
                 .catch(function (err) {
@@ -280,9 +295,24 @@
                                 });
                             }
                         }
+                    } else if (response.status === 997) {
+                        console.log(response);
+                        var error_m = document.createElement('div');
+                        error_m.classList.add('error_div');
+                        var error_p = document.createTextNode('Sé que estás intentando inyectar scripts. Deja de hacerlo!');
+                        error_m.appendChild(error_p);
+                        document.body.appendChild(error_m);
+                        const x = document.querySelectorAll(".error_div");
+                        for (let i = 0; i < x.length; i++) {
+                            for (i = 0; i < x.length; i++) {
+                                x[i].addEventListener("click", (target) => {
+                                    target.path[1].removeChild(target.path[0]);
+                                });
+                            }
+                        }
                     }
                     else {
-                        window.location.assign("/");
+                        //window.location.assign("/");
                     }
                 })
                 .catch(function (err) {
