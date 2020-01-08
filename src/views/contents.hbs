@@ -165,7 +165,7 @@
     <div class="aside">
         <div class="auto-container">
             <div class="last-episode">
-                <iframe width="100%" height="200px" src="https://www.youtube.com/embed/7hPMmzKs62w" frameborder="0"
+                <iframe width="100%" height="200px" src="" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
@@ -244,6 +244,16 @@
 
 
 <script>
+
+    window.onload = () => {
+        fetch('/superlist').then(function (response) {
+            return response.json()
+        }).then((myJSON) => {
+            console.log(myJSON)
+            let iframeSong = document.getElementById("dailySong");
+            iframeSong.src = "https://www.youtube.com/embed/" + myJSON.id;
+        }).catch(err => { console.log(err) });
+    }
 
     document.getElementById("menu-button").addEventListener("click", () => {
         if (document.getElementById("main-nav-menu").classList.contains("menu-out")) {
