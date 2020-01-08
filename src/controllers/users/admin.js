@@ -163,10 +163,9 @@ admin_ctrl.iframes = async (req, res) => {
             altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
-    const smallSound = await soundSmall.findOne();
-    const bigSound = await soundBig.findOne();
-
-    res.render('users/update_content/profile_iframes', { headers, smallSound, bigSound });
+    //const smallSound = await soundSmall.findOne();
+    const bigSound = await soundBig.find().limit(20);
+    res.render('users/update_content/profile_iframes', { headers, bigSound });
 }
 
 admin_ctrl.edit_users_panel = async (req, res) => {
