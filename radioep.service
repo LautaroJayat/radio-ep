@@ -1,0 +1,18 @@
+[Unit]
+Description=NodeJs server for Radio Entre-Piernas
+After=network.target network-online.target
+Wants=mongod.service nginx.service
+
+[Service]
+User=root
+WorkingDirectory=/home/rant/Code/RadioEntreP/radioentrepiernas/src/
+ExecStartPre=/bin/sleep 6
+ExecStart=/usr/bin/node index.js
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
