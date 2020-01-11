@@ -9,7 +9,34 @@ Para ver una maqueta del sitio dirigirse a los siguientes links:
 
 *[Maquetas realizadas en Figma](https://www.figma.com/file/1vnqesP5XAjm795tbxnR1c/Radio-Ep-dark-Theme)
 
-## Objetivo
+
+## Instalación
+
+Pre-requisitos: tener instalado NodeJS, NPM, MongoDB y NginX, así como correr Debian9 como sistema operativo.
+
+1. Descargar repositorio desde https://github.com/LautaroJayat/radio-ep.git
+
+2. Crear un archivo "**.env**" que estará oculto y llenarlo con las variables de entorno: 
+    ``` 
+    SUPER_USER=tu_usuario_secreto
+    SUPER_PASS=tu_contraseña_super_secreta
+    ```
+Ambas serán las contraseñas de emergencia (por si se extravían las contraseñas de administrador).
+
+3. Copiar el archivo "**radioep.service**" en la carpeta `/etc/systemd/system`, abrirlo y cambiar el usuario con el que se va a ejecutar el *service*.
+
+4. Correr `sudo systemctl daemon-reload` para actualizar los demonios.
+
+5. Copiar el archivo "**radioep.conf**" en la carpeta `/etc/nginx/conf.d` y quitar cualquier archivo que contenga la instrucción "default_server"
+
+6. Ir a `/tuDirectorio/radio-ep/src`, abrir una terminal y correr `sudo npm run build` para instalar todas las dependencias necesarias.
+
+7. Correr `sudo systemctl radioep start`
+
+Si todo ha salido bien, tanto NxinX como mongoDB deberían correr y luego de 6 segundos debería inicializarse el servidor de NodeJS
+
+
+## Objetivo del Proyecto
 
 El objetivo de éste proyecto es la creación de un gestor de contenidos, al estilo Wordpress, basado en NodeJs, Express, Express-handlebars, y MongoDB.
 
@@ -38,10 +65,9 @@ El gestor de contenidos implementa el paquete ImageMinRecompress para comprir la
 * Terminar la implementación de las diferentes vistas
 * Terminar el saneamiento de los formularios para prevenir XSS (del lado del usuario y del lado del servidor).
 * Crear Servicio de Mailing
-* Crear un load-balancer con NginX y pensar la implementacipon de PM2
+* Crear un load-balancer con NginX y pensar la conveniencia de implementar PM2 o SystemD
 * Crear Contenedores Docker para instancias de Node, MongoDB y un volumen virtual donde hacer backups de la base de datos
 * Crear Scripts para automatizar backups
 * Integrar la API de Google Drive para automatizar backups remotos
-* Usar PM2 para automatizar tanto backups como restores en casos de escenarios catastróficos
 * Crear una rama específica para usar el esqueleto del gestor para otros proyectos.
 * Terminar la documentación
