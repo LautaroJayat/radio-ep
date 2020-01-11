@@ -216,7 +216,6 @@ a {
     font-size: 250%;
     font-weight: bold;
     text-align: left;
-    
 }
 
 .main .article .description {
@@ -308,9 +307,13 @@ a {
     font-style: oblique;
     font-size: 90%;
 }
-article{
-    max-width: 60vw;
+
+@media screen and(min-width:1000px) {
+    article {
+        max-width: 60vw;
+    }
 }
+
 .article .body p {
     position: relative;
     line-height: 2rem;
@@ -319,6 +322,23 @@ article{
     margin-block-end: 2%;
     margin-bottom: 2%;
     text-rendering: optimizeLegibility;
+}
+
+@media screen and (max-width:600px) {
+    .article .body p {
+        margin-block-end: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.article .body blockquote {
+    margin-left: 3%;
+    padding: 0% 3%;
+    border-left: 4px solid crimson;
+}
+
+.article .body blockquote p {
+    color: rgba(255, 255, 255, 0.747);
 }
 
 .article .body {
@@ -487,7 +507,7 @@ article{
         text-align: center;
     }
     .small-header {
-        background-image: url(/small-header.JPG);
+        background-image: url(/img/small-header.JPG);
         background-repeat: no-repeat;
         background-size: cover;
         width: 100%;
