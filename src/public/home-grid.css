@@ -122,27 +122,33 @@ body {
     }
     .news .article-1 {
         grid-area: item-1;
-        min-height: 100%
+        /*min-height: 100%;*/
+        max-height: calc(60vh+5%);
     }
     .news .article-2 {
         grid-area: item-2;
-        min-height: 100%
+        /*min-height: 100%;*/
+        max-height: 30vh;
     }
     .news .article-3 {
         grid-area: item-3;
-        min-height: 100%
+        /*min-height: 100%;*/
+        max-height: 30vh;
     }
     .news .article-4 {
         grid-area: item-4;
-        min-height: 100%
+        /*min-height: 100%;*/
+        max-height: 30vh;
     }
     .news .article-5 {
         grid-area: item-5;
-        min-height: 100%
+        /*min-height: 100%;*/
+        max-height: 30vh;
     }
     .news .article-6 {
         grid-area: item-6;
-        min-height: 100%
+        /*min-height: 100%;*/
+        max-height: 30vh;
     }
 }
 
@@ -248,7 +254,6 @@ body {
     .emitions .article-big {
         grid-area: item-1;
     }
-
 }
 
 .footer {
