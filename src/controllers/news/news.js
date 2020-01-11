@@ -133,14 +133,14 @@ news_ctrl.add_news = async (req, res) => {
 news_ctrl.edit_news = async (req, res) => {
     const { title, photo, thumbnail, headline, alt_source, alt_source_link, alt_author, alt_social } = req.body;
     var { url, body, description } = req.body;
-    url = URL_F.spaceToDash(url);
-    body = utf8.encode(body);
-    description = utf8.encode(description);
-    console.log(URL_F.checkScripts(description))
-    if (URL_F.checkScripts(description)) { return res.sendStatus(997) }
-    if (URL_F.checkScripts(body)) { return res.sendStatus(997) };
-    if (URL_F.unsafeURL(url)) {
-       return res.sendStatus("999") //This will be handled by the front-end
+    testing_url = URL_F.spaceToDash(url);
+    testing_body = utf8.encode(body);
+    testing_description = utf8.encode(description);
+    //console.log(URL_F.checkScripts(testing_description))
+    if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
+    if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
+    if (URL_F.unsafeURL(testing_url)) {
+        return res.sendStatus("999") //This will be handled by the front-end
     } else {
         try {
             await News.findByIdAndUpdate(req.params.id, {
