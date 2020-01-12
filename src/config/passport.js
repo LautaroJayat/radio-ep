@@ -5,20 +5,30 @@ const User = require('../models/users');
 passport.use(new LocalStrategy({
     usernameField: 'name'
 }, async (name, password, done) => {
-    var user = await User.findOne({ name: name });
+    let user = await User.findOne({ name: name });
     if (name === process.env.SUPER_USER && process.env.SUPER_PASS) {
-        var user = await User.findOne({ name: "admin" });
-        user.admin = true;
-        await user.save();
-        return done(null, user);
+        let userAdmin = await User.findOne({ name: "admin", admin: true });
+        if (!userAdmin) {
+            console.log("userAdmin not found... we are going to create one");
+            const UA = new User({ name: "admin", admin: true });
+            return done(null, UA);
+
+
+        } else {
+            console.log("user Admin exists, now logging");
+            return done(null, userAdmin);
+        }
     } else if (!user) {
+        console.log("ese usuario no existe");
         return done(null, false, { error_msg: 'no se encontró usuario' });
     }
     else {
         const match = await user.matchPassword(password);
         if (match) {
+            console.log("El Existe pero no es admin");
             return done(null, user);
         } else {
+            console.log("El usuario existe pero la contraseña es incorrecta");
             return done(null, false, { message: 'contraseña incorrecta' });
         }
     }
