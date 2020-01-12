@@ -169,7 +169,7 @@ admin_ctrl.iframes = async (req, res) => {
 
 admin_ctrl.edit_users_panel = async (req, res) => {
     const id = req.params.id;
-    const user = await User.findById(id);
+    const userTarget = await User.findById(id);
     const headers = {
         pageTitle: "Editar Usuario",
         //ogDescription: "Escucha la radio del club más caliente",
@@ -189,8 +189,7 @@ admin_ctrl.edit_users_panel = async (req, res) => {
             ]
         }
     };
-    //console.log(user)
-    res.render("users/update_content/profile_edit_user", { headers, user });
+    res.render("users/update_content/profile_edit_user", { headers, userTarget });
 }
 
 admin_ctrl.delete_users_panel = async (req, res) => {
@@ -211,6 +210,9 @@ admin_ctrl.delete_users_panel = async (req, res) => {
 
 admin_ctrl.users_fulledit = async (req, res) => {
     const { name, email, insta, face, twit, pass } = req.body;
+    var { admin, editor } = req.body;
+    if (!admin) { admin = false }
+    if (!editor) { editor = false }
     const userTarget = await User.findById(req.params.id);
     const photoURL = req.files[0].path;
     const thumbnailURL = req.files[1].path;
@@ -229,11 +231,16 @@ admin_ctrl.users_fulledit = async (req, res) => {
     fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
 
     userTarget.name = name;
+    userTarget.admin = admin;
+    userTarget.editor = editor;
     userTarget.email = email;
     userTarget.instagram = insta;
     userTarget.facebook = face;
     userTarget.twitter = twit;
-    userTarget.pass = await userTarget.encryptPassword(pass);
+    if (pass !== "") {
+        //console.log("fuck!");
+        userTarget.pass = await userTarget.encryptPassword(pass);
+    }
     userTarget.photo = photo;
     userTarget.thumbnail = thumbnail;
     await userTarget.save();
@@ -243,18 +250,26 @@ admin_ctrl.users_fulledit = async (req, res) => {
 
 admin_ctrl.users_edit = async (req, res) => {
     const { name, email, insta, face, twit, pass, photo, thumbnail } = req.body;
+    var { admin, editor } = req.body;
+    if (!admin) { admin = false }
+    if (!editor) { editor = false }
     const userTarget = await User.findById(req.params.id);
-    //console.log(userTarget)
     userTarget.name = name;
+    userTarget.admin = admin;
+    userTarget.editor = editor;
     userTarget.email = email;
     userTarget.instagram = insta;
     userTarget.facebook = face;
     userTarget.twitter = twit;
-    userTarget.password = await userTarget.encryptPassword(pass);
+    if (pass !== "") {
+        //console.log("fuck!");
+        userTarget.password = await userTarget.encryptPassword(pass);
+    }
     userTarget.photo = photo;
     userTarget.thumbnail = thumbnail;
     //console.log(userTarget)
     await userTarget.save();
+    //console.log(userTarget);
 
     res.sendStatus('201');
 }
