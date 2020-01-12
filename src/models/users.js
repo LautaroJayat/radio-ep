@@ -7,6 +7,7 @@ const UserSchema = new Schema({
     name: { type: String, required: true },
     password: { type: String, required: true },
     admin: { type: Boolean, default: false },
+    editor: { type: Boolean, default: false },
     email: { type: String, required: false },
     photo: { type: String, required: false },
     thumbnail: { type: String, required: false },
