@@ -14,8 +14,8 @@ const users_ctrl = {};
 
 
 users_ctrl.profile_home = async (req, res) => {
-    const { _id, name, admin, email, photo, thumbnail, facebook, twitter, instagram } = req.user;
-    const user = { _id, name, admin, email, photo, thumbnail, facebook, twitter, instagram };
+    const { _id, name, admin, editor, email, photo, thumbnail, facebook, twitter, instagram } = req.user;
+    const user = { _id, name, admin, editor, email, photo, thumbnail, facebook, twitter, instagram };
     req.user = user;
     const user_news = await News.find({ author_id: user._id }, { title: 1, thumbnail: 1, date: 1, _id: 1 });
     const headers = {
@@ -29,6 +29,7 @@ users_ctrl.profile_home = async (req, res) => {
             altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
+
     res.render('users/update_content/profile', { headers, user, user_news });
 }
 
@@ -182,7 +183,7 @@ users_ctrl.update_photo = async (req, res) => {
         // Removing Uncompressed Images
         fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
         fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
-    } catch(error){
+    } catch (error) {
         if (error.code !== 0) {
             req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
             res.sendStatus("400");
