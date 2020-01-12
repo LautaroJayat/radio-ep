@@ -2,28 +2,46 @@
     <div class="ck-editor-dash">
         <h2 class="Udatos-title">Editar Usuario</h2>
         <div class="n-form">
-            <h2 class="uDatos-title">{{user._id}}</h2>
-            <input type="hidden" name="id" id="_id" value="{{user._id}}">
+            <h2 class="uDatos-title">{{userTarget._id}}</h2>
+            <input type="hidden" name="id" id="_id" value="{{userTarget._id}}">
             <label for="name">Nombre del Usuario</label>
             <input id="name" class="n-input" type="text" name="name" placeholder="Nombre de usuario"
-                value="{{user.name}}">
+                value="{{userTarget.name}}">
             <label for="email">Email del Usuario</label>
-            <input id="email" class="n-input" type="email" name="email" value="{{user.email}}"
+            <input id="email" class="n-input" type="email" name="email" value="{{userTarget.email}}"
                 placeholder="Email del usuario">
+            <input type="checkbox" name="admin" id="isAdmin" vaue="true"> <label for="admin">¿Es administrador?</label>
+            <br>
+            <input type="checkbox" name="editor" id="isEditor" value="check"> <label for="isEditor">¿Es
+                editor?</label><br>
+            <script>
+                var adminCheck = document.getElementById('isAdmin');
+                var editorCheck = document.getElementById('isEditor');
+                adminCheck.addEventListener('click', () => {
+                    if (adminCheck.checked === true) {
+                        editorCheck.checked = false
+                    }
+                });
+                editorCheck.addEventListener('click', () => {
+                    if (editorCheck.checked === true) {
+                        adminCheck.checked = false
+                    }
+                })
+            </script>
             <label for="insta">Instagram del Usuario</label>
-            <input id="insta" class="n-input" type="text" name="insta" value="{{user.instagram}}"
+            <input id="insta" class="n-input" type="text" name="insta" value="{{userTarget.instagram}}"
                 placeholder="Instagram del usuario">
             <label for="face">Facebook del Usuario</label>
-            <input id="face" class="n-input" type="text" name="email" value="{{user.facebook}}"
+            <input id="face" class="n-input" type="text" name="email" value="{{userTarget.facebook}}"
                 placeholder="Facebook del usuario">
             <label for="twit">Twitter del Usuario</label>
-            <input id="twit" class="n-input" type="text" name="email" value="{{user.twitter}}"
+            <input id="twit" class="n-input" type="text" name="email" value="{{userTarget.twitter}}"
                 placeholder="Twitter del usuario">
             <label for="pass">Cambiar la contraseña del Usuario</label>
             <input id="pass" class="n-input" type="password" name="email" value=""
                 placeholder="Cambiar contraseña del usuario">
-            <input type="hidden" id="photo" name="photo" value="{{user.photo}}">
-            <input type="hidden" id="thumbnail" name="thumbnail" value="{{user.thumbnail}}">
+            <input type="hidden" id="photo" name="photo" value="{{userTarget.photo}}">
+            <input type="hidden" id="thumbnail" name="thumbnail" value="{{userTarget.thumbnail}}">
             <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-submit-block">BUSCAR
                 IMAGEN</button>
 
@@ -96,6 +114,17 @@
         form.append('face', face.value);
         form.append('twit', twit.value);
         form.append('pass', pass.value);
+        if (editorCheck.checked === true) {
+            form.append('editor', true);
+        }
+        if (adminCheck.checked === true) {
+            form.append('admin', true)
+
+        } if (adminCheck.checked !== false && editorCheck.checked !== false) {
+            form.append('admin', false);
+            form.append('editor', false);
+        }
+
         if (binaryData) {
             var name = new Date();
             name = name.getTime();
