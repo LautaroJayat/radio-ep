@@ -37,12 +37,10 @@ Se recomienda usar tanto usuario y contraseñas complicadas, en lo posible encri
 Si todo ha salido bien, tanto NxinX como mongoDB deberían correr y luego de 6 segundos debería inicializarse el servidor de NodeJS.
 
 Para comenzar a crear usuarios se recomienda hacer login con el usuario guardado en las variables de entorno. Esto generará un primer usuario al que luego puede cambiarsele la contraseña y el nombre de usuario, éste será el único usuario con privilegios de administrador, esto es:
-    * Podrá crear acceder a todo lo creado por los demas usuarios y modificarlo.
+   * Podrá crear acceder a todo lo creado por los demas usuarios y modificarlo.
+   * Podrá cambiar los datos de los demás usuarios.
+   * Podrá crear emisiones, columnas y agregar id de videos para el video random de la página de ontents.
 
-    * Podrá cambiar los datos de los demás usuarios.
-
-    * Podrá crear emisiones, columnas y agregar id de videos para el video random de la página de contents.
-    
 
 
 ## Objetivo del Proyecto
