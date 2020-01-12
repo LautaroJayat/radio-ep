@@ -316,16 +316,22 @@ a {
 
 .article .body p {
     position: relative;
-    line-height: 2rem;
+    max-width: 85%;
+    line-height: 1.6rem;
     opacity: 1;
     letter-spacing: 0.0rem;
-    margin-block-end: 2%;
-    margin-bottom: 2%;
+    margin-block-end: 3%;
+    margin-bottom: 3%;
     text-rendering: optimizeLegibility;
+}
+
+.article .body div {
+    margin: 6vh 0;
 }
 
 @media screen and (max-width:600px) {
     .article .body p {
+        max-width: unset;
         margin-block-end: 1.5rem;
         margin-bottom: 1.5rem;
     }
@@ -424,7 +430,7 @@ a {
 
 .more-news {
     padding: 2vh 0 0 0;
-    background-color: rgba(255, 251, 251, 0.08);
+    /*background-color: rgba(255, 251, 251, 0.08);*/
     width: 100%;
     max-width: 100%;
     height: auto;
@@ -434,8 +440,12 @@ a {
 }
 
 .more-news .article {
-    width: 92%;
-    margin: 0 auto 5vh auto;
+    border: 1px solid rgba(128, 0, 128, 0);
+    background-color: rgba(255, 251, 251, 0.055);
+    box-shadow: 1px 1px 20px 2px rgba(137, 43, 226, 0.05);
+    width: 98%;
+    margin: 0 auto 2vh auto;
+    padding: 4%
 }
 
 .footer {
