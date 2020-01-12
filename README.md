@@ -21,7 +21,8 @@ Pre-requisitos: tener instalado NodeJS, NPM, MongoDB y NginX, así como correr D
     SUPER_USER=tu_usuario_secreto
     SUPER_PASS=tu_contraseña_super_secreta
     ```
-Ambas serán las contraseñas de emergencia (por si se extravían las contraseñas de administrador).
+Ambas serán las contraseñas de emergencia (por si se extravían las contraseñas de administrador) y al mismo tiempo serán las contraseñas que permitirán la creación del primer usuario admin en la ruta de login.
+Se recomienda usar tanto usuario y contraseñas complicadas, en lo posible encriptados con sha2.
 
 3. Copiar el archivo "**radioep.service**" en la carpeta `/etc/systemd/system`, abrirlo y cambiar el usuario con el que se va a ejecutar el *service*.
 
@@ -33,7 +34,12 @@ Ambas serán las contraseñas de emergencia (por si se extravían las contraseñ
 
 7. Correr `sudo systemctl radioep start`
 
-Si todo ha salido bien, tanto NxinX como mongoDB deberían correr y luego de 6 segundos debería inicializarse el servidor de NodeJS
+Si todo ha salido bien, tanto NxinX como mongoDB deberían correr y luego de 6 segundos debería inicializarse el servidor de NodeJS.
+
+Para comenzar a crear usuarios se recomienda hacer login con el usuario guardado en las variables de entorno. Esto generará un primer usuario al que luego puede cambiarsele la contraseña y el nombre de usuario, éste será el único usuario con privilegios de administrador, esto es:
+    *Podrá crear acceder a todo lo creado por los demas usuarios y modificarlo.
+    *Podrá cambiar los datos de los demás usuarios.
+    *podrá crear emisiones, columnas y agregar id de videos para el video random de la página de contents.
 
 
 ## Objetivo del Proyecto
