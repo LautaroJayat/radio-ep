@@ -26,12 +26,14 @@ contents_ctrl.get_cache = async (req, res, next) => {
 
 contents_ctrl.get_new = async (req, res) => {
     let headers;
+    let news
     const _news = HOME_CACHE.news;
     const _columns = HOME_CACHE.columns.slice(3)
     const url = req.params.url;
-    if (_news.filter(element => element.url === "mi-url-de-noticia").length > 0) {
-        let news = _news.filter(element => element.url === url);
+    if (_news.filter(element => element.url === url).length > 0) {
+        news = _news.filter(element => element.url === url);
         news = news[0];
+        console.log(news);
         headers = {
             pageTitle: news.title + " | Radio Entre-Piernas",
             ogDescription: makeOGdescriptionsSafeAgain(news.description),
@@ -45,13 +47,14 @@ contents_ctrl.get_new = async (req, res) => {
         };
         //console.log('from cache works?');
         //console.log(news);
-        res.render("contents", { news, headers, _columns, _news });
+        console.log("We are in if");
+        return res.render("contents", { news, headers, _columns, _news });
     } else {
-        let news = await News.find({ url: url }, { _id: 0 });
-        news = news[0];
+        news = await News.findOne({ url: url }, { _id: 0 });
+        console.log("We are in else");
         headers = {
             pageTitle: news.title + " | Radio Entre-Piernas",
-            ogDescription: makeOGdescriptionsSafeAgain(news.description),
+            ogDescription: await makeOGdescriptionsSafeAgain(news.description),
             ogTitle: news.title + " | Noticias | Radio Entre-Piernas",
             ogImage: news.thumbnail,
             news: true,
@@ -60,6 +63,7 @@ contents_ctrl.get_new = async (req, res) => {
                 altScripts: []
             }
         };
+        console.log(headers.pageTitle, "\n", headers.ogTitle)
         //console.log(news);
         //console.log("from database works?");
         res.render("contents", { news, headers, _columns, _news });
