@@ -120,7 +120,6 @@ admin_ctrl.all_emitions = async (req, res) => {
         members: 1,
         date: 1
     });
-
     res.render('users/update_content/profile_all_emitions', { headers, emitions });
 }
 
@@ -169,7 +168,8 @@ admin_ctrl.iframes = async (req, res) => {
 }
 
 admin_ctrl.edit_users_panel = async (req, res) => {
-    const user = await User.find({ _id: req.params.id });
+    const id = req.params.id;
+    const user = await User.findById(id);
     const headers = {
         pageTitle: "Editar Usuario",
         //ogDescription: "Escucha la radio del club más caliente",
@@ -189,6 +189,7 @@ admin_ctrl.edit_users_panel = async (req, res) => {
             ]
         }
     };
+    //console.log(user)
     res.render("users/update_content/profile_edit_user", { headers, user });
 }
 
@@ -249,7 +250,7 @@ admin_ctrl.users_edit = async (req, res) => {
     userTarget.instagram = insta;
     userTarget.facebook = face;
     userTarget.twitter = twit;
-    userTarget.pass = await userTarget.encryptPassword(pass);
+    userTarget.password = await userTarget.encryptPassword(pass);
     userTarget.photo = photo;
     userTarget.thumbnail = thumbnail;
     //console.log(userTarget)
