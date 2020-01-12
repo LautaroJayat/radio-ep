@@ -2,6 +2,10 @@
     <div class="ck-editor-dash">
         <h2 class="Udatos-title">Editar Usuario</h2>
         <div class="n-form">
+            {{#if user}}
+            {{}}
+            {{/if}}
+            <h2 class="uDatos-title">{{user._id}}</h2>
             <input type="hidden" name="id" id="_id" value="{{user._id}}">
             <label for="name">Nombre del Usuario</label>
             <input id="name" class="n-input" type="text" name="name" placeholder="Nombre de usuario"
@@ -23,14 +27,14 @@
                 placeholder="Cambiar contraseña del usuario">
             <input type="hidden" id="photo" name="photo" value="{{user.photo}}">
             <input type="hidden" id="thumbnail" name="thumbnail" value="{{user.thumbnail}}">
-            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-Submit-block">BUSCAR
+            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-submit-block">BUSCAR
                 IMAGEN</button>
 
             <div class="result-container">
                 <div id="img-preview-container" class="img-preview-container">
                 </div>
             </div>
-            <button id='sendEditorData' class=" B-B-Submit-block">EDITAR DATOS DEL USUARIO</button>
+            <button id='sendEditorData' class=" B-B-submit-block">EDITAR DATOS DEL USUARIO</button>
         </div>
     </div>
 </div>
@@ -48,7 +52,6 @@
     const insta = document.getElementById('insta');
     const pass = document.getElementById('pass');
     const senderButton = document.getElementById('sendEditorData');
-    let userId = document.getElementById('_id');
     var thumbnailBinaryData;
 
     senderButton.addEventListener('click', function (e) {
@@ -102,14 +105,19 @@
             name = name.toString();
             form.append('image', binaryData, name + "big.jpeg");
             form.append('image', thumbnailBinaryData, name + "small.jpeg");
-            fetch(`/admin/users/fulledit/${userId.value}`, { method: "POST", body: form })
+            let userId = document.getElementById('_id').value;
+            console.log(userId);
+
+            fetch(`/admin/users/fulledit/${userId}`, { method: "POST", body: form })
                 .then(function (response) {
+                    console.log(userId);
+                    console.log(response);
                     console.log(response.status);
                     if (response.status === 201) {
                         console.log("done");
                         window.location.assign("/admin/profile");
                     } else {
-                        window.location.assign("/");
+                        //window.location.assign("/");
                     }
                 })
                 .catch(function (err) {
@@ -119,13 +127,18 @@
         if (!binaryData) {
             form.append('photo', photo.value);
             form.append('thumbnail', thumbnail.value);
-            fetch(`/admin/users/edit/${userId.value}`, { method: "POST", body: form })
+            let userId = document.getElementById('_id').value;
+            console.log(userId);
+            fetch(`/admin/users/edit/${userId}`, { method: "POST", body: form })
                 .then(function (response) {
-                    console.log(response.status);
+                    //console.log(userId)
+                    //console.log(response)
+                    //console.log(response.status);
                     if (response.status === 201) {
-                        console.log("done");
+                        //console.log("done");
                         window.location.assign("/admin/profile");
                     } else {
+                        //console.log('we are in else')
                         window.location.assign("/");
                     }
                 })

@@ -1,9 +1,22 @@
+<form action="/nochesdelogin" method="POST">
+    <input type="text" name="name" id="" placeholder="Name">
+    <input type="password" name="password" placeholder="Password" id="">
+    <button type="submit" class="button-submit">Submit this fucking user!</button>
+</form>
 
-<div class="container-login form-card">
-    <h1 style="font-family:sans-serif; text-align:center">Login</h1>
-    <form class="form" action="/nochesdelogin" method="POST">
-        <input type="text" class="input-user" name="name" id="" placeholder="Name">
-        <input type="password" class="input-pass" name="password" placeholder="Password" id="">
-        <button type="submit" class="button-submit">Submit this fucking user!</button>
-    </form>
-</div>
+<style>
+    form {
+        width: 100%;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+    }
+
+    button {
+        margin-top: 2vh;
+        border: none;
+        padding: 1rem;
+    }
+</style>

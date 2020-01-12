@@ -50,22 +50,24 @@
                     {{#if news.alt_author}}value="{{news.alt_source_link}}" {{/if}}>
 
             </div>
+            <label for="content">Escriba el cuerpo de la noticia</label>
+
 
             <textarea class="photo-input" name="content" id="editor">{{news.body}}</textarea>
             <input type="hidden" id="photo" name="photo" value="{{news.photo}}">
             <input type="hidden" id="thumbnail" name="thumbnail" value="{{news.thumbnail}}">
-            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-Submit-block">BUSCAR
+            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-submit-block">BUSCAR
                 IMAGEN</button>
 
             <div class="result-container">
                 <div id="img-preview-container" class="img-preview-container">
                 </div>
             </div>
-            <button id='sendEditorData' class=" B-B-Submit-block">EDITAR nOTICIA</button>
+            <button id='sendEditorData' class=" B-B-submit-block">EDITAR nOTICIA</button>
         </div>
     </div>
 </div>
-{{>error_div_style}}
+
 
 
 <script>

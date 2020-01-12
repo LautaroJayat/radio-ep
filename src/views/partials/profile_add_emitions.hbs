@@ -8,16 +8,19 @@
                 placeholder="Escriba una descripción"></textarea>
             <input id="program" class="n-input" type="text" name="program" placeholder="Escriba el nombre del programa">
             <input id="iframe" class="n-input" type="text" name="iframe" placeholder="Inserte el Iframe de Youtube">
+
+            <label for="content">Escriba el cuerpo de la noticia</label>
+
             <textarea class="photo-input" name="content" id="editor"></textarea>
 
-            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-Submit-block">BUSCAR
+            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-submit-block">BUSCAR
                 IMAGEN</button>
 
             <div class="result-container">
                 <div id="img-preview-container" class="img-preview-container">
                 </div>
             </div>
-            <button id='sendEditorData' class=" B-B-Submit-block">SUBIR EMISIÓN</button>
+            <button id='sendEditorData' class=" B-B-submit-block">SUBIR EMISIÓN</button>
         </div>
     </div>
 </div>
@@ -165,7 +168,7 @@
             embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}',
             extraPlugins: 'embed,autoembed,image2',
             removeButtons: 'Source,Save,Templates,NewPage,Preview,Print,PasteText,Find,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,HiddenField,Subscript,Superscript,CopyFormatting,RemoveFormat,NumberedList,BulletedList,Outdent,Indent,CreateDiv,BidiLtr,BidiRtl,Language,Anchor,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Font,FontSize,TextColor,BGColor,ShowBlocks,About,Styles'
-  });
+        });
         const DescriptionEditor = CKEDITOR.replace('description', {
             width: '100%',
             height: '25vh',

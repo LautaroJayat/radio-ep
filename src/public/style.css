@@ -1,12 +1,14 @@
 /*      GENERAL STYLES                  */
 
-/*      GENERAL STYLES                  */
-
 * {
     box-sizing: content-box;
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+}
+
+a {
+    text-decoration: none;
 }
 
 /*          NAV STYLES                   */
@@ -147,10 +149,11 @@
 /*      Dashboard Right     */
 
 .dashboard-control {
+    border: 1px solid rgba(234, 0, 255, 0.137);
     margin-left: 20vw;
     width: 80vw;
     height: 93vh;
-    background-color: rgb(191, 230, 250);
+    background-color: rgb(12, 12, 12);
     overflow-y: scroll;
 }
 
@@ -165,12 +168,12 @@
 }
 
 .wellcome-profile {
-    color: rgba(0, 47, 255, 0.932);
+    color: white;
     padding-top: 3%;
     width: 45%;
     height: 35%;
-    background-color: rgb(242, 252, 255);
-    box-shadow: 2px 3px 6px rgba(122, 168, 187, 0.377);
+    background-color: rgb(14, 14, 14);
+    box-shadow: 1px 1px 7px 3px rgba(234, 0, 255, 0.137);
 }
 
 .pro-main {
@@ -224,14 +227,14 @@
 }
 
 .wellcome-news {
-    color: rgba(0, 47, 255, 0.747);
+    color: white;
     margin-top: 3%;
     margin-bottom: 5%;
     padding-top: 3%;
     width: 94%;
     height: auto;
-    background-color: rgb(242, 252, 255);
-    box-shadow: 1px 1px 30px 2px rgba(122, 168, 187, 0.377);
+    background-color: rgb(14, 14, 14);
+    box-shadow: 1px 1px 7px 3px rgba(234, 0, 255, 0.137);
 }
 
 .news-list {
@@ -244,7 +247,7 @@
 }
 
 .list-card {
-    background-color: rgba(191, 230, 250, 0.363);
+    background-color: black;
     width: 100%;
     margin: 2% 0%;
     padding: 2% 0%;
@@ -252,10 +255,11 @@
     flex-flow: row;
     align-items: center;
     justify-content: space-evenly;
+    border: 1px solid rgba(234, 0, 255, 0)
 }
 
 .list-card:hover {
-    background-color: rgba(191, 230, 250, 0.822);
+    border: 1px solid rgba(234, 0, 255, 0.801)
 }
 
 .n-img-container {
@@ -300,7 +304,6 @@
 }
 
 .n-actions {
-    font-size: 150%;
     width: 15%;
     display: flex;
     justify-content: space-evenly;
@@ -308,21 +311,39 @@
 }
 
 .edit, .trash {
+    font-size: 150%;
     color: rgba(77, 77, 77, 0.651);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 3rem;
-    width: 3rem;
     border-radius: 10px;
 }
 
 .edit {
-    background-color: rgba(255, 255, 0, 0.5);
+    background-color: rgba(255, 255, 0, 0.733);
+    height: 3rem;
+    width: 3rem;
+}
+
+.n-actions form {
+    background-color: transparent;
+    height: auto;
+    width: auto;
+}
+
+.n-actions button {
+    border: none;
+    background-color: transparent;
 }
 
 .trash {
     background-color: rgba(255, 0, 0, 0.5);
+    height: 3rem;
+    width: 3rem;
+}
+
+.edit i, .trash i {
+    color: white
 }
 
 .edit:hover {
@@ -351,18 +372,20 @@
 }
 
 .allUsers-dash {
-    color: rgba(0, 47, 255, 0.747);
-    margin-top: 3%;
+    color: white;
+    /*margin-top: 3%;*/
     margin-bottom: 5%;
     padding-top: 3%;
     width: 96%;
     height: auto;
-    background-color: rgb(242, 252, 255);
-    box-shadow: 1px 1px 30px 2px rgba(122, 168, 187, 0.377);
+    background-color: transparent
+    /*box-shadow: 1px 1px 30px 2px rgba(122, 168, 187, 0.377);*/
 }
 
 .aU-title {
-    margin-left: 6%;
+    font-weight: bold;
+    color: crimson;
+    text-align: center;
     font-size: 250%;
 }
 
@@ -418,10 +441,10 @@
     font-size: 85%;
 }
 
-.aN-author:hover, .aN-date:hover, .allUsers .allUsers-dash .n-info .n-title:hover {
+/*.aN-author:hover, .aN-date:hover, .allUsers .allUsers-dash .n-info .n-title:hover {
     cursor: pointer;
     color: darkblue;
-}
+}*/
 
 .thumb {
     display: inline-block;
@@ -504,24 +527,32 @@
 }
 
 .U-info-dash {
-    width: 70%;
-    height: 70%;
-    background-color: rgb(242, 252, 255);
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
 }
 
 .Udatos-title {
-    margin: 3%;
-    color: rgba(0, 47, 255, 0.747);
+    margin-top: 10vh;
+    text-align: center;
+    color: crimson;
     font-size: 250%;
 }
 
 .form-flex {
+    margin: unset;
     height: 60%;
-    width: 90%;
+    width: 80%;
+    justify-self: center;
     display: flex;
     flex-flow: column;
     justify-content: space-evenly;
     align-items: center;
+    background-color: rgb(14, 14, 14);
+    box-shadow: 1px 1px 7px 3px rgba(234, 0, 255, 0.137);
 }
 
 .p-input {
@@ -643,8 +674,9 @@
 }
 
 .result-container {
-    width: 90%;
-    height: 60%;
+    margin: auto;
+    width: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -660,6 +692,9 @@
 }
 
 .img-preview-container {
+    margin: 5vh auto;
+    border: 1px solid black;
+    background-color: crimson;
     width: 260px;
     height: 200px;
 }
@@ -684,7 +719,11 @@ input[type="checkbox"] {
     width: 1rem;
     height: 1rem;
 }
-label{
+
+label {
+    color: white;
     display: inline-block;
-    margin-top: 2vh;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+    font-size: 150%;
 }

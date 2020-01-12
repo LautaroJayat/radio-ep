@@ -20,17 +20,18 @@
             <label for="program">Escriba el nombre del programa</label>
             <input id="program" class="n-input" type="text" name="program" placeholder="Inserte el nombre del programa"
                 value="{{emition.program}}">
+            <label for="content">Escriba el cuerpo de la noticia</label>
 
             <textarea class="photo-input" name="content" id="editor">{{emition.body}}</textarea>
             <input type="hidden" id="thumbnail" name="thumbnail" value="{{emition.thumbnail}}">
-            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-Submit-block">BUSCAR
+            <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-submit-block">BUSCAR
                 IMAGEN</button>
 
             <div class="result-container">
                 <div id="img-preview-container" class="img-preview-container">
                 </div>
             </div>
-            <button id='sendEditorData' class=" B-B-Submit-block">EDITAR EMISIÓN</button>
+            <button id='sendEditorData' class=" B-B-submit-block">EDITAR EMISIÓN</button>
         </div>
     </div>
 </div>
