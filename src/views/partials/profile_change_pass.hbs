@@ -4,11 +4,15 @@
         <h2 class="Udatos-title">Contraseña</h2>
         <form id="form" class="form-flex" action="/users/pass/modify?_method=PUT" method="POST">
             <input type="hidden" name="_method" value="PUT">
+            <label for="newPass">Escriba su nueva contraseña</label>
             <input class="p-input" id="pass" type="password" name="newPass" placeholder="Inserte su nueva contaseña">
+            <label for="reNewPass">Confirme su nueva contraseña</label>
             <input class="p-input" id="rePass" type="password" name="reNewPass"
                 placeholder="Inserte su nueva contaseña">
+            <label for="oldPass">Escriba su contraseña actual</label>
             <input class="p-input" id="oldPass" type="password" name="oldPass"
                 placeholder="Inserte su contraseña actual">
+            <label for="reOldPass">Confirme su contraseña actual</label>
             <input class="p-input" id="reOldPass" type="password" name="reOldPass"
                 placeholder="Inserte su contraseña actual">
             <button id="sender" class="B-B-Submit" type="submit">MODIFICAR DATOS</button>

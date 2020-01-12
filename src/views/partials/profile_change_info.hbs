@@ -4,10 +4,13 @@
         <h2 class="Udatos-title">Modificar Datos</h2>
         <form id="form" class="form-flex" action="/users/info/modify?_method=PUT" method="POST">
             <input type="hidden" name="_method" value="PUT">
+            <label for="user_name">Nombre de usuario</label>
             <input class="p-input" id="user_name" type="text" name="user_name" placeholder="Inserte su nombre"
                 {{#if user.name}}value="{{user.name}}" {{/if}}>
+            <label for="email">Escriba un email válido</label>
             <input class="p-input" id="email" type="email" name="email" placeholder="Inserte su email"
                 {{#if user.email}}value="{{user.email}}" {{/if}}>
+            <label for="pass">Escriba su contraseña</label>
             <input class="p-input" id="pass" type="password" name="pass" placeholder="Inserte su contraseña">
             <button id="sender" class="B-B-Submit" type="submit">MODIFICAR DATOS</button>
         </form>
