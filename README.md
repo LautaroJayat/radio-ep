@@ -62,12 +62,13 @@ Por el tipo de funcionamiento del servidor, decidimos crear un sistema simple de
 El gestor de contenidos implementa el paquete ImageMinRecompress para comprir las imágenes una vez que se envian al servidor. De la misma forma también utiliza una implementación de la librería Cropper.js para su recorte y adecuación. (Citar las fuentes y sus git)
 
 ### TO DO:
-* Terminar la implementación de las diferentes vistas
+* Modificar radioep.conf para que NginX sirva los archivos estáticos y evitar que nodeJS lo haga.
+* Terminar la implementación de las diferentes vistas.
 * Terminar el saneamiento de los formularios para prevenir XSS (del lado del usuario y del lado del servidor).
-* Crear Servicio de Mailing
-* Crear un load-balancer con NginX y pensar la conveniencia de implementar PM2 o SystemD
-* Crear Contenedores Docker para instancias de Node, MongoDB y un volumen virtual donde hacer backups de la base de datos
-* Crear Scripts para automatizar backups
-* Integrar la API de Google Drive para automatizar backups remotos
+* Crear Servicio de Mailing.
+* Crear un load-balancer con NginX y pensar la conveniencia de implementar PM2 o SystemD.
+* Crear Contenedores Docker para instancias de Node, MongoDB y un volumen virtual donde hacer backups de la base de datos.
+* Crear Scripts para automatizar backups.
+* Integrar la API de Google Drive para automatizar backups remotos.
 * Crear una rama específica para usar el esqueleto del gestor para otros proyectos.
-* Terminar la documentación
+* Terminar la documentación.
