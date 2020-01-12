@@ -29,16 +29,22 @@ access_ctrl.signin = (req, res) => {
 
 access_ctrl.create_user = async (req, res) => {
     const { name, password } = req.body;
-    console.log(req.body);
-    const newUser = new User({ name, password });
-    newUser.password = await newUser.encryptPassword(password);
-    await newUser.save();
-    res.redirect('/nochesdelogin');
+    const usedName = await User.findOne({ name });
+    if (!usedName) {
+        const newUser = new User({ name, password });
+        newUser.password = await newUser.encryptPassword(password);
+        await newUser.save();
+        req.flash("success_msg", "Usuari@ creade con exita");
+    } else {
+        req.flash('error_msg', "El nombre que intentas utilizar ya existe")
+    }
+    return res.redirect('/nochesdelogin');
+
 }
 
 access_ctrl.logout = (req, res) => {
     req.logOut();
     res.redirect('/');
 }
-    
+
 module.exports = access_ctrl;
