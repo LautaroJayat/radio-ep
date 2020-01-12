@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const SoundBig = require('../models/soundBig');
-const cache_functions =require('../cache/cache_functions');
+const cache_functions = require('../cache/cache_functions');
 const { isAuthenticated } = require('../helpers/auth');
 const { safeIframe } = require('../helpers/url');
 const HOME_CACHE = require('../cache/HOME_CACHE');
@@ -34,8 +34,14 @@ router.post('/admin/bigsound/register', async (req, res) => {
 });
 
 router.get('/superlist', contents_ctrl.get_cache, async (req, res) => {
-    let index = Math.floor(Math.random() *10)
-    console.log(index);
+    let index = Math.floor(Math.random() * 10)
+    if (HOME_CACHE.bigSound.length < 10) {
+        while (index >= HOME_CACHE.bigSound.length) {
+            index--
+            console.log(index);
+
+        }
+    }
     iframe = HOME_CACHE.bigSound[index];
     return res.json({ id: iframe.video_id })
 })
