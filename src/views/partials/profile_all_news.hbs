@@ -22,12 +22,16 @@
                     </div>
                     <div class="n-actions">
                         <a href="/news/edit/{{_id}}">
-                            <div class="edit"><i class="fas fa-edit"></i></div>
+                            <div class="edit">
+                                <div class="icon-container"><img src="/icons/edit.png" alt=""></div>
+                            </div>
                         </a>
                         <form action="/news/delete/{{_id}}?_method=DELETE" method="POST">
                             <input type="hidden" name="_method" value="DELETE">
                             <button>
-                                <div class="trash"><i class="fas fa-trash-alt"></i></div>
+                                <div class="trash">
+                                    <div class="icon-container"><img src="/icons/trash.png" alt=""></div>
+                                </div>
                             </button>
                         </form>
                     </div>

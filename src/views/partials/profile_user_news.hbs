@@ -4,76 +4,40 @@
         <div class="allUsers-dash">
             <h2 class="aU-title">Todas las Publicaciones</h2>
             <div class="news-list">
+                {{#each user_news}}
                 <div class="list-card">
                     <div class="n-img-container">
-                        <img src="https://images.unsplash.com/photo-1570341420728-b324cde2d244?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80"
-                            alt="">
+                        {{#if thumbnail}}
+                        <img src="{{thumbnail}}" alt="">
+                        {{else}}
+                        <p>Image Missing</p>
+                        {{/if}}
                     </div>
                     <div class="n-info">
-                        <h3 class="n-title">La noticia del siglo, no es momento para perdersela, vofi</h3>
-
-                        <div class="author-block">
-                            <div class="thumb"><img
-                                    src="https://images.unsplash.com/photo-1559705421-4ae9bf6fabb5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                    alt=""></div><span class="aN-author">Por Josefina Gutierrez</span>
-                        </div>
-                        <span class="aN-date">20/16/2019</span>
+                        <span class="n-date">{{date}}</span>
+                        <h3 class="n-title">{{title}}</h3>
                     </div>
                     <div class="n-actions">
-                        <div class="edit"><i class="fas fa-edit"></i></div>
-                        <div class="trash"><i class="fas fa-trash-alt"></i></div>
+                        <a href="/news/edit/{{_id}}">
+                            <div class="edit">
+                                <div class="icon-container"><img src="/icons/edit.png" alt=""></div>
+                            </div>
+                        </a>
+                        <form action="/news/delete/{{_id}}?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button>
+                                <div class="trash">
+                                    <div class="icon-container"><img src="/icons/trash.png" alt=""></div>
+                                </div>
+                            </button>
+                        </form>
                     </div>
-                </div>
-
-                <div class="list-card">
-                    <div class="n-img-container">
-                        <img src="https://images.unsplash.com/photo-1568228228480-540feb039f2a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                            alt="">
-                    </div>
-                    <div class="n-info">
-
-                        <h3 class="n-title">Las vendas en la cara son de las cosas que más amamos los muchachos
-                            peronistas</h3>
-                        <div class="author-block">
-                            <div class="thumb"><img
-                                    src="https://images.unsplash.com/photo-1518621681930-4ea023f9c8f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                    alt=""></div><span class="aN-author">Por Doña Florinda</span>
-                        </div>
-                        <span class="aN-date">20/16/2019</span>
-                    </div>
-                    <div class="n-actions">
-                        <div class="edit"><i class="fas fa-edit"></i></div>
-                        <div class="trash"><i class="fas fa-trash-alt"></i></div>
-                    </div>
-                </div>
-
-                <div class="list-card">
-                    <div class="n-img-container">
-                        <img src="https://images.unsplash.com/photo-1561303574-59db69510c2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
-                            alt="">
-                    </div>
-                    <div class="n-info">
-                        <h3 class="n-title">La gente que se agarrala cabeza suelen ser las que más sufren dolor de
-                            cabeza</h3>
-
-                        <div class="author-block">
-                            <div class="thumb"><img
-                                    src="https://images.unsplash.com/photo-1568014887261-7c68ead310e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                    alt=""></div><span class="aN-author">Por Larreta SanToro</span>
-                        </div>
-                        <span class="aN-date">20/16/2019</span>
-                    </div>
-                    <div class="n-actions">
-                        <div class="edit"><i class="fas fa-edit"></i></div>
-                        <div class="trash"><i class="fas fa-trash-alt"></i></div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
+
 
         </div>
 
 
     </div>
-
-
-</div>

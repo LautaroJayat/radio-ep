@@ -16,7 +16,7 @@ admin_ctrl.all_users = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
     const users = await User.find({}, {
@@ -37,7 +37,7 @@ admin_ctrl.all_news = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
 
@@ -60,7 +60,7 @@ admin_ctrl.all_columns = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
 
@@ -91,7 +91,7 @@ admin_ctrl.add_column = async (req, res) => {
                 '<!--LOADING CK EDITOR FROM CDN-->',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/translations/es.js"></script>',
-                '<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
+                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
                 '<script defer src="/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]
@@ -110,7 +110,7 @@ admin_ctrl.all_emitions = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
 
@@ -140,7 +140,7 @@ admin_ctrl.add_emitions = async (req, res) => {
                 '<!--LOADING CK EDITOR FROM CDN-->',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/translations/es.js"></script>',
-                '<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
+                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
                 '<script defer src="/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]
@@ -183,7 +183,7 @@ admin_ctrl.edit_users_panel = async (req, res) => {
                 '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css">',
             ],
             altScripts: [
-                '<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
+                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
                 '<script defer src="/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]

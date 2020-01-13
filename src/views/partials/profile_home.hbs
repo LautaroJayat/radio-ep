@@ -84,12 +84,16 @@
                     </div>
                     <div class="n-actions">
                         <a href="/news/edit/{{_id}}">
-                            <div class="edit"><i class="fas fa-edit"></i></div>
+                            <div class="edit">
+                                <div class="icon-container"><img src="/icons/edit.png" alt=""></div>
+                            </div>
                         </a>
                         <form action="/news/delete/{{_id}}?_method=DELETE" method="POST">
-                        <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_method" value="DELETE">
                             <button>
-                                <div class="trash"><i class="fas fa-trash-alt"></i></div>
+                                <div class="trash">
+                                    <div class="icon-container"><img src="/icons/trash.png" alt=""></div>
+                                </div>
                             </button>
                         </form>
 
@@ -99,53 +103,6 @@
                 </div>
                 {{/each}}
 
-
-                <div class=" list-card">
-                    <div class="n-img-container">
-                        <img src="https://images.unsplash.com/photo-1570341420728-b324cde2d244?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80"
-                            alt="">
-                    </div>
-                    <div class="n-info">
-                        <span class="n-date">20/16/2019</span>
-                        <h3 class="n-title">La noticia del siglo, no es momento para perdersela, vofi</h3>
-                    </div>
-                    <div class="n-actions">
-                        <div class="edit"><i class="fas fa-edit"></i></div>
-                        <div class="trash"><i class="fas fa-trash-alt"></i></div>
-                    </div>
-                </div>
-
-                <div class="list-card">
-                    <div class="n-img-container">
-                        <img src="https://images.unsplash.com/photo-1568228228480-540feb039f2a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                            alt="">
-                    </div>
-                    <div class="n-info">
-                        <span class="n-date">20/16/2019</span>
-                        <h3 class="n-title">Las vendas en la cara son de las cosas que más amamos los muchachos
-                            peronistas</h3>
-                    </div>
-                    <div class="n-actions">
-                        <div class="edit"><i class="fas fa-edit"></i></div>
-                        <div class="trash"><i class="fas fa-trash-alt"></i></div>
-                    </div>
-                </div>
-
-                <div class="list-card">
-                    <div class="n-img-container">
-                        <img src="https://images.unsplash.com/photo-1561303574-59db69510c2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
-                            alt="">
-                    </div>
-                    <div class="n-info">
-                        <span class="n-date">20/16/2019</span>
-                        <h3 class="n-title">La gente que se agarrala cabeza suelen ser las que más sufren dolor de
-                            cabeza</h3>
-                    </div>
-                    <div class="n-actions">
-                        <div class="edit"><i class="fas fa-edit"></i></div>
-                        <div class="trash"><i class="fas fa-trash-alt"></i></div>
-                    </div>
-                </div>
             </div>
 
         </div>

@@ -1,7 +1,67 @@
 <div class="nav-container">
     <ul class="nav-list">
         <li class="sayHi">Hola {{#if user}}{{user.name}}{{/if}}</span>
-        <li class="profile-nav-links"><a href="/"><i class="fas fa-home"></i>Home</a></li>
-        <li class="profile-nav-links"><a href="/logoutbyebye"><i class="fas fa-power-off"></i>Cerrar Sesión</a></li>
+        <li class="profile-nav-links"><a href="/">
+                <div class="icon-container"><img src="/icons/home.png" alt=""></div></i>Home
+            </a></li>
+        <li class="profile-nav-links"><a href="/logoutbyebye">
+                <div class="icon-container"><img src="/icons/off2.png" alt=""></div></i>Cerrar Sesión
+            </a></li>
     </ul>
 </div>
+
+<style>
+    .menu-option .icon-container {
+        margin-left: 1rem;
+    }
+
+    .icon-container {
+        justify-self: center;
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.5rem;
+
+    }
+
+    .icon-container img {
+        filter: invert(1);
+        height: 100%;
+        width: 100%;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: cover;
+    }
+</style>
+<style>
+    .n-actions a .edit,
+    .n-actions form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: unset;
+    }
+
+    .edit .icon-container,
+    .trash .icon-container {
+        width: 60%;
+        height: 60%;
+
+
+    }
+
+    .edit .icon-container img,
+    .trash .icon-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+
+    .trash .icon-container img {
+        margin-left: 9%;
+    }
+
+    .edit:hover img {
+        filter: opacity(0.6)
+    }
+</style>

@@ -26,7 +26,7 @@ users_ctrl.profile_home = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
 
@@ -42,7 +42,7 @@ users_ctrl.change_info = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
     const { name, email, _id } = req.user;
@@ -60,7 +60,7 @@ users_ctrl.change_pass = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
 
@@ -76,7 +76,7 @@ users_ctrl.change_social = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
 
@@ -97,7 +97,7 @@ users_ctrl.change_photo = async (req, res) => {
                 '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css">',
             ],
             altScripts: [
-                '<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
+                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
                 '<script defer src="/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]
@@ -108,6 +108,7 @@ users_ctrl.change_photo = async (req, res) => {
 }
 
 users_ctrl.user_news = async (req, res) => {
+    const user_news = await News.find({ author_id: req.user._id }, { title: 1, thumbnail: 1, date: 1, _id: 1 });
     const headers = {
         pageTitle: "Mis Noticias",
         //ogDescription: "Escucha la radio del club más caliente",
@@ -116,11 +117,11 @@ users_ctrl.user_news = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            //altScripts: []
         }
     };
 
-    res.render('users/update_content/profile_user_news', { headers });
+    res.render('users/update_content/profile_user_news', { headers, user_news });
 }
 
 users_ctrl.add_new = async (req, res) => {
@@ -140,7 +141,7 @@ users_ctrl.add_new = async (req, res) => {
                 '<!--LOADING CK EDITOR FROM CDN-->',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/translations/es.js"></script>',
-                '<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
+                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
                 '<script defer src="/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]
