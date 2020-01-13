@@ -59,16 +59,23 @@
             {{/if}}
             {{#if emitions}}
             <h1 class="article-title font-white">{{emitions.title}}</h1>
-            <div class="description font-white">{{emitions.description}}</div>
+            <div class="description font-white">{{{emitions.description}}}</div>
             {{/if}}
 
             <div class="author-sharers-container">
                 <div class="author-info">
                     {{#if news}}
+                    {{#unless news.alt_author}}
                     <div class="author-img-container rounded-borders">
                         <img src="{{news.author_thumbnail}}" alt="author-img" class="author-img">
                     </div>
+
                     <span class="name font-white">Por <strong class="font-crimson">{{news.author}}</strong></span>
+                    {{else}}
+                    <a href="{{news.alt_source_link}}"><span class="name font-white">Por <strong
+                                class="font-crimson">{{news.alt_author}}</strong> desde
+                            <strong class="font-crimson">{{news.alt_source}}</strong></span></a>
+                    {{/unless}}
                     {{/if}}
                     {{#if columns}}
                     <span class="name font-white">Programa: <strong
@@ -121,7 +128,7 @@
             <div class="main-media">
                 <img src="{{news.photo}}" alt="">
                 <span class="caption font-white">Fuente:
-                    {{#if news.caption}}{{ news.caption}}{{else}}Radio
+                    {{#if news.caption}}{{news.caption}}{{else}}Radio
                     Entre-Piernas S.A.{{/if}}</span>
             </div>
             {{/if}}
