@@ -10,7 +10,7 @@ const newsSchema = new Schema({
     alt_author: { type: String, required: false },
     alt_source: { type: String, required: false },
     alt_source_link: { type: String, required: false },
-    alt_social:  { type: String, required: false },
+    alt_social: { type: String, required: false },
     author_instagram: { type: String, required: false },
     author_facebook: { type: String, required: false },
     author_twitter: { type: String, required: false },
@@ -18,6 +18,7 @@ const newsSchema = new Schema({
     author_id: { type: String, required: true },
     body: { type: String, required: false },
     photo: { type: String, required: false },
+    caption: { type: String, required: false },
     thumbnail: { type: String, required: false },
     link: { type: String, required: false },
     date: { type: String, required: false }
