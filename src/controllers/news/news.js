@@ -38,14 +38,15 @@ news_ctrl.edit_news_panel = async (req, res) => {
 
 news_ctrl.add_news = async (req, res) => {
 
-    const { title, headline, date, alt_author, alt_source, alt_source_link, alt_social } = req.body;
+    const { title, headline, date, alt_author, alt_source, alt_source_link, alt_social, caption } = req.body;
     var { url, body, description } = req.body;
-    body = utf8.encode(body);
-    description = utf8.encode(description);
-    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
-    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
-    url = URL_F.spaceToDash(url);
-    if (URL_F.unsafeURL(url)) {
+    const testing_url = URL_F.spaceToDash(url);
+    const testing_body = utf8.encode(body);
+    const testing_description = utf8.encode(description);
+    //console.log(URL_F.checkScripts(testing_description))
+    if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
+    if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
+    if (URL_F.unsafeURL(testing_url)) {
         return res.sendStatus("999") //This will be handled by the front-end
     } else {
         const photoURL = req.files[0].path;
@@ -61,12 +62,13 @@ news_ctrl.add_news = async (req, res) => {
             const photo = compressedPhotos[0].destinationPath.replace('src/public', "");
             const thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "")
             // Removing Uncompressed Images
-            console.log("Removing Uncompressed Images");
+            //console.log("Removing Uncompressed Images");
             fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
             fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
             if (!alt_author) {
                 const newNews = new News({
-                    url,
+                    url:testing_url,
+                    caption,
                     title,
                     description,
                     headline,
@@ -82,7 +84,7 @@ news_ctrl.add_news = async (req, res) => {
                     date
                 });
                 await newNews.save();
-                console.log(newNews);
+                //console.log(newNews);
                 await cache_functions.refreshNews(newNews);
 
 
@@ -90,8 +92,9 @@ news_ctrl.add_news = async (req, res) => {
             // Second case: we steal the news
             else {
                 const newNews = new News({
-                    url,
+                    url:testing_url,
                     title,
+                    caption,
                     description,
                     headline,
                     alt_author,
@@ -110,7 +113,7 @@ news_ctrl.add_news = async (req, res) => {
                     date
                 });
                 await newNews.save();
-                console.log(newNews);
+                //console.log(newNews);
                 await cache_functions.refreshNews(newNews);
 
 
@@ -131,11 +134,11 @@ news_ctrl.add_news = async (req, res) => {
 }
 
 news_ctrl.edit_news = async (req, res) => {
-    const { title, photo, thumbnail, headline, alt_source, alt_source_link, alt_author, alt_social } = req.body;
+    const { title, photo, thumbnail, headline, alt_source, alt_source_link, alt_author, alt_social, caption } = req.body;
     var { url, body, description } = req.body;
-    testing_url = URL_F.spaceToDash(url);
-    testing_body = utf8.encode(body);
-    testing_description = utf8.encode(description);
+    const testing_url = URL_F.spaceToDash(url);
+    const testing_body = utf8.encode(body);
+    const testing_description = utf8.encode(description);
     //console.log(URL_F.checkScripts(testing_description))
     if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
     if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
@@ -144,7 +147,8 @@ news_ctrl.edit_news = async (req, res) => {
     } else {
         try {
             await News.findByIdAndUpdate(req.params.id, {
-                url,
+                url:testing_url,
+                caption,
                 title: title,
                 alt_author,
                 alt_source,
@@ -160,7 +164,7 @@ news_ctrl.edit_news = async (req, res) => {
                 thumbnail: thumbnail
             });
             await cache_functions.refreshNews();
-            console.log(await News.findById(req.params.id));
+            //console.log(await News.findById(req.params.id));
         } catch (error) {
             if (error.code !== 0) {
                 req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
@@ -175,17 +179,17 @@ news_ctrl.edit_news = async (req, res) => {
 }
 
 news_ctrl.full_edit_news = async (req, res) => {
-    const { title, headline, alt_source, alt_author, alt_social } = req.body;
+    const { title, headline, alt_source, alt_source_link, alt_author, alt_social, caption } = req.body;
     var { url, body, description } = req.body;
-    url = URL_F.spaceToDash(url);
-    body = utf8.encode(body);
-    description = utf8.encode(description);
-    if (URL_F.checkScripts(description)) { return res.sendStatus(997) }
-    if (URL_F.checkScripts(body)) { return res.sendStatus(997) };
-    url = URL_F.spaceToDash(url);
-    if (URL_F.unsafeURL(url)) {
-        res.sendStatus("999") //This will be handled by the front-end
-    } else {
+    const testing_url = URL_F.spaceToDash(url);
+    const testing_body = utf8.encode(body);
+    const testing_description = utf8.encode(description);
+    //console.log(URL_F.checkScripts(testing_description))
+    if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
+    if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
+    if (URL_F.unsafeURL(testing_url)) {
+        return res.sendStatus("999") //This will be handled by the front-end
+    }else {
         const photoURL = req.files[0].path;
         const thumbnailURL = req.files[1].path;
         //  Compressing
@@ -206,10 +210,12 @@ news_ctrl.full_edit_news = async (req, res) => {
 
             // Updating New
             await News.findByIdAndUpdate(req.params.id, {
-                url,
+                url:testing_url,
+                caption,
                 title: title,
                 headline: headline,
                 alt_source,
+                alt_source_link,
                 alt_author,
                 alt_social,
                 description: description,

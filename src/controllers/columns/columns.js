@@ -20,6 +20,7 @@ columns_ctrl.get_column = async (req, res) => {
         body: 1,
         thumbnail: 1,
         date: 1,
+        capion: 1
     });
     res.send(column);
 };
@@ -54,16 +55,16 @@ columns_ctrl.edit_columns_panel = async (req, res) => {
 
 
 columns_ctrl.add_columns = async (req, res) => {
-    const { title, date, members, program } = req.body;
+    const { title, date, members, program, caption } = req.body;
     var { iframe, body, url, description } = req.body;
-    body = utf8.encode(body);
-    description = utf8.encode(description);
-    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
-    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
-    url = URL_F.spaceToDash(url);
-    if (URL_F.unsafeURL(url)) {
-        res.sendStatus("999"); //This will be handled by the front-end
-        return
+    const testing_url = URL_F.spaceToDash(url);
+    const testing_body = utf8.encode(body);
+    const testing_description = utf8.encode(description);
+    //console.log(URL_F.checkScripts(testing_description))
+    if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
+    if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
+    if (URL_F.unsafeURL(testing_url)) {
+        return res.sendStatus("999") //This will be handled by the front-end
     }
     iframe = await URL_F.safeIframe(iframe);
     if (iframe === undefined) { return res.sendStatus(998) }
@@ -87,13 +88,14 @@ columns_ctrl.add_columns = async (req, res) => {
         const newColumn = new Column({
             title,
             description,
+            caption,
             program,
             iframe: iframe,
             members,
             body,
             thumbnail,
             date,
-            url
+            url: testing_url
         });
 
         await newColumn.save();
@@ -115,15 +117,15 @@ columns_ctrl.add_columns = async (req, res) => {
 
 
 columns_ctrl.edit_columns = async (req, res) => {
-    var { title, description, body, iframe, program, members, url } = req.body;
-    body = utf8.encode(body);
-    description = utf8.encode(description);
-    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
-    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
-    url = URL_F.spaceToDash(url);
-    if (URL_F.unsafeURL(url)) {
-        res.sendStatus("999"); //This will be handled by the front-end
-        return
+    var { title, description, body, iframe, program, members, url, caption } = req.body;
+    const testing_url = URL_F.spaceToDash(url);
+    const testing_body = utf8.encode(body);
+    const testing_description = utf8.encode(description);
+    //console.log(URL_F.checkScripts(testing_description))
+    if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
+    if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
+    if (URL_F.unsafeURL(testing_url)) {
+        return res.sendStatus("999") //This will be handled by the front-end
     }
     iframe = await URL_F.safeIframe(iframe);
     if (iframe === undefined) { return res.sendStatus(998) }
@@ -131,11 +133,12 @@ columns_ctrl.edit_columns = async (req, res) => {
         await Column.findByIdAndUpdate(req.params.id, {
             program: program,
             title: title,
+            caption,
             description: description,
             body: body,
             iframe: iframe,
             members: members,
-            url
+            url: testing_url
         });
 
         cache_functions.refreshColumns();
@@ -151,16 +154,16 @@ columns_ctrl.edit_columns = async (req, res) => {
 }
 
 columns_ctrl.full_edit_columns = async (req, res) => {
-    const { title, program, members } = req.body;
+    const { title, program, members, caption } = req.body;
     var { iframe, description, body, url } = req.body;
-    body = utf8.encode(body);
-    description = utf8.encode(description);
-    if (URL_F.checkScripts(description)) { res.sendStatus("997"); return }
-    if (URL_F.checkScripts(body)) { res.sendStatus("997"); return };
-    url = URL_F.spaceToDash(url);
-    if (URL_F.unsafeURL(url)) {
-        res.sendStatus("999"); //This will be handled by the front-end
-        return
+    const testing_url = URL_F.spaceToDash(url);
+    const testing_body = utf8.encode(body);
+    const testing_description = utf8.encode(description);
+    //console.log(URL_F.checkScripts(testing_description))
+    if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
+    if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
+    if (URL_F.unsafeURL(testing_url)) {
+        return res.sendStatus("999") //This will be handled by the front-end
     }
     iframe = await URL_F.safeIframe(iframe);
     if (iframe === undefined) { return res.sendStatus(998) }
@@ -183,11 +186,12 @@ columns_ctrl.full_edit_columns = async (req, res) => {
             title: title,
             description: description,
             program: program,
+            caption,
             body: body,
             iframe: iframe,
             members: members,
             thumbnail: thumbnail,
-            url
+            url: testing_url,
         });
         cache_functions.refreshColumns();
     } catch (error) {
