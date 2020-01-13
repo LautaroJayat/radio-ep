@@ -108,7 +108,7 @@ users_ctrl.change_photo = async (req, res) => {
 }
 
 users_ctrl.user_news = async (req, res) => {
-    const user_news = await News.find({ author_id: req.user._id }, { title: 1, thumbnail: 1, date: 1, _id: 1 }).sort({ _id: -1 });
+    const user_news = await News.find({ author_id: req.user._id }, { title: 1, thumbnail: 1, date: 1, _id: 1, author_thumbnail: 1 }).sort({ _id: -1 }).limit(6);
     const headers = {
         pageTitle: "Mis Noticias",
         //ogDescription: "Escucha la radio del club más caliente",

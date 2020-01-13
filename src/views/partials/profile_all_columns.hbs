@@ -3,15 +3,15 @@
     <div class="allUsers">
         <div class="allUsers-dash">
             <h2 class="aU-title">Todas las columnas</h2>
-            <div class="news-list">
+            <div id="news-list" class="news-list">
                 {{#each columns}}
                 <div class="list-card">
                     <div class="n-img-container">
                         <img src="{{thumbnail}}" alt=""> </div>
                     <div class="n-info">
                         <h3 class="n-title">{{title}}</h3>
-                        <span class="aN-date">En Esta Emision: {{members}}</span>
                         <span class="aN-date">{{date}}</span>
+                        <span class="aN-date">Programa: {{program}}</span>
                     </div>
                     <div class="n-actions">
                         <a href="/columns/edit/{{_id}}">
@@ -32,9 +32,86 @@
                 {{/each}}
 
             </div>
+            <button id="gimmi">Más Columnas</button>
         </div>
 
     </div>
 
 
 </div>
+
+<script>
+    var i = 6;
+    document.getElementById("gimmi").addEventListener("click", () => {
+        fetch(`/admin/ajaxcolumns?page=${i}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then(res => {
+                console.log(res);
+                console.log(res.columns);
+                res.columns.forEach(e => {
+                    let article = document.createElement('div');
+                    article.classList.add('list-card');
+                    let img_container = document.createElement('div');
+                    img_container.classList.add('n-img-container');
+                    let image = document.createElement('img');
+                    image.src = e.thumbnail;
+                    let info = document.createElement('div');
+                    info.classList.add('n-info');
+                    let title = document.createElement('h3');
+                    title.classList.add('n-title');
+                    title.appendChild(document.createTextNode(e.title));
+                    info.appendChild(title);
+                    let date = document.createElement('span');
+                    date.classList.add('aN-date');
+                    date.appendChild(document.createTextNode(e.date));
+                    let container = document.createElement('div');
+                    container.appendChild(date);
+                    info.appendChild(container);
+                    if (e.program) {
+                        let program = document.createElement('span');
+                        program.classList.add('aN-date');
+                        program.appendChild(document.createTextNode("Programa: "))
+                        let StrongestNameInTheHistory = document.createElement('strong');
+                        StrongestNameInTheHistory.appendChild(document.createTextNode(`"${e.program}"`));
+                        program.appendChild(StrongestNameInTheHistory);
+                        info.appendChild(program);
+                    }
+                    img_container.appendChild(image);
+                    article.appendChild(img_container);
+                    article.appendChild(info);
+
+                    let actions = document.createElement('div');
+                    actions.classList.add('n-actions');
+
+                    actions.innerHTML = `<a href="/columns/edit/${e._id}">
+                            <div class="edit">
+                                <div class="icon-container"><img src="/icons/edit.png" alt=""></div>
+                            </div>
+                        </a>
+                        <form action="/columns/delete/${e._id}?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button>
+                                <div class="trash">
+                                    <div class="icon-container"><img src="/icons/trash.png" alt=""></div>
+                                </div>
+                            </button>
+                        </form>`
+                    article.appendChild(actions);
+                    let grid = document.getElementById("news-list");
+                    grid.appendChild(article);
+                })
+            })
+            .catch((err) => {
+                console.log(err);
+                let par = document.createElement('h3');
+                par.appendChild(document.createTextNode("Me parece que no tenemos más noticias. Te recomendamos recorrer el resto de la página, visitar nuestras redes o sumarte en alguna de nuestras épicas fiestas."));
+                let grid = document.getElementById("news-list");
+                par.classList.add('font-crimson');
+                grid.appendChild(par);
+            });
+        i = i + 3;
+        console.log(i)
+    });
+</script>

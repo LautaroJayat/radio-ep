@@ -50,6 +50,14 @@ router.get('/admin/addnew', /*isAuthenticated,*/ u_ctrl.add_new);
 
 router.get('/admin/allcolumns', /*isAuthenticated,isAdmin,*/ a_ctrl.all_columns);
 
+router.get('/admin/ajaxcolumns',/*isAuthenticated,isAdmin,*/ a_ctrl.ajax_columns);
+
+router.get('/admin/ajaxemitions',/*isAuthenticated,isAdmin,*/ a_ctrl.ajax_emitions);
+
+router.get('/admin/ajaxnews',/*isAuthenticated,isAdmin,*/ a_ctrl.ajax_news);
+
+router.get('/admin/ajaxusernews',/*isAuthenticated,isAdmin,*/ a_ctrl.ajax_user_news);
+
 router.get('/admin/addcolumn', /*isAuthenticated,isAdmin,*/ a_ctrl.add_column);
 
 router.get('/admin/emitions', /*isAuthenticated,isAdmin,*/ a_ctrl.all_emitions);

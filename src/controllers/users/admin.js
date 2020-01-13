@@ -47,7 +47,7 @@ admin_ctrl.all_news = async (req, res) => {
         author: 1,
         author_thumbnail: 1,
         date: 1,
-    }).sort({ _id: -1 });
+    }).sort({ _id: -1 }).limit(10);
     res.render('users/update_content/profile_all_news', { headers, news });
 }
 
@@ -69,8 +69,10 @@ admin_ctrl.all_columns = async (req, res) => {
         title: 1,
         program: 1,
         members: 1,
+        _id: 1,
+        date: 1
 
-    }).sort({ _id: -1 });
+    }).sort({ _id: -1 }).limit(6);
     res.render('users/update_content/profile_all_columns', { headers, columns });
 }
 
@@ -118,8 +120,10 @@ admin_ctrl.all_emitions = async (req, res) => {
         title: 1,
         iframe: 1,
         members: 1,
-        date: 1
-    }).sort({ _id: -1 });
+        date: 1,
+        program: 1,
+        _id: 1
+    }).sort({ _id: -1 }).limit(6);
     res.render('users/update_content/profile_all_emitions', { headers, emitions });
 }
 
@@ -296,5 +300,42 @@ admin_ctrl.users_delete = async (req, res) => {
         res.redirect('/');
     }
 }
+
+admin_ctrl.ajax_columns = async (req, res) => {
+    if (req.query.page) {
+        const columns = await Column.find({}, { _id: 1, thumbnail: 1, title: 1, program: 1, date: 1 }).sort({ _id: -1 }).limit(6).skip(parseInt(req.query.page));
+        if (columns.length < 1) { res.sendStatus(500) } else {
+            res.json({ columns });
+        }
+    }
+}
+
+admin_ctrl.ajax_emitions = async (req, res) => {
+    if (req.query.page) {
+        const emitions = await Emition.find({}, { _id: 1, thumbnail: 1, title: 1, program: 1, date: 1 }).sort({ _id: -1 }).limit(6).skip(parseInt(req.query.page));
+        if (emitions.length < 1) { res.sendStatus(500) } else {
+            res.json({ emitions });
+        }
+    }
+}
+
+admin_ctrl.ajax_news = async (req, res) => {
+    if (req.query.page) {
+        const news = await News.find({}, { _id: 1, thumbnail: 1, title: 1, program: 1, date: 1, author_thumbnail: 1, author: 1, alt_source: 1 }).sort({ _id: -1 }).limit(10).skip(parseInt(req.query.page));
+        if (news.length < 1) { console.log('fuck!'); res.sendStatus(500) } else {
+            res.json({ news });
+        }
+    }
+}
+
+admin_ctrl.ajax_user_news = async (req, res) => {
+    if (req.query.page) {
+        const news = await News.find({ author_id: req.user.id }, { _id: 1, thumbnail: 1, title: 1, program: 1, date: 1, author_thumbnail: 1 }).sort({ _id: -1 }).limit(6).skip(parseInt(req.query.page));
+        if (news.length < 1) { res.sendStatus(500) } else {
+            res.json({ news });
+        }
+    }
+}
+
 
 module.exports = admin_ctrl;
