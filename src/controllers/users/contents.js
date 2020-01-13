@@ -33,7 +33,6 @@ contents_ctrl.get_new = async (req, res) => {
     if (_news.filter(element => element.url === url).length > 0) {
         news = _news.filter(element => element.url === url);
         news = news[0];
-        console.log(news);
         headers = {
             pageTitle: news.title + " | Radio Entre-Piernas",
             ogDescription: makeOGdescriptionsSafeAgain(news.description),
@@ -45,13 +44,9 @@ contents_ctrl.get_new = async (req, res) => {
                 altScripts: []
             }
         };
-        //console.log('from cache works?');
-        //console.log(news);
-        console.log("We are in if");
         return res.render("contents", { news, headers, _columns, _news });
     } else {
         news = await News.findOne({ url: url }, { _id: 0 });
-        console.log("We are in else");
         headers = {
             pageTitle: news.title + " | Radio Entre-Piernas",
             ogDescription: await makeOGdescriptionsSafeAgain(news.description),
@@ -63,7 +58,6 @@ contents_ctrl.get_new = async (req, res) => {
                 altScripts: []
             }
         };
-        console.log(headers.pageTitle, "\n", headers.ogTitle)
         //console.log(news);
         //console.log("from database works?");
         res.render("contents", { news, headers, _columns, _news });
@@ -76,9 +70,11 @@ contents_ctrl.get_column = async (req, res) => {
     const _columns = HOME_CACHE.columns.slice(3)
     const url = req.params.url;
     const HC_columns = HOME_CACHE.columns;
+    let columns
     //const REDUCED_CACHE
-    if (HC_columns.filter(element => element.url === "mi-url-de-noticia").length) {
-        let columns = _columns.filter(element => element.url === url);
+    if (HC_columns.filter(element => element.url === url).length > 0) {
+        columns = HC_columns.filter(element => element.url === url);
+        //console.log(columns);
         columns = columns[0];
         headers = {
             pageTitle: columns.title + " | Radio Entre-Piernas",
@@ -94,8 +90,7 @@ contents_ctrl.get_column = async (req, res) => {
         //console.log("columns works!");
         res.render("contents", { columns, headers, _news, _columns })
     } else {
-        let columns = await Columns.find({ url: url }, { _id: 0 });
-        columns = columns[0];
+        columns = await Columns.findOne({ url: url }, { _id: 0 });
         headers = {
             pageTitle: columns.title + " | Radio Entre-Piernas",
             ogDescription: columns.description,
@@ -117,7 +112,7 @@ contents_ctrl.get_emition = async (req, res) => {
     const _news = HOME_CACHE.news;
     const _columns = HOME_CACHE.columns.slice(3)
     const _emitions = HOME_CACHE.emitions;
-    if (_emitions.filter(element => element.url === "mi-url-de-noticia").length) {
+    if (_emitions.filter(element => element.url === url).length > 0) {
         let emitions = _emitions.filter(element => element.url === url);
         emitions = emitions[0];
         headers = {
@@ -132,10 +127,9 @@ contents_ctrl.get_emition = async (req, res) => {
             }
         };
         //console.log("emitions works!");
-        res.render("contents", { emitions, headers, _news, columns });
+        res.render("contents", { emitions, headers, _news, _columns });
     } else {
-        let emitions = await Emitions.find({ url: url }, { _id: 0 });
-        emitions = emitions[0];
+        let emitions = await Emitions.findOne({ url: url }, { _id: 0 });
         headers = {
             pageTitle: emitions.title + " | Radio Entre-Piernas",
             ogDescription: emitions.description,
