@@ -20,8 +20,10 @@
             <label for="program">Escriba el nombre del programa</label>
             <input id="program" class="n-input" type="text" name="program" placeholder="Inserte el nombre del programa"
                 value="{{emition.program}}">
-            <label for="content">Escriba el cuerpo de la noticia</label>
+            <label for="caption">Inserte la fuente de la foto/video principal</label>
+            <input id="caption" class="n-input" type="text" name="caption" value="{{emition.caption}}" placeholder="Inserte la fuente">
 
+            <label for="content">Escriba el cuerpo de la noticia</label>
             <textarea class="photo-input" name="content" id="editor">{{emition.body}}</textarea>
             <input type="hidden" id="thumbnail" name="thumbnail" value="{{emition.thumbnail}}">
             <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-submit-block">BUSCAR
@@ -49,6 +51,7 @@
     const iframe = document.getElementById('iframe');
     const senderButton = document.getElementById('sendEditorData');
     const emitionId = document.getElementById('_id');
+    const caption = document.getElementById('caption');
     var thumbnailBinaryData;
 
     //  Creating a CKEDITOR instance only when everithing is loaded
@@ -131,6 +134,7 @@
         form.append('body', body);
         form.append('program', program.value);
         form.append('iframe', iframe.value);
+        form.append('caption', caption.value);
         if (binaryData) {
             var name = new Date();
             name = name.getTime();

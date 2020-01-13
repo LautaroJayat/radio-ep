@@ -2,15 +2,27 @@
     <div class="ck-editor-dash">
         <h2 class="Udatos-title">Nueva Emisión</h2>
         <div class="n-form">
+
+            <label for="url">Escriba la URL de la noticia</label>
             <input id="url" class="n-input" type="text" name="url" placeholder="Escriba la URL de la noticia">
+
+            <label for="title">Escriba su título</label>
             <input id="title" class="n-input" type="text" name="title" placeholder="Escriba un título">
+
+            <label for="program">Escriba el nombre del programa</label>
             <textarea id="description" class="n-input-textarea" type="text" name="description"
                 placeholder="Escriba una descripción"></textarea>
+
+            <label for="description">Escriba una descripción para su columna</label>
             <input id="program" class="n-input" type="text" name="program" placeholder="Escriba el nombre del programa">
+
+            <label for="iframe">Inserte el iframe de su columna</label>
             <input id="iframe" class="n-input" type="text" name="iframe" placeholder="Inserte el Iframe de Youtube">
 
-            <label for="content">Escriba el cuerpo de la noticia</label>
+            <label for="caption">Inserte la fuente de la foto/video principal</label>
+            <input id="caption" class="n-input" type="text" name="caption" placeholder="Inserte la fuente">
 
+            <label for="content">Escriba el cuerpo de la noticia</label>
             <textarea class="photo-input" name="content" id="editor"></textarea>
 
             <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-submit-block">BUSCAR
@@ -36,6 +48,7 @@
     const program = document.getElementById('program');
     const senderButton = document.getElementById('sendEditorData');
     const iframe = document.getElementById('iframe');
+    const caption = document.getElementById('caption');
     var thumbnailBinaryData;
 
     senderButton.addEventListener('click', function (e) {
@@ -100,6 +113,7 @@
         form.append('description', description);
         form.append('body', body);
         form.append('date', date);
+        form.append('caption', caption.value);
         fetch("/emitions/add", { method: "POST", body: form })
             .then(function (response) {
                 console.log(response.status);

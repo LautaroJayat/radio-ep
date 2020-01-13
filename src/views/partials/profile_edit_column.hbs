@@ -18,7 +18,14 @@
             <textarea id="description" class="n-input-textarea" type="text" name="description"
                 value="{{column.description}}" placeholder="Escriba una descripción">{{column.description}}</textarea>
             <label for="iframe">Inserte el iframe de su columna</label>
-            <input id="iframe" class="n-input" type="text" name="iframe" placeholder="Inserte el Iframe de Youtube">
+            <input id="iframe" class="n-input" type="text" name="iframe" value="{{column.iframe}}" placeholder="
+                Inserte el Iframe de Youtube">
+
+            <label for="caption">Inserte la fuente de la foto/video principal</label>
+            <input id="caption" class="n-input" type="text" name="caption" value="{{column.caption}}"
+                placeholder="Inserte la fuente">
+
+
             <label for="content">Escriba el cuerpo de la noticia</label>
 
             <textarea class="photo-input" name="content" id="editor">{{column.body}}</textarea>
@@ -47,6 +54,7 @@
     const iframe = document.getElementById('iframe');
     const senderButton = document.getElementById('sendEditorData');
     const columnId = document.getElementById('_id');
+    const caption = document.getElementById('caption');
     var thumbnailBinaryData;
 
     //  Creating a CKEDITOR instance only when everithing is loaded
@@ -132,6 +140,7 @@
         form.append('description', description);
         form.append('body', body);
         form.append('iframe', iframe.value);
+        form.append('caption', caption.value);
         if (binaryData) {
             var name = new Date();
             name = name.getTime();

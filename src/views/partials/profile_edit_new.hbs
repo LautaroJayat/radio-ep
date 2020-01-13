@@ -50,6 +50,11 @@
                     {{#if news.alt_author}}value="{{news.alt_source_link}}" {{/if}}>
 
             </div>
+
+            <label for="caption">Inserte la fuente de la foto principal</label>
+            <input id="caption" class="n-input" type="text" name="caption" value="{{news.caption}}" placeholder="Inserte la fuente">
+
+
             <label for="content">Escriba el cuerpo de la noticia</label>
 
 
@@ -84,6 +89,7 @@
     const headline = document.getElementById('headline');
     const senderButton = document.getElementById('sendEditorData');
     const newId = document.getElementById('_id');
+    const caption = document.getElementById('caption');
     var thumbnailBinaryData;
 
     //  Creating a CKEDITOR instance only when everithing is loaded
@@ -208,6 +214,7 @@
         form.append('description', description);
         form.append('headline', headline.value);
         form.append('body', body);
+        form.append('caption', caption.value);
         if (document.getElementById('delete_sources') && document.getElementById('delete_sources').checked) {
             document.getElementById('alt_sources_checkbox').checked = false;
             form.append('alt_author', "");

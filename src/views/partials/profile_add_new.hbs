@@ -33,6 +33,8 @@
             </div>
 
 
+            <label for="caption">Inserte la fuente de la foto principal</label>
+            <input id="caption" class="n-input" type="text" name="caption" placeholder="Inserte la fuente">
 
             <label for="content">Escriba el cuerpo de la noticia</label>
 
@@ -68,6 +70,7 @@
     const title = document.getElementById('title');
     const headline = document.getElementById('headline');
     const senderButton = document.getElementById('sendEditorData');
+    const caption = document.getElementById('caption');
     var thumbnailBinaryData;
 
     //Seting the logic for displaying the alt_sources fields with the checkbox
@@ -151,6 +154,7 @@
         form.append('description', description);
         form.append('body', body);
         form.append('date', date);
+        form.append('caption', caption.value);
         if (document.getElementById('alt_sources_checkbox').checked) {
             form.append('alt_author', alt_author.value);
             form.append('alt_social', alt_social.value);
