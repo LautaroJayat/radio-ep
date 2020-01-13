@@ -125,7 +125,7 @@ admin_ctrl.all_emitions = async (req, res) => {
 
 admin_ctrl.add_emitions = async (req, res) => {
     const headers = {
-        pageTitle: "Añadir Columna",
+        pageTitle: "Añadir Emisión",
         //ogDescription: "Escucha la radio del club más caliente",
         //ogTitle: "Radio Entre-Piernas",
         //ogImage: "",
