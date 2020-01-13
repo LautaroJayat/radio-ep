@@ -17,7 +17,7 @@ users_ctrl.profile_home = async (req, res) => {
     const { _id, name, admin, editor, email, photo, thumbnail, facebook, twitter, instagram } = req.user;
     const user = { _id, name, admin, editor, email, photo, thumbnail, facebook, twitter, instagram };
     req.user = user;
-    const user_news = await News.find({ author_id: user._id }, { title: 1, thumbnail: 1, date: 1, _id: 1 });
+    const user_news = await News.find({ author_id: user._id }, { title: 1, thumbnail: 1, date: 1, _id: 1 }).sort({ _id: -1 });
     const headers = {
         pageTitle: "Nueva Noticia - Radio EntrePiernas",
         ogDescription: "Escucha la radio del club más caliente",
@@ -108,7 +108,7 @@ users_ctrl.change_photo = async (req, res) => {
 }
 
 users_ctrl.user_news = async (req, res) => {
-    const user_news = await News.find({ author_id: req.user._id }, { title: 1, thumbnail: 1, date: 1, _id: 1 });
+    const user_news = await News.find({ author_id: req.user._id }, { title: 1, thumbnail: 1, date: 1, _id: 1 }).sort({ _id: -1 });
     const headers = {
         pageTitle: "Mis Noticias",
         //ogDescription: "Escucha la radio del club más caliente",
@@ -176,7 +176,7 @@ users_ctrl.update_photo = async (req, res) => {
         });
 
         // Updating News in Database
-        var news = await News.find({ author_id: req.user._id });
+        var news = await News.find({ author_id: req.user._id }).sort({ _id: -1 });
         news.forEach(n => {
             n.author_thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "");
             n.save();

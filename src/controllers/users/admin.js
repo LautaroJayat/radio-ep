@@ -24,7 +24,7 @@ admin_ctrl.all_users = async (req, res) => {
         name: 1,
         _id: 1
 
-    });
+    }).sort({ _id: -1 });
     res.render('users/update_content/profile_all_users', { headers, users });
 }
 
@@ -47,7 +47,7 @@ admin_ctrl.all_news = async (req, res) => {
         author: 1,
         author_thumbnail: 1,
         date: 1,
-    });
+    }).sort({ _id: -1 });
     res.render('users/update_content/profile_all_news', { headers, news });
 }
 
@@ -70,7 +70,7 @@ admin_ctrl.all_columns = async (req, res) => {
         program: 1,
         members: 1,
 
-    });
+    }).sort({ _id: -1 });
     res.render('users/update_content/profile_all_columns', { headers, columns });
 }
 
@@ -119,7 +119,7 @@ admin_ctrl.all_emitions = async (req, res) => {
         iframe: 1,
         members: 1,
         date: 1
-    });
+    }).sort({ _id: -1 });
     res.render('users/update_content/profile_all_emitions', { headers, emitions });
 }
 
