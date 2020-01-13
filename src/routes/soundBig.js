@@ -38,7 +38,7 @@ router.get('/superlist', contents_ctrl.get_cache, async (req, res) => {
     if (HOME_CACHE.bigSound.length < 10) {
         while (index >= HOME_CACHE.bigSound.length) {
             index--
-            console.log(index);
+            //console.log(index);
 
         }
     }
