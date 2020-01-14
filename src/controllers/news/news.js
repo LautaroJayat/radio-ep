@@ -52,9 +52,12 @@ news_ctrl.add_news = async (req, res) => {
         const photoURL = req.files[0].path;
         const thumbnailURL = req.files[1].path;
         try {
+            //  Creating date object to use as location
+            const date = new Date;
+            const dir = `${date.getFullYear()}/${date.getMonth()}`
             //  Compressing
             const compressedPhotos = await imagemin([photoURL, thumbnailURL], {
-                destination: 'src/public/temp/compressed',
+                destination: `src/public/${dir}`,
                 plugins: [
                     recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
                 ]
@@ -67,7 +70,7 @@ news_ctrl.add_news = async (req, res) => {
             fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
             if (!alt_author) {
                 const newNews = new News({
-                    url:testing_url,
+                    url: testing_url,
                     caption,
                     title,
                     description,
@@ -92,7 +95,7 @@ news_ctrl.add_news = async (req, res) => {
             // Second case: we steal the news
             else {
                 const newNews = new News({
-                    url:testing_url,
+                    url: testing_url,
                     title,
                     caption,
                     description,
@@ -147,7 +150,7 @@ news_ctrl.edit_news = async (req, res) => {
     } else {
         try {
             await News.findByIdAndUpdate(req.params.id, {
-                url:testing_url,
+                url: testing_url,
                 caption,
                 title: title,
                 alt_author,
@@ -189,13 +192,16 @@ news_ctrl.full_edit_news = async (req, res) => {
     if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
     if (URL_F.unsafeURL(testing_url)) {
         return res.sendStatus("999") //This will be handled by the front-end
-    }else {
+    } else {
         const photoURL = req.files[0].path;
         const thumbnailURL = req.files[1].path;
         //  Compressing
         try {
+            //  Creating date object to use as location
+            const date = new Date;
+            const dir = `${date.getFullYear()}/${date.getMonth()}`;
             const compressedPhotos = await imagemin([photoURL, thumbnailURL], {
-                destination: 'src/public/temp/compressed',
+                destination: `src/public/${dir}`,
                 plugins: [
                     recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
                 ]
@@ -208,9 +214,14 @@ news_ctrl.full_edit_news = async (req, res) => {
             fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
             fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
 
+            // Getting old image and deleting it
+            let oldImage = await News.findById(req.params.id, { _id: 0, thumbnail: 1, photo: 1 });
+            fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old thumbnail was deleted") });
+            fs.unlink("src/public" + oldImage.photo, (err) => { if (err) throw err; console.log("old photo was deleted") });
+
             // Updating New
             await News.findByIdAndUpdate(req.params.id, {
-                url:testing_url,
+                url: testing_url,
                 caption,
                 title: title,
                 headline: headline,
@@ -244,6 +255,11 @@ news_ctrl.full_edit_news = async (req, res) => {
 }
 
 news_ctrl.delete_news = async (req, res) => {
+    // Getting old image and deleting it
+    let oldImage = await News.findById(req.params.id, { _id: 0, thumbnail: 1, photo: 1 });
+    fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old thumbnail was deleted") });
+    fs.unlink("src/public" + oldImage.photo, (err) => { if (err) throw err; console.log("old photo was deleted") });
+    // Deleting database entry
     await News.findByIdAndDelete(req.params.id);
     await cache_functions.refreshNews();
     req.flash('success_msg', 'Noticia Eliminada Correctamente');
