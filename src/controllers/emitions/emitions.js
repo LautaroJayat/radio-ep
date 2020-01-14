@@ -53,9 +53,12 @@ emitions_ctrl.add_emitions = async (req, res) => {
     if (iframe === undefined) { return res.sendStatus(998) }
     const thumbnailURL = req.files[0].path;
     try {
+        //  Creating date object to use as location
+        const date = new Date;
+        const dir = `${date.getFullYear()}/${date.getMonth()}`
         //  Compressing
         const compressedPhotos = await imagemin([thumbnailURL], {
-            destination: 'src/public/temp/compressed',
+            destination: `src/public/${dir}`,
             plugins: [
                 recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
             ]
@@ -67,7 +70,7 @@ emitions_ctrl.add_emitions = async (req, res) => {
 
         // Creating a Emition-object from mongoose model
         const newEmition = new Emition({
-            url:testing_url,
+            url: testing_url,
             title,
             caption,
             description,
@@ -108,7 +111,7 @@ emitions_ctrl.edit_emitions = async (req, res) => {
     if (iframe === undefined) { return res.sendStatus(998) }
     try {
         await Emition.findByIdAndUpdate(req.params.id, {
-            url:testing_url,
+            url: testing_url,
             caption,
             title: title,
             description: description,
@@ -144,9 +147,12 @@ emitions_ctrl.full_edit_emitions = async (req, res) => {
     if (iframe === undefined) { return res.sendStatus(998) }
     const thumbnailURL = req.files[0].path;
     try {
+        //  Creating date object to use as location
+        const date = new Date;
+        const dir = `${date.getFullYear()}/${date.getMonth()}`
         //  Compressing
         const compressedPhotos = await imagemin([thumbnailURL], {
-            destination: 'src/public/temp/compressed',
+            destination: `src/public/${dir}`,
             plugins: [
                 recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
             ]
@@ -156,9 +162,13 @@ emitions_ctrl.full_edit_emitions = async (req, res) => {
         // Removing Uncompressed Images
         fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
 
+        // Getting old image and deleting it
+        let oldImage = await Emition.findById(req.params.id, { _id: 0, thumbnail: 1 });
+        fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
+
         // Updating New
         await Emition.findByIdAndUpdate(req.params.id, {
-            url:testing_url,
+            url: testing_url,
             caption,
             title: title,
             description: description,
@@ -180,6 +190,10 @@ emitions_ctrl.full_edit_emitions = async (req, res) => {
 }
 
 emitions_ctrl.delete_emitions = async (req, res) => {
+    // Getting old image and deleting it
+    let oldImage = await Emition.findById(req.params.id, { _id: 0, thumbnail: 1 });
+    fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
+    //  Deleting entry in the database
     await Emition.findByIdAndDelete(req.params.id);
     await cache_functions.refreshEmitions();
     req.flash('success_msg', 'Emisión Eliminada Correctamente');
