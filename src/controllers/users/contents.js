@@ -137,7 +137,7 @@ contents_ctrl.get_emition = async (req, res) => {
             ogImage: emitions.thumbnail,
             profile: false,
             altFormat: {
-                altCSS: ['<link rel="stylesheet" href="/content.css">'],
+                altCSS: ['<link rel="stylesheet" href="/css/content.css">'],
                 altScripts: []
             }
         };

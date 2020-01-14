@@ -15,8 +15,7 @@ admin_ctrl.all_users = async (req, res) => {
         pageTitle: "Todos Los Usuarios",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
         }
     };
     const users = await User.find({}, {
@@ -36,8 +35,7 @@ admin_ctrl.all_news = async (req, res) => {
         //ogImage: "",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
         }
     };
 
@@ -59,8 +57,7 @@ admin_ctrl.all_columns = async (req, res) => {
         //ogImage: "",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
         }
     };
 
@@ -85,16 +82,15 @@ admin_ctrl.add_column = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: [
-                '<link rel="stylesheet" href="/style.css">',
-                '<link rel="stylesheet" href="/cropper.css">',
+                '<link rel="stylesheet" href="/css/style.css">',
+                '<link rel="stylesheet" href="/css/cropper.css">',
                 '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css">',
             ],
             altScripts: [
                 '<!--LOADING CK EDITOR FROM CDN-->',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/translations/es.js"></script>',
-                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
-                '<script defer src="/cropper.js"></script>',
+                '<script defer src="/js/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]
         }
@@ -111,8 +107,7 @@ admin_ctrl.all_emitions = async (req, res) => {
         //ogImage: "",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
         }
     };
 
@@ -136,16 +131,15 @@ admin_ctrl.add_emitions = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: [
-                '<link rel="stylesheet" href="/style.css">',
-                '<link rel="stylesheet" href="/cropper.css">',
+                '<link rel="stylesheet" href="/css/style.css">',
+                '<link rel="stylesheet" href="/css/cropper.css">',
                 '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css">',
             ],
             altScripts: [
                 '<!--LOADING CK EDITOR FROM CDN-->',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/translations/es.js"></script>',
-                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
-                '<script defer src="/cropper.js"></script>',
+                '<script defer src="/js/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]
         }
@@ -162,8 +156,7 @@ admin_ctrl.iframes = async (req, res) => {
         //ogImage: "",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
         }
     };
     //const smallSound = await soundSmall.findOne();
@@ -182,13 +175,12 @@ admin_ctrl.edit_users_panel = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: [
-                '<link rel="stylesheet" href="/style.css">',
-                '<link rel="stylesheet" href="/cropper.css">',
+                '<link rel="stylesheet" href="/css/style.css">',
+                '<link rel="stylesheet" href="/css/cropper.css">',
                 '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css">',
             ],
             altScripts: [
-                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
-                '<script defer src="/cropper.js"></script>',
+                '<script defer src="/js/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]
         }
@@ -205,8 +197,7 @@ admin_ctrl.delete_users_panel = async (req, res) => {
         //ogImage: "https://res.cloudinary.com/djyu25sfm/image/upload/v1560887972/snipetREP.png",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
         }
     };
     res.render("users/update_content/profile_users_delete_validation", { headers, _id });

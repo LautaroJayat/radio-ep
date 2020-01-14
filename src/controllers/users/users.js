@@ -25,8 +25,7 @@ users_ctrl.profile_home = async (req, res) => {
         ogImage: "https://res.cloudinary.com/djyu25sfm/image/upload/v1560887972/snipetREP.png",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
         }
     };
 
@@ -41,7 +40,7 @@ users_ctrl.change_info = async (req, res) => {
         //ogImage: "",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
             //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
         }
     };
@@ -59,8 +58,7 @@ users_ctrl.change_pass = async (req, res) => {
         //ogImage: "",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
         }
     };
 
@@ -75,8 +73,7 @@ users_ctrl.change_social = async (req, res) => {
         //ogImage: "",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
-            //altScripts: ['<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',]
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
         }
     };
 
@@ -92,13 +89,12 @@ users_ctrl.change_photo = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: [
-                '<link rel="stylesheet" href="/style.css">',
-                '<link rel="stylesheet" href="/cropper.css">',
+                '<link rel="stylesheet" href="/css/style.css">',
+                '<link rel="stylesheet" href="/css/cropper.css">',
                 '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css">',
             ],
             altScripts: [
-                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
-                '<script defer src="/cropper.js"></script>',
+                '<script defer src="/js/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]
         }
@@ -116,7 +112,7 @@ users_ctrl.user_news = async (req, res) => {
         //ogImage: "",
         profile: true,
         altFormat: {
-            altCSS: ['<link rel="stylesheet" href="/style.css">'],
+            altCSS: ['<link rel="stylesheet" href="/css/style.css">'],
             //altScripts: []
         }
     };
@@ -133,16 +129,15 @@ users_ctrl.add_new = async (req, res) => {
         profile: true,
         altFormat: {
             altCSS: [
-                '<link rel="stylesheet" href="/style.css">',
-                '<link rel="stylesheet" href="/cropper.css">',
+                '<link rel="stylesheet" href="/css/style.css">',
+                '<link rel="stylesheet" href="/css/cropper.css">',
                 '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css">',
             ],
             altScripts: [
                 '<!--LOADING CK EDITOR FROM CDN-->',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>',
                 '<script src="https://cdn.ckeditor.com/4.13.0/standard-all/translations/es.js"></script>',
-                //'<script src="https://kit.fontawesome.com/14c21f0150.js" crossorigin="anonymous"></script>',
-                '<script defer src="/cropper.js"></script>',
+                '<script defer src="/js/cropper.js"></script>',
                 '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>'
             ]
         }
