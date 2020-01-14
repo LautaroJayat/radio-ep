@@ -72,9 +72,12 @@ columns_ctrl.add_columns = async (req, res) => {
     //safeIframe = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${safeIframe}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
     const thumbnailURL = req.files[0].path;
     try {
+        //  Creating date object to use as location
+        const date = new Date;
+        const dir = `${date.getFullYear()}/${date.getMonth()}`
         //  Compressing
         const compressedPhotos = await imagemin([thumbnailURL], {
-            destination: 'src/public/temp/compressed',
+            destination: `src/public/${dir}`,
             plugins: [
                 recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
             ]
@@ -169,9 +172,12 @@ columns_ctrl.full_edit_columns = async (req, res) => {
     if (iframe === undefined) { return res.sendStatus(998) }
     const thumbnailURL = req.files[0].path;
     try {
+        //  Creating date object to use as location
+        const date = new Date;
+        const dir = `${date.getFullYear()}/${date.getMonth()}`
         //  Compressing
         const compressedPhotos = await imagemin([thumbnailURL], {
-            destination: 'src/public/temp/compressed',
+            destination: `src/public/${dir}`,
             plugins: [
                 recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
             ]
@@ -180,6 +186,10 @@ columns_ctrl.full_edit_columns = async (req, res) => {
 
         // Removing Uncompressed Images
         fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+
+        // Getting old image and deleting it
+        let oldImage = await Column.findById(req.params.id, { _id: 0, thumbnail: 1 });
+        fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
 
         // Updating New
         await Column.findByIdAndUpdate(req.params.id, {
@@ -206,6 +216,10 @@ columns_ctrl.full_edit_columns = async (req, res) => {
 }
 
 columns_ctrl.delete_columns = async (req, res) => {
+    // Getting old image and deleting it
+    let oldImage = await Column.findById(req.params.id, { _id: 0, thumbnail: 1 });
+    fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
+    //  Deleting database entry
     await Column.findByIdAndDelete(req.params.id);
     cache_functions.refreshColumns();
     req.flash('success_msg', 'Emisión Eliminada Correctamente');
