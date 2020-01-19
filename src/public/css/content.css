@@ -324,10 +324,9 @@ a {
     margin-bottom: 3%;
     text-rendering: optimizeLegibility;
     word-break: break-word;
-
 }
 
-.article .body a{
+.article .body a {
     color: crimson
 }
 
@@ -634,9 +633,9 @@ a {
         display: block;
         top: unset
     }
-    .main .article {
+    /*.main .article {
         margin-bottom: -10vh
-    }
+    }*/
     .last-episode {
         height: auto;
         width: 95%;
@@ -757,6 +756,9 @@ a {
 }
 
 @media screen and (max-width: 520px) {
+    .main-media {
+        max-height: 50vh;
+    }
     .small-header {
         background-position-x: 30%;
     }
