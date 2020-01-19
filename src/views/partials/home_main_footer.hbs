@@ -1,0 +1,83 @@
+
+<footer class="footer">
+    <div class="item">
+        <a href="#">
+            <h3 class="custom-medium-title font-crimson">¿Quienes somos?</h3>
+        </a>
+        <p class="font-white">Radio Entre-Piernas es un medo alternativo centrado en la comunicación desdelas
+            disidencias, que se
+            desprende del proyecto original "Entre Piernas Noches De Club"</p>
+    </div>
+    <div class="item">
+        <a href="#">
+            <h3 class="custom-medium-title font-crimson">¿Querés Colaborar?</h3>
+        </a>
+        <p class="font-white">Si querés enterarte de más, entrá en el laberinto y buscanos en nuestras redes.
+        </p>
+        <p class="font-white">Si querés participar de la redacción o proponer un programa para nuestra radio, no
+            dudes en enviar un
+            email a <strong class="font-crimson">radioentrepiernas@gmail.com</strong></p>
+    </div>
+    <div class="item">
+        <a href="#">
+            <h3 class="custom-medium-title font-crimson">Copyright</h3>
+        </a>
+        <p class="font-white">Ninguna de las noticias publicadas tiene copyright o derechos de autor. Todo lo
+            publicado está liberado
+            para ser reproducido o compar tido, sólo sugerimos compar tir la fuente y así
+            contribuir con el proyecto</p>
+    </div>
+
+    <div class="socials-footer">
+        <a href="" class="img-container">
+            <img src="/Youtube.svg" alt="youtube">
+        </a>
+        <a href="" class="img-container">
+            <img src="/facebook.svg" alt="facebook">
+        </a>
+        <a href="" class="img-container">
+            <img src="/Twitter.svg" alt="twitter">
+        </a>
+        <a href="" class="img-container">
+            <img src="/Instagram.svg" alt="instagram">
+        </a>
+    </div>
+</footer>
+
+
+
+
+<script>
+
+    document.getElementById("menu-button").addEventListener("click", () => {
+        if (document.getElementById("main-nav-menu").classList.contains("menu-out")) {
+            document.getElementById("main-nav-menu").classList.remove("menu-out");
+        };
+        if (!document.getElementById("main-nav-menu").classList.contains("menu-in")) {
+            document.getElementById("main-nav-menu").classList.add("menu-in");
+        }
+    });
+    document.getElementById("close-button").addEventListener("click", () => {
+        if (document.getElementById("main-nav-menu").classList.contains("menu-in")) {
+            document.getElementById("main-nav-menu").classList.remove("menu-in");
+        }
+        if (!document.getElementById("main-nav-menu").classList.contains("menu-out")) {
+            document.getElementById("main-nav-menu").classList.add("menu-out");
+        }
+    });
+
+
+    var toClamp = document.getElementsByClassName("clamp");
+    for (let i = 0; i < toClamp.length; i++) {
+        let ps = toClamp[i].getElementsByTagName("p");
+        let text = ""
+        for (let j = 0; j < ps.length; j++) {
+            let a = ps[0].innerText;
+            text = text + a+ " ";
+        }
+        toClamp[i].innerHTML = "";
+        if (i === 0 && text.length > 200) { text = text.slice(0, 200); text = text + "..." }
+        if (i !== 0 && text.length > 100) { text = text.slice(0, 100); text = text + "..." }
+        toClamp[i].appendChild(document.createTextNode(text));
+    }
+</script>

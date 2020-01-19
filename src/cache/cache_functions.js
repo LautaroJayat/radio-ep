@@ -140,7 +140,7 @@ cache_functions.checkIfEmptyAndPopulate = async function () {
 // This function refreshes the News array in HOME_CACHE object
 cache_functions.refreshNews = async function () {
     //  Triyng to find News and sorting in Desc order.
-    HOME_CACHE.news = await News.find({}, { _id: 0 }).sort({ _id: -1 }).limit(6);
+    HOME_CACHE.news = await News.find({}, { _id: 0 }).sort({ _id: -1 }).limit(10);
     //  Then populate the CACHE with the Newest 6 elements 
     (() => {
         if (HOME_CACHE.news.length > 0) {
@@ -170,7 +170,7 @@ cache_functions.refreshColumns = async function () {
 // This function refreshes the Columns array in HOME_CACHE object
 cache_functions.refreshEmitions = async function () {
     //  Triyng to find Columns and sorting in Desc order.
-    HOME_CACHE.emitions = await Emitions.find({}, { _id: 0 }).sort({ _id: -1 }).limit(5);
+    HOME_CACHE.emitions = await Emitions.find({}, { _id: 0 }).sort({ _id: -1 }).limit(6);
     //  Then populate the CACHE with the Newest 4 elements 
     (() => {
         if (HOME_CACHE.emitions.length > 0) {
@@ -200,11 +200,11 @@ cache_functions.refreshBigSound = async function () {
 // A simple shortCut to populate CACHE, if its needed...
 cache_functions.refreshAll = async function () {
 
-    HOME_CACHE.columns = await Columns.find({}, { _id: 0 }).sort({ _id: -1 });
+    HOME_CACHE.columns = await Columns.find({}, { _id: 0 }).sort({ _id: -1 }).limit(6);
 
     HOME_CACHE.emitions = await Emitions.find({}, { _id: 0 }).sort({ _id: -1 }).limit(6);
 
-    HOME_CACHE.news = await News.find({}, { _id: 0 }).sort({ _id: -1 }).limit(6);
+    HOME_CACHE.news = await News.find({}, { _id: 0 }).sort({ _id: -1 }).limit(10);
 
     HOME_CACHE.bigSound = await BigSound.find({}, { _id: 0 }).sort({ _id: -1 }).limit(10);
     console.log(HOME_CACHE.BigSound);

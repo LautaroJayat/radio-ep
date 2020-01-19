@@ -65,7 +65,7 @@ body {
     background-color: rgba(0, 0, 0, 0.890);
 }
 
-.first-section-background {
+/*.first-section-background {
     box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.822);
     position: relative;
     height: auto;
@@ -75,7 +75,7 @@ body {
     background-attachment: fixed;
     background-position-y: 5vh;
     overflow: hidden;
-}
+}*/
 
 .columns-news-section-background {
     box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.76);
@@ -98,7 +98,6 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    overflow: hidden;
 }
 
 .news {
@@ -110,13 +109,13 @@ body {
 }
 
 .article-bg {
-    background-color: rgba(51, 51, 51, 0.28);
+    /*background-color: rgba(51, 51, 51, 0.28);*/
 }
 
 @media only screen and (min-width: 1201px) {
     .news {
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: repeat(3 30vh);
+        grid-template-rows: repeat(3 20vh);
         grid-gap: 5% 2%;
         grid-template-areas: "item-1 item-2 item-2" "item-1 item-3 item-4" "item-1 item-5 item-6";
     }
@@ -127,33 +126,31 @@ body {
     }
     .news .article-2 {
         grid-area: item-2;
-        /*min-height: 100%;*/
-        max-height: 30vh;
     }
     .news .article-3 {
         grid-area: item-3;
-        /*min-height: 100%;*/
-        max-height: 30vh;
     }
     .news .article-4 {
         grid-area: item-4;
-        /*min-height: 100%;*/
-        max-height: 30vh;
     }
     .news .article-5 {
         grid-area: item-5;
-        /*min-height: 100%;*/
-        max-height: 30vh;
     }
     .news .article-6 {
         grid-area: item-6;
-        /*min-height: 100%;*/
-        max-height: 30vh;
     }
 }
 
-.news .info {
-    padding: 4%;
+.news .article-1 .info {
+    padding: 2% 2% 0% 0%;
+}
+
+.news .article-2 .info {
+    padding: 0% 2% 2% 1%;
+}
+
+.news .article-3 .info, .news .article-4 .info, .news .article-5 .info, .news .article-6 .info {
+    padding: 0% 2% 1% 3%
 }
 
 .columns-and-news-container {
@@ -234,7 +231,6 @@ body {
 
 .emitions {
     position: relative;
-    overflow: hidden;
     height: auto;
     margin: 0vh auto 15vh auto;
     display: grid;
@@ -289,11 +285,11 @@ body {
     .menu-button, .main-nav-menu {
         display: none;
     }
-    .first-section-background {
+    /*.first-section-background {
         background-image: url(/DanaFlip.JPG);
         background-position-y: 5vh;
         background-repeat: round;
-    }
+    }*/
     .columns-news-section-background {
         background-image: url(/yuni.jpg);
         background-position-x: -23vw;
@@ -470,7 +466,7 @@ body {
         box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.822);
         position: relative;
         height: auto;
-        background-image: url(/Dana2.JPG);
+        background-image: none;
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -481,7 +477,7 @@ body {
         box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.76);
         position: relative;
         height: auto;
-        background-image: url(/yuni.jpg);
+        background-image: none;
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -491,8 +487,7 @@ body {
         box-shadow: inset 0px 10px 40px 40px rgba(0, 0, 0, 0.562);
         position: relative;
         height: auto;
-        overflow: hidden;
-        background-image: url(/chape.JPG);
+        background-image: none;
         background-position-x: 25vh;
         background-size: cover;
         background-repeat: no-repeat;
@@ -502,12 +497,13 @@ body {
     .news, .columns, .emitions {
         position: relative;
         width: 85%;
+        max-width: 85%;
         height: auto;
         margin: 0 auto;
         display: grid;
         grid-template-columns: 1fr;
         grid-auto-rows: auto;
-        grid-gap: 5vh;
+        grid-gap: 5vh 0;
     }
     .news .info {
         padding: 4%;
@@ -550,5 +546,8 @@ body {
     .main-nav-menu .socials-footer {
         margin-top: 7vh;
         justify-content: space-between;
+    }
+    .clamp {
+        max-width: 96%;
     }
 }

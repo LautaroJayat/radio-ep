@@ -40,7 +40,7 @@ contents_ctrl.get_new = async (req, res) => {
             ogImage: news.thumbnail,
             news: true,
             altFormat: {
-                altCSS: ['<link rel="stylesheet" href="/content.css">'],
+                altCSS: ['<link rel="stylesheet" href="/css/content.css">'],
                 altScripts: []
             }
         };
@@ -83,7 +83,7 @@ contents_ctrl.get_column = async (req, res) => {
             ogImage: columns.thumbnail,
             profile: false,
             altFormat: {
-                altCSS: ['<link rel="stylesheet" href="/content.css">'],
+                altCSS: ['<link rel="stylesheet" href="/css/content.css">'],
                 altScripts: []
             }
         };
@@ -98,7 +98,7 @@ contents_ctrl.get_column = async (req, res) => {
             ogImage: columns.thumbnail,
             profile: false,
             altFormat: {
-                altCSS: ['<link rel="stylesheet" href="/content.css">'],
+                altCSS: ['<link rel="stylesheet" href="/css/content.css">'],
                 altScripts: []
             }
         };
@@ -122,7 +122,7 @@ contents_ctrl.get_emition = async (req, res) => {
             ogImage: emitions.thumbnail,
             profile: false,
             altFormat: {
-                altCSS: ['<link rel="stylesheet" href="/content.css">'],
+                altCSS: ['<link rel="stylesheet" href="/css/content.css">'],
                 altScripts: []
             }
         };
@@ -154,7 +154,7 @@ contents_ctrl.get_author = async (req, res) => {
 
 contents_ctrl.get_all_news = async (req, res) => {
     if (req.query.page) {
-        const news = await News.find({}, { _id: 0 }).sort({ _id: -1 }).limit(3).skip(parseInt(req.query.page));
+        const news = await News.find({}, { _id: 0 }).sort({ _id: -1 }).limit(2).skip(parseInt(req.query.page));
         if (news.length < 1) { res.sendStatus(500) } else {
             res.json({ news });
         }
@@ -192,6 +192,22 @@ contents_ctrl.get_all_columns = async (req, res) => {
     }
 }
 
+contents_ctrl.get_iframe_column = async (req, res) => {
+    const url = req.params.url;
+    console.log(url);
+    let HC_columns = HOME_CACHE.columns;
+    const columns = HC_columns.filter(element => element.url === url);
+    res.json({ "data": columns[0].iframe })
+    res.end()
+}
+
+contents_ctrl.get_iframe_emition = async (req, res) => {
+    const url = req.params.url;
+    let HC_emitions = HOME_CACHE.emitions;
+    const emition = HC_emitions.filter(element => element.url === url);
+    res.json({ "data": emition[0].iframe })
+    res.end()
+}
 
 
 module.exports = contents_ctrl;

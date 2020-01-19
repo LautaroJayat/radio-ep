@@ -1,0 +1,437 @@
+<div class="small-header">
+</div>
+<nav class="main-nav">
+    <a href="/" class="logo-container"> <img src="/LogoBlanco.png" class="nav-logo" alt="">
+    </a>
+    <div class="button-listen-now font-crimson"><span>ESCUCHAR AHORA!</span></div>
+    <ul class="nav-list">
+        <li><a href="/all/news" class="nav-link font-crimson">NOTICIAS</a></li>
+        <li><a href="/all/columns" class="nav-link font-crimson">RECORTES</a></li>
+        <li><a href="/all/emitions" class="nav-link font-crimson">EMISIONES</a></li>
+        <li><a href="/all/contact" class="nav-link font-crimson">CONTACTO</a></li>
+    </ul>
+
+</nav>
+<nav id="main-nav-menu" class="main-nav-menu menu-out">
+    <div id="close-button" class="close-button"><span>+</span></div>
+    <h2 class="font-crimson">MENU</h2>
+    <ul class="nav-list">
+        <li><a href="/all/news" class="nav-link font-crimson">NOTICIAS</a></li>
+        <li><a href="/all/columns" class="nav-link font-crimson">RECORTES</a></li>
+        <li><a href="/all/emitions" class="nav-link font-crimson">EMISIONES</a></li>
+        <li><a href="/all/contact" class="nav-link font-crimson">CONTACTO</a></li>
+    </ul>
+    <div class="socials-footer">
+        <a href="" class="img-container">
+            <img src="/Youtube.svg" alt="youtube">
+        </a>
+        <a href="" class="img-container">
+            <img src="/facebook.svg" alt="facebook">
+        </a>
+        <a href="" class="img-container">
+            <img src="/Twitter.svg" alt="twitter">
+        </a>
+        <a href="" class="img-container">
+            <img src="/Instagram.svg" alt="instagram">
+        </a>
+    </div>
+</nav>
+
+<div id="menu-button" class="menu-button"><span>|||</span></div>
+
+<header class="hero">
+    <div class="background-img">
+        <div class="translucid-background">
+            <h1 class="title">RADIO</h1>
+            <div class="logo-container">
+                <img src="/LogoBlanco.png" class="logo" alt="">
+            </div>
+            <p class="slogan">La radio más caliente</p>
+        </div>
+    </div>
+</header>
+
+<div class="hero-small">
+    <div class="translucid-background">
+        <h1 class="title">RADIO</h1>
+        <div class="logo-container">
+            <img src="/LogoBlanco.png" class="logo" alt="">
+        </div>
+        <p class="slogan">La radio más caliente</p>
+    </div>
+
+</div>
+
+
+<div class="first-section-background">
+    <div class="opacity-layer"></div>
+    <div class="socials-header">
+        <a href="#" class="img-container">
+            <img src="/Youtube.svg" alt="youtube">
+        </a>
+        <a href="#" class="img-container">
+            <img src="/facebook.svg" alt="facebook">
+        </a>
+        <a href="#" class="img-container">
+            <img src="/Twitter.svg" alt="twitter">
+        </a>
+        <a href="#" class="img-container">
+            <img src="/Instagram.svg" alt="instagram">
+        </a>
+    </div>
+    <h2 class="news-title font-crimson">NOTICIAS</h2>
+    {{#if news}}
+    <section id="news" class="news">
+        <div class="article-1">
+            <div class="news-image-container">
+                <a href="/contents/news/{{news.[0].url}}"><img src="{{news.[0].thumbnail}}" class="news-img" alt=""></a>
+            </div>
+            <div class="article-bg info">
+                <span class="custom-headline font-crimson">{{news.[0].headline}}</span>
+                <a href="/contents/news/{{news.[0].url}}">
+                    <h3 class="custom-big-title font-white title-hover">{{news.[0].title}}</h3>
+                </a>
+                <span class="custom-author font-white">Por <div class="uppercase">{{news.[0].author}}</div></span>
+            </div>
+
+        </div>
+
+        <div class="article-2 article-bg">
+            <div class="news-image-container"><a href="/contents/news/{{news.[1].url}}">
+                    <img src="{{news.[1].thumbnail}}" class="news-img" alt=""></a>
+            </div>
+            <div class="info">
+                <span class="custom-headline font-crimson">{{news.[1].headline}}</span>
+                <a href="/contents/news/{{news.[1].url}}">
+                    <h3 class="custom-medium-title font-white title-hover">{{news.[1].title}}</h3>
+                </a>
+                <span class="custom-author font-white">Por <div class="uppercase">{{news.[1].author}}</div></span>
+
+            </div>
+
+
+        </div>
+        <div class="article-3 article-bg">
+            <div class="news-image-container-small">
+                <a href="/contents/news/{{news.[2].url}}"><img src="{{news.[2].thumbnail}}" class="news-img" alt=""></a>
+            </div>
+            <div class="info ">
+                <span class="custom-headline font-crimson">{{news.[2].headline}}</span>
+                <a href="/contents/news/{{news.[2].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{news.[2].title}}</h3>
+                </a>
+                <span class="custom-author font-white">Por <div class="uppercase">{{news.[2].author}}</div></span>
+            </div>
+        </div>
+
+        <div class="article-4 article-bg">
+            <div class="news-image-container-small">
+                <a href="/contents/news/{{news.[3].url}}"><img src="{{news.[3].thumbnail}}" class="news-img" alt=""></a>
+            </div>
+            <div class="info ">
+                <span class="custom-headline font-crimson">{{news.[3].headline}}</span>
+                <a href="/contents/news/{{news.[3].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{news.[3].title}}</h3>
+                </a>
+                <span class="custom-author font-white">Por <div class="uppercase">{{news.[3].author}}</div></span>
+            </div>
+
+
+        </div>
+        <div class="article-5 article-bg">
+            <div class="news-image-container-small">
+                <a href="/contents/news/{{news.[4].url}}"><img src="{{news.[4].thumbnail}}" class="news-img" alt=""></a>
+            </div>
+            <div class="info">
+                <span class="custom-headline font-crimson">{{news.[4].headline}}</span>
+                <a href="/contents/news/{{news.[4].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{news.[4].title}}</h3>
+                </a>
+                <span class="custom-author font-white">Por <div class="uppercase">{{news.[4].author}}</div></span>
+            </div>
+
+
+        </div>
+        <div class="article-6 article-bg">
+            <div class="news-image-container-small">
+                <a href="/contents/news/{{news.[5].url}}"><img src="{{news.[5].thumbnail}}" class="news-img" alt=""></a>
+            </div>
+            <div class="info ">
+                <span class="custom-headline font-crimson">{{news.[5].headline}}</span>
+                <a href="/contents/news/{{news.[5].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{news.[5].title}}</h3>
+                </a>
+                <span class="custom-author font-white">Por <div class="uppercase">{{news.[5].author}}</div></span>
+            </div>
+        </div>
+    </section>
+    {{/if}}
+</div>
+
+
+<div class="columns-news-section-background">
+    <div class="opacity-layer"></div>
+    <div class="columns-and-news-container">
+        <h2 class="title font-crimson">RECORTES</h2>
+
+        <h2 class="title-small font-crimson">Más Noticias</h2>
+        {{#if columns}}
+        <section id="columns" class="columns">
+            <div class="article-1">
+                <div class="column-image-container">
+                    <a href="/contents/columns/{{columns.[0].url}}">
+                        <img src="{{columns.[0].thumbnail}}" class="column-img" alt="">
+                        <img src="/play-crimson-small.png" class="column-play" alt=""></a>
+
+                </div>
+                <span class="custom-headline font-crimson font-italic">{{columns.[0].program}}</span>
+                <a href="/contents/columns/{{columns.[0].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{columns.[0].title}}</h3>
+                </a>
+            </div>
+            <div class="article-2">
+                <div class="column-image-container">
+                    <a href="/contents/columns/{{columns.[1].url}}">
+                        <img src="{{columns.[1].thumbnail}}" class="column-img" alt="">
+                        <img src="/play-crimson-small.png" class="column-play" alt=""></a>
+
+                </div>
+                <span class="custom-headline font-crimson font-italic">{{columns.[1].program}}</span>
+                <a href="/contents/columns/{{columns.[1].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{columns.[1].title}}</h3>
+                </a>
+            </div>
+            <div class="article-3">
+                <div class="column-image-container">
+                    <a href="/contents/columns/{{columns.[2].url}}">
+                        <img src="{{columns.[2].thumbnail}}" class="column-img" alt="">
+                        <img src="/play-crimson-small.png" class="column-play" alt=""></a>
+
+                </div>
+                <span class="custom-headline font-crimson font-italic">{{columns.[2].program}}</span>
+                <a href="/contents/columns/{{columns.[2].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{columns.[2].title}}</h3>
+                </a>
+            </div>
+            <div class="article-4">
+                <div class="column-image-container">
+                    <a href="/contents/columns/{{columns.[3].url}}">
+                        <img src="{{columns.[3].thumbnail}}" class="column-img" alt="">
+                        <img src="/play-crimson-small.png" class="column-play" alt=""></a>
+
+                </div>
+                <span class="custom-headline font-crimson font-italic">{{columns.[3].program}}</span>
+                <a href="/contents/columns/{{columns.[3].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{columns.[3].title}}</h3>
+                </a>
+            </div>
+            <div class="article-5">
+                <div class="column-image-container">
+                    <a href="/contents/columns/{{columns.[4].url}}">
+                        <img src="{{columns.[4].thumbnail}}" class="column-img" alt="">
+                        <img src="/play-crimson-small.png" class="column-play" alt=""></a>
+
+                </div>
+                <span class="custom-headline font-crimson font-italic">{{columns.[4].program}}</span>
+                <a href="/contents/columns/{{columns.[4].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{columns.[4].title}}</h3>
+                </a>
+            </div>
+            <div class="article-6">
+                <div class="column-image-container">
+                    <a href="/contents/columns/{{columns.[5].url}}">
+                        <img src="{{columns.[5].thumbnail}}" class="column-img" alt="">
+                        <img src="/play-crimson-small.png" class="column-play" alt=""></a>
+
+                </div>
+                <span class="custom-headline font-crimson font-italic">{{columns.[5].program}}</span>
+                <a href="/contents/columns/{{columns.[5].url}}">
+                    <h3 class="custom-small-title font-white title-hover">{{columns.[5].title}}</h3>
+                </a>
+            </div>
+        </section>
+        {{/if}}
+
+        <section id="more-news" class="more-news">
+            <div class="bg-when-small">
+                {{#each news}}
+                <div class="article">
+                    <a href="#">
+                        <h3 class="custom-small-title font-white">{{title}}</h3>
+                    </a>
+                    <span class="custom-author font-crimson">Por <div class="uppercase">{{author}}</div></span>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="emitions-background">
+    <div class="opacity-layer"></div>
+    <section id="emitions" class="emitions">
+        <h2 class="title font-crimson">EMISIONES</h2>
+        {{#if emitions}}
+        <div class="article-big">
+            <div class="emition-image-container">
+                <a href="/contents/emitions/{{emitions.[0].url}}"><img src="{{emitions.[0].thumbnail}}"
+                        class="emition-img" alt=""></a>
+            </div>
+            <div class="info">
+                <span class="custom-headline font-white">{{emitions.[0].date}}</span>
+
+                <a href="/contents/emitions/{{emitions.[0].url}}">
+                    <h3 class="custom-medium-title font-crimson">{{emitions.[0].program}}</h3>
+                </a>
+                <span class="custom-small-title font-white clamp">{{{emitions.[0].description}}}</span>
+            </div>
+        </div>
+
+        <div class="article-small">
+            <div class="emition-image-container">
+                <a href="/contents/emitions/{{emitions.[1].url}}"><img src="{{emitions.[1].thumbnail}}"
+                        class="emition-img" alt=""></a>
+            </div>
+            <div class="info">
+                <span class="custom-author font-white">{{emitions.[1].date}}</span>
+
+                <a href="/contents/emitions/{{emitions.[1].url}}">
+                    <h3 class="custom-small-title font-crimson">{{emitions.[1].program}}</h3>
+                </a>
+                <span class="custom-headline font-white clamp">{{{emitions.[1].description}}}</span>
+            </div>
+
+        </div>
+        <div class="article-small">
+            <div class="emition-image-container">
+                <a href="/contents/emitions/{{emitions.[2].url}}"><img src="{{emitions.[2].thumbnail}}"
+                        class="emition-img" alt=""></a>
+            </div>
+            <div class="info">
+                <span class="custom-author font-white">{{emitions.[2].date}}</span>
+
+                <a href="/contents/emitions/{{emitions.[2].url}}">
+                    <h3 class="custom-small-title font-crimson">{{emitions.[2].program}}</h3>
+                </a>
+                <span class="custom-headline font-white clamp">{{{emitions.[2].description}}}</span>
+            </div>
+
+        </div>
+        <div class="article-small">
+            <div class="emition-image-container">
+                <a href="/contents/emitions/{{emitions.[3].url}}"><img src="{{emitions.[3].thumbnail}}"
+                        class="emition-img" alt=""></a>
+            </div>
+            <div class="info">
+                <span class="custom-author font-white">{{emitions.[3].date}}</span>
+                <a href="/contents/emitions/{{emitions.[3].url}}">
+                    <h3 class="custom-small-title font-crimson">{{emitions.[3].program}}</h3>
+                </a>
+                <span class="custom-headline font-white clamp">{{{emitions.[3].description}}}</span>
+            </div>
+
+
+        </div>
+        <div class="article-small">
+            <div class="emition-image-container">
+                <a href="/contents/emitions/{{emitions.[4].url}}"><img src="{{emitions.[4].thumbnail}}"
+                        class="emition-img" alt=""></a>
+            </div>
+            <div class="info">
+                <span class="custom-author font-white">{{emitions.[4].date}}</span>
+
+                <a href="/contents/emitions/{{emitions.[4].url}}">
+                    <h3 class="custom-small-title font-crimson">{{emitions.[4].program}}</h3>
+                </a>
+                <span class="custom-headline font-white clamp">{{{emitions.[4].description}}}</span>
+            </div>
+        </div>
+
+        {{/if}}
+    </section>
+</div>
+
+
+
+<footer class="footer">
+    <div class="item">
+        <a href="#">
+            <h3 class="custom-medium-title font-crimson">¿Quienes somos?</h3>
+        </a>
+        <p class="font-white">Radio Entre-Piernas es un medo alternativo centrado en la comunicación desdelas
+            disidencias, que se
+            desprende del proyecto original "Entre Piernas Noches De Club"</p>
+    </div>
+    <div class="item">
+        <a href="#">
+            <h3 class="custom-medium-title font-crimson">¿Querés Colaborar?</h3>
+        </a>
+        <p class="font-white">Si querés enterarte de más, entrá en el laberinto y buscanos en nuestras redes.
+        </p>
+        <p class="font-white">Si querés participar de la redacción o proponer un programa para nuestra radio, no
+            dudes en enviar un
+            email a <strong class="font-crimson">radioentrepiernas@gmail.com</strong></p>
+    </div>
+    <div class="item">
+        <a href="#">
+            <h3 class="custom-medium-title font-crimson">Copyright</h3>
+        </a>
+        <p class="font-white">Ninguna de las noticias publicadas tiene copyright o derechos de autor. Todo lo
+            publicado está liberado
+            para ser reproducido o compar tido, sólo sugerimos compar tir la fuente y así
+            contribuir con el proyecto</p>
+    </div>
+
+    <div class="socials-footer">
+        <a href="" class="img-container">
+            <img src="/Youtube.svg" alt="youtube">
+        </a>
+        <a href="" class="img-container">
+            <img src="/facebook.svg" alt="facebook">
+        </a>
+        <a href="" class="img-container">
+            <img src="/Twitter.svg" alt="twitter">
+        </a>
+        <a href="" class="img-container">
+            <img src="/Instagram.svg" alt="instagram">
+        </a>
+    </div>
+</footer>
+
+
+
+
+<script>
+
+    document.getElementById("menu-button").addEventListener("click", () => {
+        if (document.getElementById("main-nav-menu").classList.contains("menu-out")) {
+            document.getElementById("main-nav-menu").classList.remove("menu-out");
+        };
+        if (!document.getElementById("main-nav-menu").classList.contains("menu-in")) {
+            document.getElementById("main-nav-menu").classList.add("menu-in");
+        }
+    });
+    document.getElementById("close-button").addEventListener("click", () => {
+        if (document.getElementById("main-nav-menu").classList.contains("menu-in")) {
+            document.getElementById("main-nav-menu").classList.remove("menu-in");
+        }
+        if (!document.getElementById("main-nav-menu").classList.contains("menu-out")) {
+            document.getElementById("main-nav-menu").classList.add("menu-out");
+        }
+    });
+
+
+    var toClamp = document.getElementsByClassName("clamp");
+    for (let i = 0; i < toClamp.length; i++) {
+        let ps = toClamp[i].getElementsByTagName("p");
+        let text = ""
+        for (let j = 0; j < ps.length; j++) {
+            let a = ps[0].innerText;
+            text = text + a+ " ";
+        }
+        toClamp[i].innerHTML = "";
+        if (i === 0 && text.length > 200) { text = text.slice(0, 200); text = text + "..." }
+        if (i !== 0 && text.length > 100) { text = text.slice(0, 100); text = text + "..." }
+        toClamp[i].appendChild(document.createTextNode(text));
+    }
+</script>

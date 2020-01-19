@@ -1,0 +1,201 @@
+<div class="main-container">
+    <section class="news">
+        <h3 class="section-title">NOTICIAS</h3>
+        <div class="container">
+
+
+            <div class="article-big">
+                <a href="/contents/news/{{news.[0].url}}">
+                    <div class="img-container"><img src="{{news.[0].thumbnail}}" alt="" class="cover"></div>
+                    <div class="info">
+                        <span class="headline">{{news.[0].headline}}</span>
+                        <h4 class="title">{{news.[0].title}}</h4>
+                        <span class="author">Por <strong class="font-white">{{news.[0].author}}</strong> |
+                            {{news.[0].date}}</span>
+                    </div>
+                </a>
+            </div>
+
+
+
+            <div class="article-big">
+                <a href="/contents/news/{{news.[1].url}}">
+                    <div class="img-container"><img src="{{news.[1].thumbnail}}" alt="" class="cover"></div>
+                    <div class="info">
+                        <span class="headline">{{news.[1].headline}}</span>
+                        <h4 class="title">{{news.[1].title}}</h4>
+                        <span class="author">Por <strong class="font-white">{{news.[1].author}}</strong> |
+                            {{news.[1].date}}</span>
+                    </div>
+                </a>
+            </div>
+
+
+
+            <div class="article-big">
+                <a href="/contents/news/{{news.[2].url}}">
+                    <div class="img-container"><img src="{{news.[2].thumbnail}}" alt="" class="cover"></div>
+                    <div class="info">
+                        <span class="headline">{{news.[2].headline}}</span>
+                        <h4 class="title">{{news.[2].title}}</h4>
+                        <span class="author">Por <strong class="font-white">{{news.[2].author}}</strong> |
+                            {{news.[2].date}}</span>
+                    </div>
+                </a>
+            </div>
+
+
+
+            <div class="article-big">
+                <a href="/contents/news/{{news.[3].url}}">
+                    <div class="img-container"><img src="{{news.[3].thumbnail}}" alt="" class="cover"></div>
+                    <div class="info">
+                        <span class="headline">{{news.[3].headline}}</span>
+                        <h4 class="title">{{news.[3].title}}</h4>
+                        <span class="author">Por <strong class="font-white">{{news.[3].author}}</strong> |
+                            {{news.[3].date}}</span>
+                    </div>
+                </a>
+            </div>
+
+
+
+            <div class="article-big">
+                <a href="/contents/news/{{news.[4].url}}">
+                    <div class="img-container"><img src="{{news.[4].thumbnail}}" alt="" class="cover"></div>
+                    <div class="info">
+                        <span class="headline">{{news.[4].headline}}</span>
+                        <h4 class="title">{{news.[4].title}}</h4>
+                        <span class="author">Por <strong class="font-white">{{news.[3].author}}</strong> |
+                            {{news.[3].date}}</span>
+                    </div>
+                </a>
+            </div>
+
+
+
+            <div class="article-big">
+                <a href="/contents/news/{{news.[5].url}}">
+                    <div class="img-container"><img src="{{news.[5].thumbnail}}" alt="" class="cover"></div>
+                    <div class="info">
+                        <span class="headline">{{news.[5].headline}}</span>
+                        <h4 class="title">{{news.[5].title}}</h4>
+                       <span class="author">Por <strong class="font-white">{{news.[5].author}}</strong> |
+                            {{news.[5].date}}</span>
+                    </div>
+                </a>
+            </div>
+
+
+
+
+        </div>
+
+    </section>
+    <section class="columns">
+        <h3 class="section-title">RECORTES</h3>
+        <div class="container">
+
+            {{#each columns}}
+            <div class="article-small">
+                <div class="info">
+                    <a href="contents/columns/{{url}}">
+                        <span class="program">Programa: <strong class="font-crimson">{{program}}</strong></span>
+                        <h4 class="title">{{title}}</h4>
+                    </a>
+                </div>
+                <div class="snippet" original-url="{{url}}">
+                    <div class="img-container">
+                        <img src="/icons/youtube-play.svg" class="play" alt="">
+                        <img src="{{thumbnail}}" alt="" class="cover">
+                    </div>
+                    <div class="iframe-container"></div>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+    </section>
+
+    <section class="more-news">
+        <div class="more-news-container">
+            <h3 class="section-title-medium centered">Más Noticias</h3>
+
+            <div class="aside-article">
+                <span class="date">{{news.[6].date}}</span>
+                <h4 class="title">{{news.[6].title}}</h4>
+                <span class="author">Por: <strong class="font-white">{{news.[6].author}}</strong></span>
+            </div>
+            <div class="aside-article">
+                <span class="date">{{news.[7].date}}</span>
+                <h4 class="title">{{news.[7].title}}</h4>
+                <span class="author">Por: <strong class="font-white">{{news.[7].author}}</strong></span>
+            </div>
+            <div class="aside-article">
+                <span class="date">{{news.[8].date}}</span>
+                <h4 class="title">{{news.[8].title}}</h4>
+                <span class="author">Por: <strong class="font-white">{{news.[8].author}}</strong></span>
+            </div>
+            <div class="aside-article">
+                <span class="date">{{news.[9].date}}</span>
+                <h4 class="title">{{news.[9].title}}</h4>
+                <span class="author">Por: <strong class="font-white">{{news.[9].author}}</strong></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="emitions">
+        <h3 class="section-title">EMISIONES</h3>
+        <div class="container">
+
+            {{#each emitions}}
+            <div class="article-small">
+                <div class="emition-snippet" original-url="{{url}}">
+                    <div class="img-container"><img src="/icons/youtube-play.svg" class="play" alt=""><img
+                            src="{{thumbnail}}" alt="" class="cover"></div>
+                    <div class="iframe-container"></div>
+                </div>
+                <a href="/contents/emitions/{{url}}">
+                    <div class="info">
+                        <span class="date">{{date}}</span>
+                        <span class="aux font-white">Programa:</span>
+                        <h4 class="program">{{program}}</h4>
+                    </div>
+                </a>
+            </div>
+            {{/each}}
+
+
+        </div>
+    </section>
+
+</div>
+
+<script>
+    var snippet = document.getElementsByClassName('snippet');
+    for (let i = 0; i < snippet.length; i++) {
+        snippet[i].addEventListener('click', () => {
+            let url = snippet[i].getAttribute('original-url');
+            fetch("/contents/iframe/column/" + url).then((response) => { return response.json() }).
+                then(data => {
+                    snippet[i].lastElementChild.innerHTML = data.data
+                });
+            snippet[i].firstElementChild.style.display = 'none';
+            snippet[i].lastElementChild.style.display = 'block';
+        });
+    }
+
+    var emitionSnippet = document.getElementsByClassName('emition-snippet');
+    for (let i = 0; i < emitionSnippet.length; i++) {
+        emitionSnippet[i].addEventListener('click', () => {
+            let url = emitionSnippet[i].getAttribute('original-url');
+            fetch("/contents/iframe/emition/" + url).then((response) => { return response.json() }).
+                then(data => {
+                    emitionSnippet[i].lastElementChild.innerHTML = data.data
+                });
+            emitionSnippet[i].firstElementChild.style.display = 'none';
+            emitionSnippet[i].lastElementChild.style.display = 'block';
+        });
+    }
+
+</script>

@@ -23,11 +23,11 @@
 
     <!--Import Google Icon Font-->
     <link rel="shortcut icon" href="/faviconOjo1.jpeg" type="image/jpeg">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Roboto|Roboto+Slab&display=swap" rel="stylesheet">
+
+
+
 
     <!--There will be CSS in this section-->
     {{#if headers.altFormat.altCSS}}
@@ -35,8 +35,8 @@
     {{{this}}}
     {{/each}}
     {{else}}
-    <link rel="stylesheet" href="/css/home-grid.css">
-    <link rel="stylesheet" href="/css/home-styles.css">
+    <link rel="stylesheet" href="/css/generals_header_nav_footer.css">
+    <link rel="stylesheet" href="/css/home.css">
     {{/if}}
 
 
@@ -48,6 +48,33 @@
 
 <body>
     {{#each error_msg}}<div class="error_div">{{this}}</div>{{/each}}
+
+    {{#each success_msg}}<div class="success_div">{{this}}</div>{{/each}}
+
+    {{#if success_msg}}
+    <script>
+        const x = document.querySelectorAll(".success_div");
+        for (let i = 0; i < x.length; i++) {
+            for (i = 0; i < x.length; i++) {
+                x[i].addEventListener("click", (target) => {
+                    target.path[1].removeChild(target.path[0]);
+                });
+            }
+        }
+    </script>
+    <style>
+        .success_div {
+            z-index: 99999;
+            position: relative;
+            height: auto;
+            background-color: white;
+            color: green;
+            border: solid 1px green;
+            width: auto;
+        }
+    </style>
+    {{/if}}
+
     {{#if error_msg}}
     <script>
         const x = document.querySelectorAll(".error_div");
@@ -62,7 +89,7 @@
     <style>
         .error_div {
             z-index: 99999;
-            position: fixed;
+            position: relative;
             height: auto;
             background-color: white;
             color: red;

@@ -7,59 +7,56 @@ document.getElementById("gimmi").addEventListener("click", () => {
         .then(res => {
             res.news.forEach(e => {
                 let article = document.createElement('div');
-                article.classList.add('article');
+                article.classList.add('article-big');
                 let img_container = document.createElement('div');
                 img_container.classList.add('img-container');
-                let link = document.createElement('a');
-                link.href = `/contents/news/${e.url}`;
                 let image = document.createElement('img');
+                image.classList.add('cover');
                 image.src = e.thumbnail;
+                img_container.appendChild(image);
                 let info = document.createElement('div');
                 info.classList.add('info');
-                let link2 = document.createElement('a');
-                link2.href = `contents/news/${e.url}`;
-                let title = document.createElement('h2');
-                title.classList.add('article-title');
+                let headline = document.createElement('span');
+                headline.classList.add('headline');
+                headline.appendChild(document.createTextNode(e.headline));
+                let title = document.createElement('h4');
+                title.classList.add('title');
                 title.appendChild(document.createTextNode(e.title));
                 let date = document.createElement('span');
                 date.classList.add('date');
                 date.appendChild(document.createTextNode(e.date));
-                link2.appendChild(title);
-                let container = document.createElement('div');
-                container.appendChild(date);
-                container.appendChild(link2);
-                info.appendChild(container);
-                let author = document.createElement('div');
+                let author = document.createElement('span');
                 author.classList.add('author');
-                let author_container = document.createElement('div');
-                author_container.classList.add('author_container');
-                let author_img = document.createElement('img');
-                author_img.src = e.author_thumbnail;
-                author_container.appendChild(author_img);
-                author.appendChild(author_container);
-                let author_name = document.createElement('span');
-                author_name.appendChild(document.createTextNode('Por '));
-                let StrongestNameInTheHistory = document.createElement('strong');
-                StrongestNameInTheHistory.appendChild(document.createTextNode(e.author));
-                author_name.appendChild(StrongestNameInTheHistory);
+                author.innerText = 'Por: ';
+                let author_name = document.createElement('strong');
+                author_name.classList.add('font-crimson');
+                author_name.appendChild(document.createTextNode(e.author));
                 author.appendChild(author_name);
-                info.appendChild(author);
-                link.appendChild(image);
-                img_container.appendChild(link);
+                info.appendChild(headline);
+                info.appendChild(title);
+                info.appendChild(author)
+                info.appendChild(date);
                 article.appendChild(img_container);
                 article.appendChild(info);
-                let grid = document.getElementById("grid-container");
-                grid.appendChild(article);
+                let container = document.getElementById("container");
+                let link = document.createElement('a');
+                link.classList.add('cover');
+                link.href = e.url;
+                link.appendChild(img_container);
+                link.appendChild(info);
+                article.appendChild(link);
+                container.appendChild(article);
+
             })
 
         }
         ).catch((err) => {
             let par = document.createElement('h3');
             par.appendChild(document.createTextNode("Me parece que no tenemos más tenemos más noticias. Te recomendamos recorrer el resto de la página, visitar nuestras redes o sumarte en alguna de nuestras épicas fiestas."));
-            let grid = document.getElementById("grid-container");
+            let container = document.getElementById("container");
             par.classList.add('font-crimson');
-            grid.appendChild(par);
+            container.appendChild(par);
         });
-    i = i + 3;
+    i = i + 2;
     console.log(i)
 });

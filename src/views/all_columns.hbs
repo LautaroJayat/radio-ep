@@ -1,41 +1,5 @@
-<nav class="main-nav">
-    <a href="/" class="logo-container"> <img src="/LogoBlanco.png" class="nav-logo" alt="">
-    </a>
-    <div class="button-listen-now font-crimson"><span>ESCUCHAR AHORA!</span></div>
-    <ul class="nav-list">
-        <li><a href="/news" class="nav-link font-crimson">NOTICIAS</a></li>
-        <li><a href="/columns" class="nav-link font-crimson">RECORTES</a></li>
-        <li><a href="/emitions" class="nav-link font-crimson">EMISIONES</a></li>
-        <li><a href="/contact" class="nav-link font-crimson">CONTACTO</a></li>
-    </ul>
+{{>home_contents_header}}
 
-</nav>
-<nav id="main-nav-menu" class="main-nav-menu menu-out">
-    <div id="close-button" class="close-button"><span>+</span></div>
-    <h2 class="font-crimson">MENU</h2>
-    <ul class="nav-list">
-        <li><a href="/all/news" class="nav-link font-crimson">NOTICIAS</a></li>
-        <li><a href="/all/columns" class="nav-link font-crimson">RECORTES</a></li>
-        <li><a href="/all/emitions" class="nav-link font-crimson">EMISIONES</a></li>
-        <li><a href="/contact" class="nav-link font-crimson">CONTACTO</a></li>
-    </ul>
-    <div class="socials-footer">
-        <a href="" class="img-container">
-            <img src="/Youtube.svg" alt="youtube">
-        </a>
-        <a href="" class="img-container">
-            <img src="/facebook.svg" alt="facebook">
-        </a>
-        <a href="" class="img-container">
-            <img src="/Twitter.svg" alt="twitter">
-        </a>
-        <a href="" class="img-container">
-            <img src="/Instagram.svg" alt="instagram">
-        </a>
-    </div>
-</nav>
-
-<div id="menu-button" class="menu-button"><span>|||</span></div>
 <section class="contents">
     <h1 class="section-title font-crimson">Todas las Columnas</h1>
     <div id="grid-container" class="grid-container">
@@ -53,7 +17,6 @@
                 </div>
 
                 <div class="author">
-                    <!--<div class="author_container"><img src="{{author_thumbnail}}" alt=""></div>-->
                     {{#if program}}<span>Programa: <strong>"{{program}}"</strong></span>{{/if}}
                 </div>
             </div>
@@ -65,50 +28,8 @@
     <button id="gimmi">MÁS COLUMNAS!</button>
 </div>
 
-<footer class="footer">
-    <div class="item">
-        <a href="#">
-            <h3 class="custom-medium-title font-crimson">¿Quienes somos?</h3>
-        </a>
-        <p class="font-white">Radio Entre-Piernas es un medo alternativo centrado en la comunicación desdelas
-            disidencias, que se
-            desprende del proyecto original "Entre Piernas Noches De Club"</p>
-    </div>
-    <div class="item">
-        <a href="#">
-            <h3 class="custom-medium-title font-crimson">¿Querés Colaborar?</h3>
-        </a>
-        <p class="font-white">Si querés enterarte de más, entrá en el laberinto y buscanos en nuestras redes.
-        </p>
-        <p class="font-white">Si querés participar de la redacción o proponer un programa para nuestra radio, no
-            dudes en enviar un
-            email a <strong class="font-crimson">radioentrepiernas@gmail.com</strong></p>
-    </div>
-    <div class="item">
-        <a href="#">
-            <h3 class="custom-medium-title font-crimson">Copyright</h3>
-        </a>
-        <p class="font-white">Ninguna de las noticias publicadas tiene copyright o derechos de autor. Todo lo
-            publicado está liberado
-            para ser reproducido o compar tido, sólo sugerimos compar tir la fuente y así
-            contribuir con el proyecto</p>
-    </div>
+{{>home_main_footer}}
 
-    <div class="socials-footer">
-        <a href="" class="img-container">
-            <img src="/Youtube.svg" alt="youtube">
-        </a>
-        <a href="" class="img-container">
-            <img src="/facebook.svg" alt="facebook">
-        </a>
-        <a href="" class="img-container">
-            <img src="/Twitter.svg" alt="twitter">
-        </a>
-        <a href="" class="img-container">
-            <img src="/Instagram.svg" alt="instagram">
-        </a>
-    </div>
-</footer>
 <script>
     document.getElementById("menu-button").addEventListener("click", () => {
         if (document.getElementById("main-nav-menu").classList.contains("menu-out")) {
