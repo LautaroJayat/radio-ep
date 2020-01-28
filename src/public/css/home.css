@@ -13,6 +13,10 @@
     --typo-anton: 'Anton', sans-serif;
 }
 
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
 /* FUNCTIONALS*/
 
 .cover {
