@@ -80,7 +80,7 @@
                     <div class="info">
                         <span class="headline">{{news.[5].headline}}</span>
                         <h4 class="title">{{news.[5].title}}</h4>
-                       <span class="author">Por <strong class="font-white">{{news.[5].author}}</strong> |
+                        <span class="author">Por <strong class="font-white">{{news.[5].author}}</strong> |
                             {{news.[5].date}}</span>
                     </div>
                 </a>
@@ -119,6 +119,7 @@
 
     <section class="more-news">
         <div class="more-news-container">
+            {{#if news.[6]}}
             <h3 class="section-title-medium centered">Más Noticias</h3>
 
             <div class="aside-article">
@@ -126,21 +127,31 @@
                 <h4 class="title">{{news.[6].title}}</h4>
                 <span class="author">Por: <strong class="font-white">{{news.[6].author}}</strong></span>
             </div>
+            {{/if}}
+
+            {{#if news.[7]}}
             <div class="aside-article">
                 <span class="date">{{news.[7].date}}</span>
                 <h4 class="title">{{news.[7].title}}</h4>
                 <span class="author">Por: <strong class="font-white">{{news.[7].author}}</strong></span>
             </div>
+            {{/if}}
+
+            {{#if news.[8]}}
             <div class="aside-article">
                 <span class="date">{{news.[8].date}}</span>
                 <h4 class="title">{{news.[8].title}}</h4>
                 <span class="author">Por: <strong class="font-white">{{news.[8].author}}</strong></span>
             </div>
+            {{/if}}
+
+            {{#if news.[9]}}
             <div class="aside-article">
                 <span class="date">{{news.[9].date}}</span>
                 <h4 class="title">{{news.[9].title}}</h4>
                 <span class="author">Por: <strong class="font-white">{{news.[9].author}}</strong></span>
             </div>
+            {{/if}}
         </div>
     </section>
 
