@@ -171,6 +171,7 @@
     width: 100%;
     height: 45vh;
     transition: all 0.5s ease-in-out;
+    cursor: pointer;
 }
 
 section {
@@ -340,13 +341,8 @@ section {
 .emitions .info {
     width: 100%;
     height: 40%;
-    transition: border 0.2s ease-out;
     padding: 0.5%;
-    border: 1px dashed black;
-}
-
-.emitions .info:hover {
-    border: 1px solid rgba(220, 20, 60, 0.548);
+    transition: filter 0.2s ease-in-out;
 }
 
 .emitions .aux {
@@ -363,6 +359,10 @@ section {
 .emitions .program {
     font-size: 160%;
     color: var(--title-color);
+}
+
+.emitions .info:hover .program {
+    color: rgb(255, 31, 31);
 }
 
 a {
@@ -594,9 +594,6 @@ a {
         min-width: 100%;
         border: none;
         background-color: rgba(255, 255, 255, 0.041);
-    }
-    .emitions .info:hover {
-        border: none;
     }
     .emitions .aux {
         font-family: 'Roboto Slab', serif;
