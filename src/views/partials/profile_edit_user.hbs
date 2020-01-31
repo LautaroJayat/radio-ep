@@ -2,7 +2,6 @@
     <div class="ck-editor-dash">
         <h2 class="Udatos-title">Editar Usuario</h2>
         <div class="n-form">
-            <h2 class="uDatos-title">{{userTarget._id}}</h2>
             <input type="hidden" name="id" id="_id" value="{{userTarget._id}}">
             <label for="name">Nombre del Usuario</label>
             <input id="name" class="n-input" type="text" name="name" placeholder="Nombre de usuario"
@@ -132,16 +131,18 @@
             form.append('image', binaryData, name + "big.jpeg");
             form.append('image', thumbnailBinaryData, name + "small.jpeg");
             let userId = document.getElementById('_id').value;
-            console.log(userId);
 
             fetch(`/admin/users/fulledit/${userId}`, { method: "POST", body: form })
                 .then(function (response) {
-                    console.log(userId);
                     console.log(response);
                     console.log(response.status);
                     if (response.status === 201) {
                         console.log("done");
                         window.location.assign("/admin/profile");
+
+                    }
+                    else if (response.status === 996) {
+                        nameAllreadyExistsError();
                     } else {
                         //window.location.assign("/");
                     }
@@ -154,16 +155,18 @@
             form.append('photo', photo.value);
             form.append('thumbnail', thumbnail.value);
             let userId = document.getElementById('_id').value;
-            console.log(userId);
             fetch(`/admin/users/edit/${userId}`, { method: "POST", body: form })
                 .then(function (response) {
-                    //console.log(userId)
-                    //console.log(response)
-                    //console.log(response.status);
                     if (response.status === 201) {
                         //console.log("done");
                         window.location.assign("/admin/profile");
-                    } else {
+
+
+
+                    } else if (response.status === 996) {
+                        nameAllreadyExistsError();
+                    }
+                    else {
                         //console.log('we are in else')
                         window.location.assign("/");
                     }
@@ -171,6 +174,22 @@
                 .catch(function (err) {
                     console.log(err);
                 });
+        }
+    }
+
+    function nameAllreadyExistsError() {
+        var error_m = document.createElement('div');
+        error_m.classList.add('error_div');
+        var error_p = document.createTextNode('Ese nombre de usuario ya existe');
+        error_m.appendChild(error_p);
+        document.body.appendChild(error_m);
+        const x = document.querySelectorAll(".error_div");
+        for (let i = 0; i < x.length; i++) {
+            for (i = 0; i < x.length; i++) {
+                x[i].addEventListener("click", (target) => {
+                    target.path[1].removeChild(target.path[0]);
+                });
+            }
         }
     }
 
