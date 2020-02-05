@@ -6,11 +6,13 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const multer = require('multer');
+const helmet = require('helmet');
 
 // Initializations
 require('dotenv').config();
 const app = express();
 require('./database');
+app.use(helmet())
 require('./config/passport');
 
 
