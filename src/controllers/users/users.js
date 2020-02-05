@@ -198,24 +198,30 @@ users_ctrl.update_photo = async (req, res) => {
 /// FOR PUT REQUESTS
 
 users_ctrl.modify_info = async (req, res) => {
+    const { user_name, email } = req.body;
     hasReqUser(req, res);
-    const user = await User.findById(req.user._id);
-    const isAllowed = await user.matchPassword(req.body.pass);
-    if (isAllowed) {
-        const { user_name, email } = req.body;
-        await User.findByIdAndUpdate(req.user._id, { name: user_name, email: email });
-        req.flash('success_msg', 'Tu información ha sido modificada con éxito');
-        res.redirect('/admin/profile');
+    const exists = await User.findOne({ name: user_name });
+    if (!exists || exists._id === req.params._id) {
+        const user = await User.findById(req.user._id);
+        const isAllowed = await user.matchPassword(req.body.pass);
+        if (isAllowed) {
+            await User.findByIdAndUpdate(req.user._id, { name: user_name, email: email });
+            req.flash('success_msg', 'Tu información ha sido modificada con éxito');
+            res.redirect('/admin/profile');
+        } else {
+            try {
+                req.logOut();
+            }
+            catch (err) {
+                console.log(err);
+                console.log("BUT THE SERVER IS STILL ALIVE! :)")
+            }
+            req.flash('error_msg', 'Contraseña incorrecta.')
+            res.redirect('/');
+        }
     } else {
-        try {
-            req.logOut();
-        }
-        catch (err) {
-            console.log(err);
-            console.log("BUT THE SERVER IS STILL ALIVE! :)")
-        }
-        req.flash('error_msg', 'Contraseña incorrecta.')
-        res.redirect('/');
+        req.flash('error_msg', 'El nombre de usuario ya existe, mejor prueba otro');
+        res.redirect('/admin/profile');
     }
 }
 

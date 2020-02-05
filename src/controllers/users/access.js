@@ -28,18 +28,22 @@ access_ctrl.signin = (req, res) => {
 }
 
 access_ctrl.create_user = async (req, res) => {
-    const { name, password } = req.body;
-    const usedName = await User.findOne({ name });
-    if (!usedName) {
-        const newUser = new User({ name, password });
-        newUser.password = await newUser.encryptPassword(password);
-        await newUser.save();
-        req.flash("success_msg", "Usuari@ creade con exita");
+    const { name, password, adminPass } = req.body;
+    if (adminPass !== process.env.SUPERÁSS) {
+        req.flash('error_msg', "No tenés permiso para realizar esa acción!");
+        return res.redirect('/nochesdelogin');
     } else {
-        req.flash('error_msg', "El nombre que intentas utilizar ya existe")
+        const usedName = await User.findOne({ name });
+        if (!usedName) {
+            const newUser = new User({ name, password });
+            newUser.password = await newUser.encryptPassword(password);
+            await newUser.save();
+            req.flash("success_msg", "Usuari@ creade con exita");
+        } else {
+            req.flash('error_msg', "El nombre que intentas utilizar ya existe")
+        }
+        return res.redirect('/nochesdelogin');
     }
-    return res.redirect('/nochesdelogin');
-
 }
 
 access_ctrl.logout = (req, res) => {

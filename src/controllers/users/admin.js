@@ -205,68 +205,79 @@ admin_ctrl.delete_users_panel = async (req, res) => {
 
 admin_ctrl.users_fulledit = async (req, res) => {
     const { name, email, insta, face, twit, pass } = req.body;
-    var { admin, editor } = req.body;
-    if (!admin) { admin = false }
-    if (!editor) { editor = false }
-    const userTarget = await User.findById(req.params.id);
-    const photoURL = req.files[0].path;
-    const thumbnailURL = req.files[1].path;
-    //  Compressing
-    const compressedPhotos = await imagemin([photoURL, thumbnailURL], {
-        destination: 'src/public/temp/compressed',
-        plugins: [
-            recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
-        ]
-    });
-    const photo = compressedPhotos[0].destinationPath.replace('src/public', "");
-    const thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "")
+    const exists = await User.findOne({ name: name });
+    console.log(exists);
+    if (!exists || exists._id === req.params._id) {
+        var { admin, editor } = req.body;
+        if (!admin) { admin = false }
+        if (!editor) { editor = false }
+        const userTarget = await User.findById(req.params.id);
+        const photoURL = req.files[0].path;
+        const thumbnailURL = req.files[1].path;
+        //  Compressing
+        const compressedPhotos = await imagemin([photoURL, thumbnailURL], {
+            destination: 'src/public/temp/compressed',
+            plugins: [
+                recomp({ method: "ssim", target: 0.999, accurate: true, progressive: true })
+            ]
+        });
+        const photo = compressedPhotos[0].destinationPath.replace('src/public', "");
+        const thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "")
 
-    // Removing Uncompressed Images
-    fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
-    fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+        // Removing Uncompressed Images
+        fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
+        fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
 
-    userTarget.name = name;
-    userTarget.admin = admin;
-    userTarget.editor = editor;
-    userTarget.email = email;
-    userTarget.instagram = insta;
-    userTarget.facebook = face;
-    userTarget.twitter = twit;
-    if (pass !== "") {
-        //console.log("fuck!");
-        userTarget.pass = await userTarget.encryptPassword(pass);
+        userTarget.name = name;
+        userTarget.admin = admin;
+        userTarget.editor = editor;
+        userTarget.email = email;
+        userTarget.instagram = insta;
+        userTarget.facebook = face;
+        userTarget.twitter = twit;
+        if (pass !== "") {
+            //console.log("fuck!");
+            userTarget.pass = await userTarget.encryptPassword(pass);
+        }
+        userTarget.photo = photo;
+        userTarget.thumbnail = thumbnail;
+        await userTarget.save();
+
+        return res.sendStatus('201');
+    } else {
+        return res.sendStatus('996');
     }
-    userTarget.photo = photo;
-    userTarget.thumbnail = thumbnail;
-    await userTarget.save();
-
-    res.sendStatus('201');
 }
 
 admin_ctrl.users_edit = async (req, res) => {
     const { name, email, insta, face, twit, pass, photo, thumbnail } = req.body;
-    var { admin, editor } = req.body;
-    if (!admin) { admin = false }
-    if (!editor) { editor = false }
-    const userTarget = await User.findById(req.params.id);
-    userTarget.name = name;
-    userTarget.admin = admin;
-    userTarget.editor = editor;
-    userTarget.email = email;
-    userTarget.instagram = insta;
-    userTarget.facebook = face;
-    userTarget.twitter = twit;
-    if (pass !== "") {
-        //console.log("fuck!");
-        userTarget.password = await userTarget.encryptPassword(pass);
-    }
-    userTarget.photo = photo;
-    userTarget.thumbnail = thumbnail;
-    //console.log(userTarget)
-    await userTarget.save();
-    //console.log(userTarget);
+    const exists = await User.findOne({ name: name });
+    if (!exists || exists._id === req.params._id) {
+        var { admin, editor } = req.body;
+        if (!admin) { admin = false }
+        if (!editor) { editor = false }
+        const userTarget = await User.findById(req.params.id);
+        userTarget.name = name;
+        userTarget.admin = admin;
+        userTarget.editor = editor;
+        userTarget.email = email;
+        userTarget.instagram = insta;
+        userTarget.facebook = face;
+        userTarget.twitter = twit;
+        if (pass !== "") {
+            //console.log("fuck!");
+            userTarget.password = await userTarget.encryptPassword(pass);
+        }
+        userTarget.photo = photo;
+        userTarget.thumbnail = thumbnail;
+        //console.log(userTarget)
+        await userTarget.save();
+        //console.log(userTarget);
 
-    res.sendStatus('201');
+        return res.sendStatus('201');
+    } else {
+        return res.sendStatus('996');
+    }
 }
 
 admin_ctrl.users_delete = async (req, res) => {
