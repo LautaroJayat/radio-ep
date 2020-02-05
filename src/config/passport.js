@@ -11,6 +11,7 @@ passport.use(new LocalStrategy({
         if (!userAdmin) {
             console.log("userAdmin not found... we are going to create one");
             const UA = new User({ name: "admin", admin: true });
+            await UA.save();
             return done(null, UA);
 
 
