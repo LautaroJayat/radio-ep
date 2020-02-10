@@ -3,7 +3,7 @@
         <h3 class="section-title">NOTICIAS</h3>
         <div class="container">
 
-
+            {{#if news.[0]}}
             <div class="article-big">
                 <a href="/contents/news/{{news.[0].url}}">
                     <div class="img-container"><img src="{{news.[0].thumbnail}}" alt="" class="cover"></div>
@@ -15,9 +15,11 @@
                     </div>
                 </a>
             </div>
+            {{/if}}
 
 
 
+            {{#if news.[1]}}
             <div class="article-big">
                 <a href="/contents/news/{{news.[1].url}}">
                     <div class="img-container"><img src="{{news.[1].thumbnail}}" alt="" class="cover"></div>
@@ -29,9 +31,10 @@
                     </div>
                 </a>
             </div>
+            {{/if}}
 
 
-
+            {{#if news.[2]}}
             <div class="article-big">
                 <a href="/contents/news/{{news.[2].url}}">
                     <div class="img-container"><img src="{{news.[2].thumbnail}}" alt="" class="cover"></div>
@@ -43,9 +46,11 @@
                     </div>
                 </a>
             </div>
+            {{/if}}
 
 
 
+            {{#if news.[3]}}
             <div class="article-big">
                 <a href="/contents/news/{{news.[3].url}}">
                     <div class="img-container"><img src="{{news.[3].thumbnail}}" alt="" class="cover"></div>
@@ -57,9 +62,10 @@
                     </div>
                 </a>
             </div>
+            {{/if}}
 
 
-
+            {{#if news.[4]}}
             <div class="article-big">
                 <a href="/contents/news/{{news.[4].url}}">
                     <div class="img-container"><img src="{{news.[4].thumbnail}}" alt="" class="cover"></div>
@@ -71,9 +77,10 @@
                     </div>
                 </a>
             </div>
+            {{/if}}
 
 
-
+            {{#if news.[5]}}
             <div class="article-big">
                 <a href="/contents/news/{{news.[5].url}}">
                     <div class="img-container"><img src="{{news.[5].thumbnail}}" alt="" class="cover"></div>
@@ -85,6 +92,8 @@
                     </div>
                 </a>
             </div>
+            {{/if}}
+
 
 
 
