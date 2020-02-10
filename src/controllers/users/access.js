@@ -29,11 +29,7 @@ access_ctrl.signin = (req, res) => {
 
 access_ctrl.create_user = async (req, res) => {
     const { name, password, adminPass } = req.body;
-<<<<<<< HEAD
     if (adminPass !== process.env.SUPER_PASS) {
-=======
-    if (adminPass !== process.env.SUPERPASS) {
->>>>>>> f6e036bb14d09ce3e7a8479926e607fa1767658c
         req.flash('error_msg', "No tenés permiso para realizar esa acción!");
         return res.redirect('/nochesdelogin');
     } else {
