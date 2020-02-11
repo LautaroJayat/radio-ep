@@ -85,7 +85,14 @@ columns_ctrl.add_columns = async (req, res) => {
         const thumbnail = compressedPhotos[0].destinationPath.replace('src/public', "")
 
         // Removing Uncompressed Images
-        fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+        fs.access(thumbnailURL, fs.constants.F_OK, (err) => {
+            if (err) {
+                console.log(err);
+                return
+            }
+            fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+
+        })
 
         // Creating a Column-object from mongoose model
         const newColumn = new Column({
@@ -170,7 +177,7 @@ columns_ctrl.full_edit_columns = async (req, res) => {
     }
     iframe = await URL_F.safeIframe(iframe);
     if (iframe === undefined) { return res.sendStatus(998) }
-    const thumbnailURL = req.files[0].path;
+    var thumbnailURL = req.files[0].path;
     try {
         //  Creating date object to use as location
         const date = new Date;
@@ -185,12 +192,25 @@ columns_ctrl.full_edit_columns = async (req, res) => {
         const thumbnail = compressedPhotos[0].destinationPath.replace('src/public', "")
 
         // Removing Uncompressed Images
-        fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+        fs.access(thumbnailURL, fs.constants.F_OK, (err) => {
+            if (err) {
+                console.log(err);
+                return
+            }
+            fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("Old img deleted") });
+
+        });
 
         // Getting old image and deleting it
         let oldImage = await Column.findById(req.params.id, { _id: 0, thumbnail: 1 });
-        fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
+        fs.access("src/public" + oldImage.thumbnail, fs.constants.F_OK, (err) => {
+            if (err) {
+                console.log(err);
+                return
+            }
+            fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("little img deleted") });
 
+        });
         // Updating New
         await Column.findByIdAndUpdate(req.params.id, {
             title: title,
@@ -206,6 +226,7 @@ columns_ctrl.full_edit_columns = async (req, res) => {
         cache_functions.refreshColumns();
     } catch (error) {
         if (error.code !== 0) {
+            console.log(error)
             req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
             res.sendStatus("400");
             return
@@ -218,7 +239,14 @@ columns_ctrl.full_edit_columns = async (req, res) => {
 columns_ctrl.delete_columns = async (req, res) => {
     // Getting old image and deleting it
     let oldImage = await Column.findById(req.params.id, { _id: 0, thumbnail: 1 });
-    fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
+    fs.access("src/public" + oldImage.thumbnail, fs.constants.F_OK, (err) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("Old img deleted") });
+
+    });
     //  Deleting database entry
     await Column.findByIdAndDelete(req.params.id);
     cache_functions.refreshColumns();

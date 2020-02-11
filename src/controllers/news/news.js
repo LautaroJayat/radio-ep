@@ -66,8 +66,22 @@ news_ctrl.add_news = async (req, res) => {
             const thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "")
             // Removing Uncompressed Images
             //console.log("Removing Uncompressed Images");
-            fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
-            fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+            fs.access(photoURL, fs.constants.F_OK, (err) => {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
+
+            });
+            fs.access(thumbnailURL, fs.constants.F_OK, (err) => {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+
+            });
             if (!alt_author) {
                 const newNews = new News({
                     url: testing_url,
@@ -94,6 +108,9 @@ news_ctrl.add_news = async (req, res) => {
             }
             // Second case: we steal the news
             else {
+                if (alt_source_link.indexOf('https://') < 0) {
+                    alt_source_link = 'https://' + alt_source_link;
+                }
                 const newNews = new News({
                     url: testing_url,
                     title,
@@ -137,8 +154,8 @@ news_ctrl.add_news = async (req, res) => {
 }
 
 news_ctrl.edit_news = async (req, res) => {
-    const { title, photo, thumbnail, headline, alt_source, alt_source_link, alt_author, alt_social, caption } = req.body;
-    var { url, body, description } = req.body;
+    const { title, photo, thumbnail, headline, alt_source, alt_author, alt_social, caption } = req.body;
+    var { url, body, alt_source_link, description } = req.body;
     const testing_url = URL_F.spaceToDash(url);
     const testing_body = utf8.encode(body);
     const testing_description = utf8.encode(description);
@@ -149,6 +166,9 @@ news_ctrl.edit_news = async (req, res) => {
         return res.sendStatus("999") //This will be handled by the front-end
     } else {
         try {
+            if (alt_source_link && alt_source_link.indexOf('https://') < 0) {
+                alt_source_link = 'https://' + alt_source_link;
+            }
             await News.findByIdAndUpdate(req.params.id, {
                 url: testing_url,
                 caption,
@@ -170,6 +190,7 @@ news_ctrl.edit_news = async (req, res) => {
             //console.log(await News.findById(req.params.id));
         } catch (error) {
             if (error.code !== 0) {
+                console.log(error)
                 req.flash("error_msg", "sorry pal, there was an error, you did something wrong");
                 res.sendStatus("400");
                 return
@@ -182,8 +203,8 @@ news_ctrl.edit_news = async (req, res) => {
 }
 
 news_ctrl.full_edit_news = async (req, res) => {
-    const { title, headline, alt_source, alt_source_link, alt_author, alt_social, caption } = req.body;
-    var { url, body, description } = req.body;
+    const { title, headline, alt_source, alt_author, alt_social, caption } = req.body;
+    var { url, body, alt_source_link, description } = req.body;
     const testing_url = URL_F.spaceToDash(url);
     const testing_body = utf8.encode(body);
     const testing_description = utf8.encode(description);
@@ -195,6 +216,7 @@ news_ctrl.full_edit_news = async (req, res) => {
     } else {
         const photoURL = req.files[0].path;
         const thumbnailURL = req.files[1].path;
+        console.log(thumbnailURL);
         //  Compressing
         try {
             //  Creating date object to use as location
@@ -211,14 +233,46 @@ news_ctrl.full_edit_news = async (req, res) => {
             const photo = compressedPhotos[0].destinationPath.replace('src/public', "");
             const thumbnail = compressedPhotos[1].destinationPath.replace('src/public', "");
             console.log("Removing Uncompressed Images");
-            fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
-            fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+            fs.access(photoURL, fs.constants.F_OK, (err) => {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                fs.unlink(photoURL, (err) => { if (err) throw err; console.log("big img deleted") });
+
+            });
+            fs.access(thumbnailURL, fs.constants.F_OK, (err) => {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+
+            });
+
 
             // Getting old image and deleting it
             let oldImage = await News.findById(req.params.id, { _id: 0, thumbnail: 1, photo: 1 });
-            fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old thumbnail was deleted") });
-            fs.unlink("src/public" + oldImage.photo, (err) => { if (err) throw err; console.log("old photo was deleted") });
+            fs.access("src/public" + oldImage.thumbnail, fs.constants.F_OK, (err) => {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old thumbnail was deleted") });
 
+            })
+            fs.access("src/public" + oldImage.photo, fs.constants.F_OK, (err) => {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                fs.unlink("src/public" + oldImage.photo, (err) => { if (err) throw err; console.log("old photo was deleted") });
+
+            })
+
+            if (alt_source_link && alt_source_link.indexOf('https://') < 0) {
+                alt_source_link = 'https://' + alt_source_link;
+            }
             // Updating New
             await News.findByIdAndUpdate(req.params.id, {
                 url: testing_url,
@@ -257,8 +311,23 @@ news_ctrl.full_edit_news = async (req, res) => {
 news_ctrl.delete_news = async (req, res) => {
     // Getting old image and deleting it
     let oldImage = await News.findById(req.params.id, { _id: 0, thumbnail: 1, photo: 1 });
-    fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old thumbnail was deleted") });
-    fs.unlink("src/public" + oldImage.photo, (err) => { if (err) throw err; console.log("old photo was deleted") });
+    fs.access("src/public" + oldImage.thumbnail, fs.constants.F_OK, (err) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old thumbnail was deleted") });
+
+    })
+    fs.access("src/public" + oldImage.photo, fs.constants.F_OK, (err) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        fs.unlink("src/public" + oldImage.photo, (err) => { if (err) throw err; console.log("old photo was deleted") });
+
+    })
+
     // Deleting database entry
     await News.findByIdAndDelete(req.params.id);
     await cache_functions.refreshNews();

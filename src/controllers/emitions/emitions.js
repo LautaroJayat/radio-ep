@@ -66,8 +66,13 @@ emitions_ctrl.add_emitions = async (req, res) => {
         const thumbnail = compressedPhotos[0].destinationPath.replace('src/public', "")
 
         // Removing Uncompressed Images
-        fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
-
+        fs.access(thumbnailURL, fs.constants.F_OK, (err) => {
+            if (err) {
+                console.log(err);
+                return
+            }
+            fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+        });
         // Creating a Emition-object from mongoose model
         const newEmition = new Emition({
             url: testing_url,
@@ -160,11 +165,25 @@ emitions_ctrl.full_edit_emitions = async (req, res) => {
         const thumbnail = compressedPhotos[0].destinationPath.replace('src/public', "")
 
         // Removing Uncompressed Images
-        fs.unlink(thumbnailURL, (err) => { if (err) throw err; console.log("little img deleted") });
+        fs.access(thumbnailURL, fs.constants.F_OK, (err) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            fs.unlink(thumbnailURL, (err) => {
+                if (err) { console.log(err) } else { console.log('Little img deleted') }
+            })
+        })
 
         // Getting old image and deleting it
         let oldImage = await Emition.findById(req.params.id, { _id: 0, thumbnail: 1 });
-        fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
+        fs.access("src/public" + oldImage.thumbnail, fs.constants.F_OK, (err) => {
+            if (err) {
+                console.log(err);
+                return
+            }
+            fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
+        });
 
         // Updating New
         await Emition.findByIdAndUpdate(req.params.id, {
@@ -192,7 +211,14 @@ emitions_ctrl.full_edit_emitions = async (req, res) => {
 emitions_ctrl.delete_emitions = async (req, res) => {
     // Getting old image and deleting it
     let oldImage = await Emition.findById(req.params.id, { _id: 0, thumbnail: 1 });
-    fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
+    fs.access("src/public" + oldImage.thumbnail, fs.constants.F_OK, (err) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        fs.unlink("src/public" + oldImage.thumbnail, (err) => { if (err) throw err; console.log("old image was deleted") });
+    });
+
     //  Deleting entry in the database
     await Emition.findByIdAndDelete(req.params.id);
     await cache_functions.refreshEmitions();
