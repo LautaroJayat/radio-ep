@@ -23,16 +23,16 @@
         <li><a href="/all/contact" class="nav-link font-crimson">CONTACTO</a></li>
     </ul>
     <div class="socials-footer">
-        <a href="" class="img-container">
+        <a href="https://www.youtube.com/channel/UCcbkYFIp1yckYM_SqWWG4Gw/" class="img-container">
             <img src="/Youtube.svg" alt="youtube">
         </a>
-        <a href="" class="img-container">
+        <a href="https://www.facebook.com/Radio-Entre-Piernas-109936057248253" class="img-container">
             <img src="/facebook.svg" alt="facebook">
         </a>
-        <a href="" class="img-container">
+        <a href="https://www.twitter.com/radioentrep/" class="img-container">
             <img src="/Twitter.svg" alt="twitter">
         </a>
-        <a href="" class="img-container">
+        <a href="https://www.instagram.com/entrep49/" class="img-container">
             <img src="/Instagram.svg" alt="instagram">
         </a>
     </div>
@@ -90,32 +90,43 @@
 
                 <div class="socials-sharers">
 
-                    <a href="#">
+                    <a href="https://telegram.me/share/url?url={{#unless news.alt_author}}https://www.radioentrepiernas.tk/contents/{{#if news}}news/{{news.url}}{{/if}}{{#if columns}}columns/{{columns.url}}{{/if}}{{#if emitions}}emitions/{{emitions.url}}{{/if}}{{else}}{{news.alt_source_links}}{{/unless}}&text={{news.title}}{{columns.title}}{{emitions.title}} | Por 
+                        {{#unless news.alt_author}}
+                        {{news.author}}
+                        {{columns.program}}
+                        {{emitions.program}}
+                        {{else}}
+                        {{news.alt_author}}
+                        {{/unless}}">
                         <div class="img-container">
-                            <img src="/socials/telegram.svg" alt="">
+                            <img src="/socials/telegram.svg" alt="Telegram Sharer">
                         </div>
                     </a>
-                    <a href=" #">
+                    <!--a href=" #">
                         <div class="img-container">
-                            <img src="/socials/messenger.svg" alt="">
+                            <img src="/socials/messenger.svg" alt="Messenger Sharer">
                         </div>
-                    </a>
-                    <a href=" #">
+                    </a-->
+                    <a
+                        href="https://www.facebook.com/sharer/sharer.php?u={{#unless news.alt_author}}https://www.radioentrepiernas.tk/contents/{{#if news}}news/{{news.url}}{{/if}}{{#if columns}}columns/{{columns.url}}{{/if}}{{#if emitions}}emitions/{{emitions.url}}{{/if}}{{else}}{{news.alt_source_link}}{{/unless}}">
                         <div class="img-container">
                             <img src="/socials/facebook (1).svg" alt="">
                         </div>
                     </a>
-                    <a href=" #">
+                    <!--a href=" #">
                         <div class="img-container">
                             <img src="/socials/instagram.svg" class="rounded-borders" alt="">
                         </div>
-                    </a>
-                    <a href=" #">
+                    </a-->
+                    <a
+                        href=" http://twitter.com/share?text={{news.title}}{{columns.title}}{{emitions.title}} @radioentrep. Por: {{#if news.alt_author}}{{news.alt_author}}{{/if}}{{news.altAuthor}}&url={{#unless news.alt_author}}https://www.radioentrepiernas.tk/contents/{{#if news}}news/{{news.url}}{{/if}}{{#if columns}}columns/{{columns.url}}{{/if}}{{#if emitions}}emitions/{{emitions.url}}{{/if}}{{else}}{{news.alt_source_link}}{{/unless}}">
                         <div class="img-container">
                             <img src="/socials/twitter.svg" alt="">
                         </div>
                     </a>
-                    <a href=" #">
+
+                    <a
+                        href="whatsapp://send?text={{#unless news.alt_author}}https://www.radioentrepiernas.tk/contents/{{#if news}}news/{{news.url}}{{/if}}{{#if columns}}columns/{{columns.url}}{{/if}}{{#if emitions}}emitions/{{emitions.url}}{{/if}}{{else}}{{news.alt_source_link}}{{/unless}}">
                         <div class="img-container">
                             <img src="/socials/whatsapp.svg" alt="">
                         </div>
@@ -235,16 +246,16 @@
     </div>
 
     <div class="socials-footer">
-        <a href="" class="img-container">
+        <a href="https://www.youtube.com/channel/UCcbkYFIp1yckYM_SqWWG4Gw/" class="img-container">
             <img src="/Youtube.svg" alt="youtube">
         </a>
-        <a href="" class="img-container">
+        <a href="https://www.facebook.com/Radio-Entre-Piernas-109936057248253" class="img-container">
             <img src="/facebook.svg" alt="facebook">
         </a>
-        <a href="" class="img-container">
+        <a href="https://www.twitter.com/radioentrep/" class="img-container">
             <img src="/Twitter.svg" alt="twitter">
         </a>
-        <a href="" class="img-container">
+        <a href="https://www.instagram.com/entrep49/" class="img-container">
             <img src="/Instagram.svg" alt="instagram">
         </a>
     </div>
