@@ -8,14 +8,14 @@ const contents_ctrl = require('../controllers/users/contents');
 
 
 
-router.delete('/iframes/delete/:_id', async (req, res) => {
+router.delete('/iframes/delete/:_id', isAuthenticated, async (req, res) => {
     console.log(req.params._id);
     await SoundBig.findByIdAndDelete(req.params._id);
 
     res.redirect('/admin/iframes');
 });
 
-router.post('/admin/bigsound/register', async (req, res) => {
+router.post('/admin/bigsound/register',isAuthenticated, async (req, res) => {
     var { iframe } = req.body;
     const onlyID = true;
     let video_id = await safeIframe(iframe, onlyID);

@@ -5,7 +5,7 @@ const { isAuthenticated } = require('../helpers/auth');
 const cache_functions = require('../cache/cache_functions');
 
 
-router.put('/admin/smallsound/register', async (req, res) => {
+router.put('/admin/smallsound/register',isAuthenticated, async (req, res) => {
     const { iframe } = req.body;
     const registeredIframe = await SoundSmall.findOne();
     if (registeredIframe === null) {

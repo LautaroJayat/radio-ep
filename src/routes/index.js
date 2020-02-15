@@ -16,11 +16,11 @@ router.get('/', async (req, res) => {
 });
 
 
-router.get('/test', async (req, res) => {
+/*router.get('/test', async (req, res) => {
     await cache_functions.mainFunction();
     const { news, emitions, smallSound, columns } = HOME_CACHE;
     res.render('test', { news, emitions, smallSound, columns });
 
 });
-
+*/
 module.exports = router;
