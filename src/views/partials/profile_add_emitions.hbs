@@ -3,27 +3,24 @@
         <h2 class="Udatos-title">Nueva Emisión</h2>
         <div class="n-form">
 
-            <label for="url">Escriba la URL de la noticia</label>
+            <label for="url">Escriba la URL de la Emisión</label>
             <input id="url" class="n-input" type="text" name="url" placeholder="Escriba la URL de la noticia">
 
-            <label for="title">Escriba su título</label>
-            <input id="title" class="n-input" type="text" name="title" placeholder="Escriba un título">
-
-            <label for="program">Escriba el nombre del programa</label>
-            <textarea id="description" class="n-input-textarea" type="text" name="description"
-                placeholder="Escriba una descripción"></textarea>
-
-            <label for="description">Escriba una descripción para su columna</label>
+            <label for="program">Escriba nombre del programa</label>
             <input id="program" class="n-input" type="text" name="program" placeholder="Escriba el nombre del programa">
 
-            <label for="iframe">Inserte el iframe de su columna</label>
+            <label for="number">Numero o título del programa</label>
+            <input id="number" class="n-input" type="text" name="number" placeholder="Nombre o título del programa">
+
+            <label for="iframe">Inserte el iframe de su noticia</label>
             <input id="iframe" class="n-input" type="text" name="iframe" placeholder="Inserte el Iframe de Youtube">
 
             <label for="caption">Inserte la fuente de la foto/video principal</label>
             <input id="caption" class="n-input" type="text" name="caption" placeholder="Inserte la fuente">
 
-            <label for="content">Escriba el cuerpo de la noticia</label>
-            <textarea class="photo-input" name="content" id="editor"></textarea>
+            <label for="description">Escriba el una breve descripción</label>
+            <textarea id="description" class="n-input-textarea" type="text" name="description"
+                placeholder="Escriba una descripción"></textarea>
 
             <button onclick="openCropper()" style="background-color: rgb(255, 0, 106);" class="B-B-submit-block">BUSCAR
                 IMAGEN</button>
@@ -44,22 +41,19 @@
     // Declaring basic elements to interact with
     const CROPPER_RATIO = 1.4;
     const front_url = document.getElementById('url');
-    const title = document.getElementById('title');
+
     const program = document.getElementById('program');
     const senderButton = document.getElementById('sendEditorData');
     const iframe = document.getElementById('iframe');
     const caption = document.getElementById('caption');
+    const number = document.getElementById('number');
+
     var thumbnailBinaryData;
 
     senderButton.addEventListener('click', function (e) {
         e.preventDefault();
-        let dataLength = CKEDITOR.instances.editor.getData();
-        dataLength = dataLength.length;
-        if (title.value.length < 7) {
-            alert("El título debe tener al menos 7 carácteres de largo");
-        }
-        else if (dataLength < 60) {
-            alert("El cuerpo de la noticia es demasiado corto")
+        if (program.value.length < 7) {
+            alert("El título del programa debe tener al menos 7 carácteres de largo");
         }
         else if (!binaryData) {
             alert("Todavía no has elegido una imágen para la noticia");
@@ -97,8 +91,7 @@
 
     }
     async function appendingDataIntoFormAndFetchingToServer() {
-        let body = await CKEDITOR.instances.editor.getData()
-        let description = await CKEDITOR.instances.editor.getData()
+        let description = await CKEDITOR.instances.description.getData()
 
         var form = new FormData();
         var name = new Date();
@@ -109,9 +102,8 @@
         form.append('iframe', iframe.value);
         form.append('program', program.value);
         form.append('url', front_url.value);
-        form.append('title', title.value);
         form.append('description', description);
-        form.append('body', body);
+        form.append('number', number.value);
         form.append('date', date);
         form.append('caption', caption.value);
         fetch("/emitions/add", { method: "POST", body: form })
@@ -176,13 +168,7 @@
 
     //  Creating a CKEDITOR instance only when everithing is loaded
     window.onload = () => {
-        const BlogEditor = CKEDITOR.replace('editor', {
-            width: '100%',
-            height: '75vh',
-            embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}',
-            extraPlugins: 'embed,autoembed,image2',
-            removeButtons: 'Source,Save,Templates,NewPage,Preview,Print,PasteText,Find,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,HiddenField,Subscript,Superscript,CopyFormatting,RemoveFormat,NumberedList,BulletedList,Outdent,Indent,CreateDiv,BidiLtr,BidiRtl,Language,Anchor,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Font,FontSize,TextColor,BGColor,ShowBlocks,About,Styles'
-        });
+
         const DescriptionEditor = CKEDITOR.replace('description', {
             width: '100%',
             height: '25vh',

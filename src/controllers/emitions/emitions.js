@@ -38,14 +38,14 @@ emitions_ctrl.edit_emitions_panel = async (req, res) => {
 
 
 emitions_ctrl.add_emitions = async (req, res) => {
-    const { title, program, date, caption } = req.body;
-    var { iframe, description, body, url } = req.body;
+    const { program, date, caption } = req.body;
+    var { iframe, description, number, url } = req.body;
     const testing_url = URL_F.spaceToDash(url);
-    const testing_body = utf8.encode(body);
     const testing_description = utf8.encode(description);
+    const testing_number = utf8.encode(number)
     //console.log(URL_F.checkScripts(testing_description))
     if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
-    if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
+    if (URL_F.checkScripts(testing_number)) { return res.sendStatus(997) };
     if (URL_F.unsafeURL(testing_url)) {
         return res.sendStatus("999") //This will be handled by the front-end
     }
@@ -54,8 +54,8 @@ emitions_ctrl.add_emitions = async (req, res) => {
     const thumbnailURL = req.files[0].path;
     try {
         //  Creating date object to use as location
-        const date = new Date;
-        const dir = `${date.getFullYear()}/${date.getMonth()}`
+        const today = new Date;
+        const dir = `${today.getFullYear()}/${today.getMonth()}`
         //  Compressing
         const compressedPhotos = await imagemin([thumbnailURL], {
             destination: `src/public/${dir}`,
@@ -76,12 +76,12 @@ emitions_ctrl.add_emitions = async (req, res) => {
         // Creating a Emition-object from mongoose model
         const newEmition = new Emition({
             url: testing_url,
-            title,
+
+            number: number,
             caption,
-            description,
+            description: description,
             iframe: iframe,
             program,
-            body,
             thumbnail,
             date
         });
@@ -101,14 +101,14 @@ emitions_ctrl.add_emitions = async (req, res) => {
 }
 
 emitions_ctrl.edit_emitions = async (req, res) => {
-    const { title, program, caption } = req.body;
-    var { iframe, description, body, url } = req.body;
+    const { program, caption } = req.body;
+    var { iframe, description, number, url } = req.body;
     const testing_url = URL_F.spaceToDash(url);
-    const testing_body = utf8.encode(body);
+    const testing_number = utf8.encode(number);
     const testing_description = utf8.encode(description);
     //console.log(URL_F.checkScripts(testing_description))
     if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
-    if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
+    if (URL_F.checkScripts(testing_number)) { return res.sendStatus(997) };
     if (URL_F.unsafeURL(testing_url)) {
         return res.sendStatus("999") //This will be handled by the front-end
     }
@@ -118,9 +118,8 @@ emitions_ctrl.edit_emitions = async (req, res) => {
         await Emition.findByIdAndUpdate(req.params.id, {
             url: testing_url,
             caption,
-            title: title,
             description: description,
-            body: body,
+            number: number,
             iframe: iframe,
             program: program
         });
@@ -137,14 +136,14 @@ emitions_ctrl.edit_emitions = async (req, res) => {
 }
 
 emitions_ctrl.full_edit_emitions = async (req, res) => {
-    const { title, program, caption } = req.body;
-    var { iframe, description, body, url } = req.body;
+    const { program, caption } = req.body;
+    var { iframe, description, number, url } = req.body;
     const testing_url = URL_F.spaceToDash(url);
-    const testing_body = utf8.encode(body);
+    const testing_number = utf8.encode(number);
     const testing_description = utf8.encode(description);
     //console.log(URL_F.checkScripts(testing_description))
     if (URL_F.checkScripts(testing_description)) { return res.sendStatus(997) }
-    if (URL_F.checkScripts(testing_body)) { return res.sendStatus(997) };
+    if (URL_F.checkScripts(testing_number)) { return res.sendStatus(997) };
     if (URL_F.unsafeURL(testing_url)) {
         return res.sendStatus("999") //This will be handled by the front-end
     }
@@ -189,9 +188,9 @@ emitions_ctrl.full_edit_emitions = async (req, res) => {
         await Emition.findByIdAndUpdate(req.params.id, {
             url: testing_url,
             caption,
-            title: title,
+
             description: description,
-            body: body,
+            number: number,
             iframe: iframe,
             program: program,
             thumbnail: thumbnail
