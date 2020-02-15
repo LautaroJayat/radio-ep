@@ -53,8 +53,8 @@ news_ctrl.add_news = async (req, res) => {
         const thumbnailURL = req.files[1].path;
         try {
             //  Creating date object to use as location
-            const date = new Date;
-            const dir = `${date.getFullYear()}/${date.getMonth()}`
+            const today = new Date;
+            const dir = `${today.getFullYear()}/${today.getMonth()}`
             //  Compressing
             const compressedPhotos = await imagemin([photoURL, thumbnailURL], {
                 destination: `src/public/${dir}`,

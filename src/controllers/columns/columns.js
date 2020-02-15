@@ -73,8 +73,8 @@ columns_ctrl.add_columns = async (req, res) => {
     const thumbnailURL = req.files[0].path;
     try {
         //  Creating date object to use as location
-        const date = new Date;
-        const dir = `${date.getFullYear()}/${date.getMonth()}`
+        const today = new Date;
+        const dir = `${today.getFullYear()}/${today.getMonth()}`
         //  Compressing
         const compressedPhotos = await imagemin([thumbnailURL], {
             destination: `src/public/${dir}`,
