@@ -228,9 +228,14 @@ strong {
     }
     .description {
         width: auto;
-        max-width: 80%;
+        max-width: 85;
         text-align: justify;
     }
+}
+
+.article .body img {
+    max-width: 100%;
+    height: auto;
 }
 
 .main .article .description {
@@ -343,7 +348,7 @@ strong {
 
 .article .body p, .article .body a {
     font-size: 1.3rem;
-    max-width: 85%;
+    max-width: 95%;
     line-height: 2rem;
     letter-spacing: 0.0rem;
     text-rendering: optimizeLegibility;
@@ -360,6 +365,8 @@ strong {
 
 @media screen and (max-width:600px) {
     .article .body p {
+        text-align: left;
+        word-spacing: 0.15rem;
         max-width: unset;
         margin-block-end: 1.5rem;
         margin-bottom: 1.5rem;
@@ -691,6 +698,7 @@ strong {
 }
 
 @media screen and (max-width: 700px) {
+  
     .author-sharers-container {
         width: 100%;
         flex-flow: column;
