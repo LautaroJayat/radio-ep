@@ -228,7 +228,7 @@ strong {
     }
     .description {
         width: auto;
-        max-width: 85;
+        max-width: 85%;
         text-align: justify;
     }
 }
